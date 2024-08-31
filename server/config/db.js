@@ -1,5 +1,6 @@
 import mongoose from "mongoose";
 import dotenv from "dotenv";
+import { logError, logBuddy } from "../utils/errorUtils.js";
 
 dotenv.config();
 
@@ -7,9 +8,7 @@ export default async function connectToMongoDB() {
   const { DB_USER, DB_PASS, DB_HOST, DB_NAME } = process.env;
 
   if (!DB_USER || !DB_PASS || !DB_HOST || !DB_NAME) {
-    console.error(
-      "Missing necessary environment variables for MongoDB connection"
-    );
+    logError("Missing necessary environment variables for MongoDB connection");
     return;
   }
 
@@ -19,8 +18,8 @@ export default async function connectToMongoDB() {
 
   try {
     await mongoose.connect(mongoURI);
-    console.log("Database connected! 👍");
+    logBuddy("Database connected! 👍");
   } catch (error) {
-    console.log("Database connection error:", error.message);
+    logError("Database connection error:", error.message);
   }
 }
