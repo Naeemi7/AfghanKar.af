@@ -1,7 +1,7 @@
 import User from "../models/User.js";
 
 /**
- * Helper for uppercase the first letter
+ * Helper to make the first letter  uppercase
  * @param {*} word
  * @returns
  */
@@ -21,6 +21,10 @@ export const checkUserExistenceByEmail = async (value) => {
   }
 };
 
+/**
+ * Helper to check if a username already exists
+ * @param {*} value
+ */
 export const checkUserExistenceByUsername = async (value) => {
   const existedUsername = await User.findOne({ username: value });
 

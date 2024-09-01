@@ -36,6 +36,9 @@ export const validateUserRules = [
   body("password")
     .isStrongPassword()
     .withMessage(
-      "Password must contain at least 8 characters, at least one lowercase letter, at least on uppercase letter, at least one number, and at least one symobol."
+      "Password must contain at least 8 characters, at least one lowercase letter, at least on uppercase letter, at least one number, and at least one symbol."
     ),
+
+  // Sanitize and validate the  user's role
+  body("role").toLowerCase(),
 ];

@@ -1,5 +1,6 @@
 import { StatusCodes } from "http-status-codes";
 import { verifyJwt } from "../helpers/jwt.js";
+import { logError } from "../utils/errorUtils.js";
 
 export const authenticateUser = async (req, res, next) => {
   const token = req.cookies.userToken;
@@ -24,7 +25,7 @@ export const authenticateUser = async (req, res, next) => {
     }
   } catch (error) {
     // Handle errors during token verification
-    console.error("Error verifying token:", error);
+    logError("Error verifying token:", error);
     return res
       .status(StatusCodes.UNAUTHORIZED)
       .json({ message: "Security token issue" });

@@ -11,10 +11,18 @@ import { generateJwt } from "../helpers/jwt.js";
 export const createUser = async (req, res) => {
   const { firstName, lastName, username, email, password, role } = req.body;
 
-  // Hash the user's password
-  const hashedPassword = await bcrypt.hash(password, 12);
-
   try {
+    // Check if all required fields are provided
+    if (!firstName || !lastName || !username || !email || !password) {
+      return res.status(StatusCodes.BAD_REQUEST).json({
+        message: "You need to provide the required information to sign up!",
+      });
+    }
+
+    // Hash the user's password
+    const hashedPassword = await bcrypt.hash(password, 12);
+
+    // Create the user and immediately exclude the password field from the result
     const newUser = await User.create({
       firstName,
       lastName,
@@ -24,21 +32,20 @@ export const createUser = async (req, res) => {
       role,
     });
 
-    // Returns a bad request response if user don't provide the required data
-    if (!newUser) {
-      return res.status(StatusCodes.BAD_REQUEST).json({
-        message: "You need to provide the required information to sign up!",
-      });
-    }
+    // Query the created user and exclude the password directly in the MongoDB query
+    const userWithoutPassword = await User.findById(newUser._id)
+      .select("-password")
+      .lean(); // `lean()` returns a plain JavaScript object
 
-    // Return a success response with newly created user
-    return res
-      .status(StatusCodes.OK)
-      .json({ message: "User successfully created", data: newUser });
+    // Return a success response with the sanitized user object
+    return res.status(StatusCodes.OK).json({
+      message: "User successfully created",
+      data: userWithoutPassword,
+    });
   } catch (error) {
     return res
       .status(StatusCodes.INTERNAL_SERVER_ERROR)
-      .json({ message: "Internal server error! " });
+      .json({ message: "Internal server error!" });
   }
 };
 
