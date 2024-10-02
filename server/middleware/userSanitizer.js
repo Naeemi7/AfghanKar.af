@@ -20,8 +20,10 @@ export const validateUserRules = [
     .isAlphanumeric()
     .isLength({ max: 20 })
     .withMessage("Username can't be longer than 20 characters.")
-    .custom(async (value) => checkUserExistenceByUsername(value)),
-  // Custom validator to check if a username already existed
+    // Custom validator to check if a username already existed
+    .custom(async (value) => {
+      await checkUserExistenceByUsername(value);
+    }),
 
   // Sanitize and validate the email
   body("email")
@@ -29,8 +31,10 @@ export const validateUserRules = [
     .isEmail()
     .normalizeEmail() // Normalize email address
     .customSanitizer((value) => value.toLowerCase()) // Convert the email to all lowercase
-    .custom(async (value) => checkUserExistenceByEmail(value)),
-  // Custom validator to check if an email address already existed
+    // Custom validator to check if an email address already existed
+    .custom(async (value) => {
+      await checkUserExistenceByEmail(value);
+    }),
 
   // Sanitize and validate the password
   body("password")

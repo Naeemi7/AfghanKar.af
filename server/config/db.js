@@ -1,6 +1,6 @@
 import mongoose from "mongoose";
 import dotenv from "dotenv";
-import { logError, logBuddy } from "../utils/errorUtils.js";
+import { logError, logBuddy } from "../utils/logUtils.js";
 
 dotenv.config();
 

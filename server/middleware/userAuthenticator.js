@@ -1,7 +1,14 @@
 import { StatusCodes } from "http-status-codes";
 import { verifyJwt } from "../helpers/jwt.js";
-import { logError } from "../utils/errorUtils.js";
+import { logError } from "../utils/logUtils.js";
 
+/**
+ * The  middleware to authenticate users
+ * @param {*} req
+ * @param {*} res
+ * @param {*} next
+ * @returns
+ */
 export const authenticateUser = async (req, res, next) => {
   const token = req.cookies.userToken;
 

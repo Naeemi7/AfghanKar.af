@@ -2,6 +2,7 @@ import { StatusCodes } from "http-status-codes";
 import bcrypt from "bcrypt";
 import User from "../models/User.js";
 import { generateJwt } from "../helpers/jwt.js";
+import { logError } from "../utils/logUtils.js";
 
 /**
  * Handler function for creating user accounts

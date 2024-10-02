@@ -6,7 +6,7 @@ dotenv.config(); // configuring dotenv to access the .env variables
 import app from "./app.js";
 import connectToMongoDB from "./config/db.js";
 import userRouters from "./routes/userRoutes.js";
-import { logBuddy } from "./utils/errorUtils.js";
+import { logBuddy } from "./utils/logUtils.js";
 
 // Define the PORT variable
 
