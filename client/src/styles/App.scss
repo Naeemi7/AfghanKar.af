@@ -1,0 +1,110 @@
+@import "variables";
+@import "mixin";
+@import "media-query";
+
+.navbar-container {
+  position: sticky;
+  width: 100%;
+  z-index: 100;
+  top: 0;
+  .navbar {
+    height: 6rem;
+    display: flex;
+    background-color: $secondary-background-color;
+    justify-content: space-between;
+    align-items: center;
+
+    .logo {
+      padding: 0 2rem;
+
+      h1 {
+        @include logo-font-style;
+        font-family: "MoonDance-Regular";
+        font-size: 4rem;
+      }
+    }
+
+    .nav-menu {
+      @include paragraph-normal;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      gap: 1rem;
+      margin-right: 2.5rem;
+
+      .item {
+        display: flex;
+        justify-content: center;
+        list-style: none;
+        padding: 1rem;
+
+        .links {
+          text-decoration: none;
+          color: $text-color;
+          font-size: 1.1rem;
+
+          &:hover {
+            border-bottom: 3px solid #b48821;
+            transition: ease-in-out;
+          }
+        }
+      }
+
+      .contact-btn {
+        button {
+          @include button-style;
+          .links {
+            color: white;
+
+            &:hover {
+              color: black;
+            }
+          }
+        }
+      }
+      .cart-btn {
+        color: #b48821;
+        width: 30px;
+        height: 50px;
+        &:hover {
+          color: black;
+        }
+      }
+      .cart {
+        list-style: none;
+        position: relative;
+        .links span {
+          font-size: 10px;
+          background-color: rgb(11, 11, 11);
+          border-radius: 50%;
+          display: flex;
+          justify-content: center;
+          align-items: center;
+          color: white;
+          position: absolute;
+          top: 0px;
+          left: 20px;
+          padding: 0.5px 5px;
+        }
+      }
+      .profile-btn {
+        list-style: none;
+        .links {
+          border-radius: 50%;
+          display: flex;
+          justify-content: center;
+          align-items: center;
+
+          .user {
+            color: #b48821;
+            font-size: 3.5rem;
+          }
+        }
+      }
+    }
+  }
+  .hamburger {
+    font-size: 3rem;
+    display: none;
+  }
+}
