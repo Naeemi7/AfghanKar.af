@@ -1,10 +1,15 @@
 import "@styles/App.scss";
+
+import UserProvider from "@provider/UserProvider";
+
 import Navbar from "@common/navbar/Navbar";
 
 function App() {
   return (
     <div className="app">
-      <Navbar />
+      <UserProvider>
+        <Navbar />
+      </UserProvider>
     </div>
   );
 }

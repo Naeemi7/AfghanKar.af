@@ -1,27 +1,29 @@
-// $primary-color: #4e342e; // Header, Heading
-// $secondary-color: #f57c00;
-// $accent-color: #ff7043; // Call to action
-// $background: #f1f8e9;
-// $text-color: #212121;
-// $primary-btn-background: #ff7043;
-// $btn-text-color: #ffffff; // cart background too
-// $secondary-btn-background: #4e342e;
-// $primary-btn-hover: #ff8a65;
-// $secondary-btn-hover: #6d4c41;
-// $link-color: #d84315;
-// $link-hover: #e64a19;
+// Primary Theme Colors
+$primary-color: #006699; // For headers, titles, and important elements
+$secondary-color: #e6e6e6; // For subtle backgrounds or sections
 
-$primary-background-color: white;
-$secondary-background-color: #ece8e7;
-$text-color: #333;
-$button-text-color: white;
-$button-primary-background-color: #b48821;
-$button-secondary-background-color: #b68a23;
-$error-color: #dd2d4a;
+// Headings
+$heading-color: #006699; // Main heading color (H1, H2, etc.)
+$subheading-color: #212121; // Subheadings or smaller titles (H3, H4)
+
+// Accent and Background
+$accent-color: #ff7043; // Call-to-action buttons and key highlights
+$background-color: #f1f8e9; // Page background color
+$text-color: #212121; // Main body text color
+
+// Buttons
+$primary-btn-background: #ff7043; // Primary button background (CTA)
+$primary-btn-hover: #ff8a65; // Hover state for primary buttons
+$secondary-btn-background: #4e342e; // Secondary button background (alternative actions)
+$secondary-btn-hover: #6d4c41; // Hover state fo buttons
+
+// Links
+$link-color: #d84315; // Default link color
+$link-hover: #e64a19; // Hover color for links
+
+// Other Elements
+$card-background-color: #ffffff; // Card or container background
+$border-color: #e0e0e0; // For borders or separators
+$error-color: #dd2d4a; // secondary buttons
+$btn-text-color: #ffffff; // Text color for all
 $success-color: #749c75;
-
-//Media Query breakpoints/
-$small: 360px;
-$medium: 600px;
-$large: 800px;
-$xlarge: 1024px;

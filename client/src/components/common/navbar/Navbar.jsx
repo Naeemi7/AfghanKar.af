@@ -1,108 +1,85 @@
-import { Outlet, Link, useNavigate } from "react-router-dom";
-import { useState, useEffect } from "react";
-import { FcMenu } from "react-icons/fc";
-import { GrClose } from "react-icons/gr";
-import { FaUserCircle } from "react-icons/fa";
+import { useState } from "react";
+import { useLocation } from "react-router-dom";
+import "@styles/reusableComponents.scss";
 
-function Navbar() {
-  const [isOpen, setIsOpen] = useState(false);
-  const navigate = useNavigate();
+import Profile from "./Profile";
+import Logo from "./Logo";
+import Icon from "@reusable/Icon";
+import useUserContext from "@hooks/useUserContext";
+import useNavigation from "@hooks/useNavigation";
 
-  const toggleNav = () => {
-    setIsOpen(!isOpen);
-  };
+const Navbar = () => {
+  const { isLoggedIn } = useUserContext();
+  const { goTo } = useNavigation();
+  const location = useLocation();
 
-  useEffect(() => {
-    const handleScrollToTop = () => {
-      window.scrollTo({
-        top: 0,
-        behavior: "smooth",
-      });
-    };
+  const [isMobileNavOpen, setMobileNavOpen] = useState(false);
 
-    const homeLink = document.getElementById("home-link");
+  const toggleMobileNav = () => setMobileNavOpen(!isMobileNavOpen);
 
-    if (homeLink) {
-      homeLink.addEventListener("click", (e) => {
-        e.preventDefault(); // Prevent default navigation behavior
-        handleScrollToTop(); // Scroll to top
-        navigate("/"); // Navigate to the home route
-        toggleNav(); // Close the navigation menu
-      });
-    }
+  const isUserDashboard = location.pathname === "/user-dashboard";
 
-    return () => {
-      if (homeLink) {
-        homeLink.removeEventListener("click", handleScrollToTop);
-      }
-    };
-  }, [navigate]);
+  if (isUserDashboard) {
+    return (
+      <nav className="navbar-container">
+        <Icon
+          library="md"
+          name="MdOutlineArrowBackIos"
+          size={30}
+          className="go-back"
+          onClick={() => {
+            isLoggedIn ? goTo("/home") : goTo("/");
+          }}
+        />
+      </nav>
+    );
+  }
 
   return (
-    <div className="navbar-container">
-      <nav className={isOpen ? "navbar expanded" : "navbar"}>
-        <div className="logo">
-          <h1>Y&M</h1>
+    <nav className="navbar-container">
+      <div className="navbar-items">
+        <Logo />
+        <div className="nav-links">
+          <a href="/jobs" className="nav-item">
+            Jobs
+          </a>
+          <a href="/about" className="nav-item">
+            About
+          </a>
+          <a href="/contact" className="nav-item">
+            Contact
+          </a>
         </div>
-        <div>
-          <ul className={`nav-menu ${isOpen ? "show-menu" : ""}`}>
-            <li className="item">
-              <Link
-                to="/"
-                id="home-link"
-                className="links link-color"
-                onClick={toggleNav}
-              >
-                Home
-              </Link>
-            </li>
-            <li className="item">
-              <Link
-                to="/aboutme"
-                className="links link-color"
-                activeClassName="active-link"
-                onClick={toggleNav}
-              >
-                About
-              </Link>
-            </li>
-            <li className="item">
-              <Link
-                to="/services"
-                className="links link-color"
-                activeClassName="active-link"
-                onClick={toggleNav}
-              >
-                Services
-              </Link>
-            </li>
-            <li className="contact-btn item">
-              <button>
-                <Link
-                  to="/contacts"
-                  className="links"
-                  activeClassName="active-link"
-                  onClick={toggleNav}
-                >
-                  Contact
-                </Link>
-              </button>
-            </li>
 
-            <li className="profile-btn">
-              <Link to="/login" className="links">
-                <FaUserCircle className="user" />
-              </Link>
-            </li>
-          </ul>
+        {/* Hamburger icon for small screens */}
+        <div className="hamburger-icon" onClick={toggleMobileNav}>
+          {isMobileNavOpen ? (
+            <Icon library="md" name="MdClose" size={30} /> // Close icon
+          ) : (
+            <Icon library="md" name="MdMenu" size={30} /> // Hamburger icon
+          )}
         </div>
-        <div className="hamburger" onClick={toggleNav}>
-          {isOpen ? <GrClose /> : <FcMenu />}
+
+        {/* Profile on larger screens */}
+        <Profile />
+      </div>
+
+      {/* Mobile Navigation Links */}
+      {isMobileNavOpen && (
+        <div className="mobile-nav">
+          <a href="/jobs" className="nav-item" onClick={toggleMobileNav}>
+            Jobs
+          </a>
+          <a href="/about" className="nav-item" onClick={toggleMobileNav}>
+            About
+          </a>
+          <a href="/contact" className="nav-item" onClick={toggleMobileNav}>
+            Contact
+          </a>
         </div>
-      </nav>
-      <Outlet />
-    </div>
+      )}
+    </nav>
   );
-}
+};
 
 export default Navbar;
