@@ -44,7 +44,7 @@ body {
         .nav-item {
           display: flex;
           align-items: center;
-          gap: 0.5rem;
+          gap: 0.5rem; // Default gap between icon and text on larger screens
           font-size: 1.6rem;
           color: $secondary-color;
           text-decoration: none;
@@ -54,8 +54,12 @@ body {
             color: $accent-color;
           }
 
-          .nav-icon :hover {
+          .nav-icon:hover {
             color: $accent-color;
+          }
+
+          @media (max-width: 768px) {
+            gap: 1.5rem; // Increase the gap on mobile screens for better spacing
           }
         }
       }
@@ -98,8 +102,15 @@ body {
           position: relative;
           display: flex;
           align-items: center;
-          gap: 0.5rem;
+          gap: 0.5rem; // Default gap for larger screens
           cursor: pointer;
+
+          &:hover {
+            span,
+            .profile-icon {
+              color: $accent-color;
+            }
+          }
 
           span {
             font-size: 1.6rem;
@@ -109,6 +120,10 @@ body {
 
           .profile-icon {
             @include icon-template;
+          }
+
+          @media (max-width: 768px) {
+            gap: 1.5rem; // Increase gap between icon and text on mobile
           }
         }
 
@@ -169,12 +184,12 @@ body {
       @media (max-width: 768px) {
         display: flex;
         flex-direction: column;
+        align-items: center;
         background-color: $primary-color;
         position: absolute;
         top: 7rem;
         right: 0;
         width: 100%;
-        text-align: center;
 
         .nav-item {
           padding: 1rem 0;
@@ -185,6 +200,8 @@ body {
           &:hover {
             color: $accent-color;
           }
+
+          gap: 1.5rem; // Add gap between icons and text in the mobile dropdown
         }
       }
     }

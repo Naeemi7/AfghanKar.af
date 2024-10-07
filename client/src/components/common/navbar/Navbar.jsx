@@ -1,38 +1,15 @@
 import { useState } from "react";
 import { Link } from "react-router-dom";
-import { useLocation } from "react-router-dom";
 import "@styles/reusableComponents.scss";
 import Profile from "./Profile";
 import Logo from "./Logo";
 import Icon from "@reusable/Icon";
-import useUserContext from "@hooks/useUserContext";
-import useNavigation from "@hooks/useNavigation";
 import navItems from "@data/navbar/navItems";
 
 const Navbar = () => {
-  const { isLoggedIn } = useUserContext();
-  const { goTo } = useNavigation();
-  const location = useLocation();
   const [isMobileNavOpen, setMobileNavOpen] = useState(false);
 
   const toggleMobileNav = () => setMobileNavOpen(!isMobileNavOpen);
-  const isUserDashboard = location.pathname === "/user-dashboard";
-
-  if (isUserDashboard) {
-    return (
-      <nav className="navbar-container">
-        <Icon
-          library="md"
-          name="MdOutlineArrowBackIos"
-          size={30}
-          className="go-back"
-          onClick={() => {
-            isLoggedIn ? goTo("/home") : goTo("/");
-          }}
-        />
-      </nav>
-    );
-  }
 
   return (
     <nav className="navbar-container">
@@ -71,7 +48,7 @@ const Navbar = () => {
       {isMobileNavOpen && (
         <div className="mobile-nav">
           {navItems.map((item, index) => (
-            <a
+            <Link
               href={item.path}
               className="nav-item"
               key={index}
@@ -83,7 +60,7 @@ const Navbar = () => {
                 size={item.icon.size}
               />
               <span>{item.label}</span>
-            </a>
+            </Link>
           ))}
         </div>
       )}
