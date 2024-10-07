@@ -1,19 +1,48 @@
-import { useState } from "react";
+import { useState, useEffect, useRef } from "react";
 import Icon from "@reusable/Icon";
 import dropdownData from "@data/dropdownData";
 import DropdownItems from "./DropdownItems";
 
 const Profile = () => {
   const [showDropdown, setShowDropdown] = useState(false);
+  const profileRef = useRef(null);
+  let timeout;
 
-  const handleMouseEnter = () => setShowDropdown(true);
-  const handleMouseLeave = () => setShowDropdown(false);
+  const handleMouseEnter = () => {
+    clearTimeout(timeout);
+    timeout = setTimeout(() => setShowDropdown(true), 100); // Add slight delay
+  };
+
+  const handleMouseLeave = () => {
+    clearTimeout(timeout);
+    timeout = setTimeout(() => setShowDropdown(false), 100); // Add slight delay
+  };
+
+  const handleKeyDown = (e) => {
+    if (e.key === "Enter") {
+      setShowDropdown((prev) => !prev);
+    }
+  };
+
+  // Close dropdown if clicked outside
+  useEffect(() => {
+    const handleClickOutside = (event) => {
+      if (profileRef.current && !profileRef.current.contains(event.target)) {
+        setShowDropdown(false);
+      }
+    };
+    document.addEventListener("mousedown", handleClickOutside);
+    return () => document.removeEventListener("mousedown", handleClickOutside);
+  }, []);
 
   return (
     <div
       className="profile-container"
+      ref={profileRef}
       onMouseEnter={handleMouseEnter}
       onMouseLeave={handleMouseLeave}
+      onKeyDown={handleKeyDown}
+      tabIndex={0} // Make focusable
       role="button"
       aria-haspopup="true"
       aria-expanded={showDropdown}
@@ -28,7 +57,10 @@ const Profile = () => {
         <span>Login</span>
       </div>
       {showDropdown && (
-        <div className="profile-dropdown" role="menu">
+        <div
+          className={`profile-dropdown ${showDropdown ? "open" : ""}`}
+          role="menu"
+        >
           <ul>
             {dropdownData.map((item, index) => (
               <DropdownItems item={item} key={index} />

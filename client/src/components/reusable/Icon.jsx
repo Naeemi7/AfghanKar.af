@@ -7,6 +7,8 @@ import * as IoIcons5 from "react-icons/io5";
 import * as BsIcons from "react-icons/bs";
 import * as RiIcons from "react-icons/ri";
 import * as PiIcons from "react-icons/pi";
+import * as CiIcons from "react-icons/ci";
+import * as GriIcons from "react-icons/gr";
 
 const ICON_LIBRARIES = {
   fa: FaIcons,
@@ -17,6 +19,8 @@ const ICON_LIBRARIES = {
   bs: BsIcons,
   ri: RiIcons,
   pi: PiIcons,
+  ci: CiIcons,
+  gr: GriIcons,
 };
 
 export default function ReusableIcon({

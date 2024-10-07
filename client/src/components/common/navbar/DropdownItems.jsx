@@ -5,7 +5,7 @@ import Icon from "@reusable/Icon";
 const DropdownItems = ({ item }) => {
   return (
     <Link to={item.to} className="dropdown-link-items">
-      <li>
+      <li className={item.className}>
         <Icon
           library={item.library}
           name={item.name}

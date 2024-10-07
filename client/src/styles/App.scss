@@ -21,25 +21,13 @@ body {
     position: relative;
     z-index: 1;
 
-    .navbar-items {
+    .navbar-items-container {
       display: flex;
       justify-content: space-between;
       align-items: center;
       max-width: 100rem;
       width: 100%;
       padding: 0 2rem;
-
-      // Logo container
-      .logo-container {
-        img {
-          height: 8rem;
-          width: auto;
-
-          @media (max-width: 768px) {
-            height: 4rem;
-          }
-        }
-      }
 
       // Navigation links
       .nav-links {
@@ -52,13 +40,33 @@ body {
           display: none; // Hide the nav links on small screens
         }
 
+        // Nav Item
         .nav-item {
+          display: flex;
+          align-items: center;
+          gap: 0.5rem;
           font-size: 1.6rem;
           color: $secondary-color;
           text-decoration: none;
 
           &:hover {
             color: $accent-color;
+          }
+
+          .nav-icon {
+            @include icon-template;
+          }
+        }
+      }
+
+      // Logo container
+      .logo-container {
+        img {
+          height: 8rem;
+          width: auto;
+
+          @media (max-width: 768px) {
+            height: 4rem;
           }
         }
       }
@@ -82,17 +90,22 @@ body {
         position: relative;
 
         @media (max-width: 768px) {
-          display: none; // Hide profile on small screens
+          display: flex; // Show on mobile as well
         }
 
         .profile-icon-wrapper {
+          position: relative;
           display: flex;
           align-items: center;
           gap: 0.5rem;
+          cursor: pointer;
 
           span {
             font-size: 1.6rem;
+            color: $secondary-color;
+            font-weight: bold;
           }
+
           .profile-icon {
             @include icon-template;
           }
@@ -107,6 +120,14 @@ body {
           z-index: 2;
           width: 200px;
           border-radius: 0.5rem;
+          opacity: 0;
+          transform: translateY(-10px);
+          transition: opacity 0.3s ease, transform 0.3s ease;
+
+          &.open {
+            opacity: 1;
+            transform: translateY(0);
+          }
 
           ul {
             list-style: none;
@@ -128,6 +149,11 @@ body {
                   background-color: $secondary-color;
                   border-radius: 0.5rem;
                 }
+              }
+
+              .item-with-border {
+                border-top: 1px solid $border-color;
+                border-radius: 0.5rem;
               }
             }
           }
