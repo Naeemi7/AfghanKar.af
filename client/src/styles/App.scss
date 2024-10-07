@@ -32,7 +32,7 @@ body {
       // Logo container
       .logo-container {
         img {
-          height: 7rem;
+          height: 8rem;
           width: auto;
 
           @media (max-width: 768px) {
@@ -85,13 +85,22 @@ body {
           display: none; // Hide profile on small screens
         }
 
-        .profile-icon {
-          @include icon-template;
+        .profile-icon-wrapper {
+          display: flex;
+          align-items: center;
+          gap: 0.5rem;
+
+          span {
+            font-size: 1.6rem;
+          }
+          .profile-icon {
+            @include icon-template;
+          }
         }
 
         .profile-dropdown {
           position: absolute;
-          top: 7rem;
+          top: 3rem;
           right: 0;
           background-color: $card-background-color;
           box-shadow: 0 8px 16px rgba(0, 0, 0, 0.2);

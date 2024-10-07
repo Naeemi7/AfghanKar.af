@@ -18,13 +18,15 @@ const Profile = () => {
       aria-haspopup="true"
       aria-expanded={showDropdown}
     >
-      <Icon
-        library="pi"
-        name="PiUserCircleGearFill"
-        size={10}
-        className="profile-icon"
-      />
-      <span>Sign in</span>
+      <div className="profile-icon-wrapper">
+        <Icon
+          library="pi"
+          name="PiUserCircleGearFill"
+          size={10}
+          className="profile-icon"
+        />
+        <span>Login</span>
+      </div>
       {showDropdown && (
         <div className="profile-dropdown" role="menu">
           <ul>
