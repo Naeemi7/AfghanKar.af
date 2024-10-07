@@ -9,145 +9,146 @@ body {
   width: 100vw;
   display: flex;
   position: relative;
-}
 
-.navbar-container {
-  height: 7rem;
-  width: 100%;
-  background-color: $primary-color;
-  color: $secondary-color;
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-  position: relative;
-  z-index: 1;
-
-  .navbar-items {
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    max-width: 100rem;
+  .navbar-container {
+    height: 7rem;
     width: 100%;
-    padding: 0 2rem;
+    background-color: $primary-color;
+    color: $secondary-color;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    position: relative;
+    z-index: 1;
 
-    // Logo container
-    .logo-container {
-      img {
-        height: 5rem;
-        width: auto;
+    .navbar-items {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      max-width: 100rem;
+      width: 100%;
+      padding: 0 2rem;
+
+      // Logo container
+      .logo-container {
+        img {
+          height: 7rem;
+          width: auto;
+
+          @media (max-width: 768px) {
+            height: 4rem;
+          }
+        }
+      }
+
+      // Navigation links
+      .nav-links {
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        gap: 2rem;
 
         @media (max-width: 768px) {
-          height: 4rem;
+          display: none; // Hide the nav links on small screens
+        }
+
+        .nav-item {
+          font-size: 1.6rem;
+          color: $secondary-color;
+          text-decoration: none;
+
+          &:hover {
+            color: $accent-color;
+          }
         }
       }
-    }
 
-    // Navigation links
-    .nav-links {
-      display: flex;
-      align-items: center;
-      gap: 2rem;
-
-      @media (max-width: 768px) {
-        display: none; // Hide the nav links on small screens
-      }
-
-      .nav-item {
-        font-size: 1.6rem;
+      // Hamburger menu for mobile
+      .hamburger-icon {
+        display: none;
+        font-size: 3rem;
         color: $secondary-color;
-        text-decoration: none;
+        cursor: pointer;
 
-        &:hover {
-          color: $accent-color;
+        @media (max-width: 768px) {
+          display: block; // Show hamburger on small screens
         }
       }
-    }
 
-    // Hamburger menu for mobile
-    .hamburger-icon {
-      display: none;
-      font-size: 3rem;
-      color: $secondary-color;
-      cursor: pointer;
+      // Profile dropdown container
+      .profile-container {
+        display: flex;
+        align-items: center;
+        position: relative;
 
-      @media (max-width: 768px) {
-        display: block; // Show hamburger on small screens
-      }
-    }
+        @media (max-width: 768px) {
+          display: none; // Hide profile on small screens
+        }
 
-    // Profile dropdown container
-    .profile-container {
-      display: flex;
-      align-items: center;
-      position: relative;
+        .profile-icon {
+          @include icon-template;
+        }
 
-      @media (max-width: 768px) {
-        display: none; // Hide profile on small screens
-      }
+        .profile-dropdown {
+          position: absolute;
+          top: 7rem;
+          right: 0;
+          background-color: $card-background-color;
+          box-shadow: 0 8px 16px rgba(0, 0, 0, 0.2);
+          z-index: 2;
+          width: 200px;
+          border-radius: 0.5rem;
 
-      .profile-icon {
-        @include icon-template;
-      }
+          ul {
+            list-style: none;
+            margin: 0;
+            padding: 0;
 
-      .profile-dropdown {
-        position: absolute;
-        top: 7rem;
-        right: 0;
-        background-color: $card-background-color;
-        box-shadow: 0 8px 16px rgba(0, 0, 0, 0.2);
-        z-index: 2;
-        width: 200px;
-        border-radius: 0.5rem;
+            .dropdown-link-items {
+              text-decoration: none;
 
-        ul {
-          list-style: none;
-          margin: 0;
-          padding: 0;
+              li {
+                font-size: 1.5rem;
+                padding: 10px;
+                display: flex;
+                align-items: center;
+                gap: 10px;
+                color: $primary-color;
 
-          .dropdown-link-items {
-            text-decoration: none;
-
-            li {
-              font-size: 1.5rem;
-              padding: 10px;
-              display: flex;
-              align-items: center;
-              gap: 10px;
-              color: $primary-color;
-
-              &:hover {
-                background-color: $secondary-color;
-                border-radius: 0.5rem;
+                &:hover {
+                  background-color: $secondary-color;
+                  border-radius: 0.5rem;
+                }
               }
             }
           }
         }
       }
     }
-  }
 
-  // Dropdown menu for mobile
-  .mobile-nav {
-    display: none;
+    // Dropdown menu for mobile
+    .mobile-nav {
+      display: none;
 
-    @media (max-width: 768px) {
-      display: flex;
-      flex-direction: column;
-      background-color: $primary-color;
-      position: absolute;
-      top: 7rem;
-      right: 0;
-      width: 100%;
-      text-align: center;
+      @media (max-width: 768px) {
+        display: flex;
+        flex-direction: column;
+        background-color: $primary-color;
+        position: absolute;
+        top: 7rem;
+        right: 0;
+        width: 100%;
+        text-align: center;
 
-      .nav-item {
-        padding: 1rem 0;
-        font-size: 2rem;
-        color: $secondary-color;
-        text-decoration: none;
+        .nav-item {
+          padding: 1rem 0;
+          font-size: 2rem;
+          color: $secondary-color;
+          text-decoration: none;
 
-        &:hover {
-          color: $accent-color;
+          &:hover {
+            color: $accent-color;
+          }
         }
       }
     }
