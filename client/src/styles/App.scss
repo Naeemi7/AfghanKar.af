@@ -50,11 +50,12 @@ body {
           text-decoration: none;
 
           &:hover {
+            font-weight: bold;
             color: $accent-color;
           }
 
-          .nav-icon {
-            @include icon-template;
+          .nav-icon :hover {
+            color: $accent-color;
           }
         }
       }
@@ -142,7 +143,7 @@ body {
                 padding: 10px;
                 display: flex;
                 align-items: center;
-                gap: 10px;
+                gap: 1rem;
                 color: $primary-color;
 
                 &:hover {

@@ -47,7 +47,7 @@ const Navbar = () => {
                 library={item.icon.library}
                 name={item.icon.name}
                 size={item.icon.size}
-                className="nav-icon" // Optional: Add extra styling for icons if needed
+                className="nav-icon"
               />
               <span>{item.label}</span>
             </Link>
