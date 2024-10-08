@@ -2,7 +2,7 @@ import { Link } from "react-router-dom";
 import PropTypes from "prop-types";
 import Icon from "@reusable/Icon";
 
-const DropdownItems = ({ item }) => {
+export default function DropdownItems({ item }) {
   return (
     <Link to={item.to} className="dropdown-link-items">
       <li className={item.className}>
@@ -16,7 +16,7 @@ const DropdownItems = ({ item }) => {
       </li>
     </Link>
   );
-};
+}
 
 DropdownItems.propTypes = {
   item: PropTypes.shape({
@@ -28,5 +28,3 @@ DropdownItems.propTypes = {
     label: PropTypes.string.isRequired,
   }).isRequired,
 };
-
-export default DropdownItems;

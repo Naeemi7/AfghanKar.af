@@ -3,7 +3,7 @@ import Icon from "@reusable/Icon";
 import dropdownData from "@data/dropdownData";
 import DropdownItems from "./DropdownItems";
 
-const Profile = () => {
+export default function Profile() {
   const [showDropdown, setShowDropdown] = useState(false);
   const profileRef = useRef(null);
   let timeout;
@@ -70,6 +70,4 @@ const Profile = () => {
       )}
     </div>
   );
-};
-
-export default Profile;
+}

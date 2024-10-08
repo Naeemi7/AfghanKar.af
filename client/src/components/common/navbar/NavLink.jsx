@@ -2,7 +2,7 @@ import PropTypes from "prop-types";
 import { Link } from "react-router-dom";
 import Icon from "@reusable/Icon";
 
-const NavLink = ({ items, onClick }) => {
+export default function NavLink({ items, onClick }) {
   return (
     <div className="nav-links">
       {items.map((item) => (
@@ -23,9 +23,7 @@ const NavLink = ({ items, onClick }) => {
       ))}
     </div>
   );
-};
-
-export default NavLink;
+}
 
 // Validating the props
 NavLink.propTypes = {

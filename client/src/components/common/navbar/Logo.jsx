@@ -1,7 +1,7 @@
 import { Link } from "react-router-dom";
 import logo from "@images/navbar/logo3.png";
 
-const Logo = () => {
+export default function Logo() {
   return (
     <div className="logo-container">
       <Link to="/home">
@@ -9,6 +9,4 @@ const Logo = () => {
       </Link>
     </div>
   );
-};
-
-export default Logo;
+}
