@@ -5,7 +5,7 @@ import UserLogin from "@auth/user-login/UserLogin";
 
 function App() {
   return (
-    <>
+    <div className="app">
       <UserProvider>
         <Navbar />
 
@@ -13,7 +13,7 @@ function App() {
           <Route path="/user-login" element={<UserLogin />} />
         </Routes>
       </UserProvider>
-    </>
+    </div>
   );
 }
 

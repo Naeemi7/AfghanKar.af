@@ -18,7 +18,7 @@
     top: 0;
     width: calc(100% - 30px);
     height: -5px;
-    background: white;
+    background: transparent;
     z-index: 1;
   }
 
@@ -27,10 +27,10 @@
     left: 15px;
     top: 0;
     transform: translateY(-50%);
-    background: white;
+    background: $background-color;
     padding: 0 5px;
     font-size: 1.5rem;
-    color: #333;
+    color: $text-color;
     z-index: 2;
   }
 }
@@ -40,13 +40,13 @@
   height: 100%;
   width: 100%;
   border-radius: 0.8rem;
-  border: 2px solid red;
+  border: 2px solid $border-color;
   outline: none;
   font-size: 1.3rem;
   padding-left: 1rem;
 
   &:focus {
-    border-color: $primary-color;
+    border-color: $accent-color;
   }
 }
 
@@ -58,4 +58,9 @@
   border: none;
   border-radius: 0.6rem;
   cursor: pointer;
+  color: $btn-text-color;
+
+  &:hover {
+    background-color: $primary-btn-hover;
+  }
 }

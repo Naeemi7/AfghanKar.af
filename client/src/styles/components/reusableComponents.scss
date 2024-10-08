@@ -6,7 +6,7 @@
 // Reusable button
 .reusable-button {
   @include common-button-template;
-  background-color: $primary-color;
+  background-color: $primary-btn-background;
 }
 
 form {
@@ -21,14 +21,19 @@ form {
 
     .hide-and-show-pass {
       position: absolute;
-      right: 1rem; // Adjust as necessary
+      right: 1rem;
       cursor: pointer;
+      color: $primary-btn-background;
+
+      &:hover {
+        color: $primary-btn-hover;
+      }
     }
   }
 
   // Input box style
   .input-box {
-    height: 5rem; // Fixed deprecated warning by moving height above mixin
+    height: 5rem;
 
     @include common-input-container-template;
 

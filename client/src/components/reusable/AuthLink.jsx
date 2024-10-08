@@ -13,13 +13,13 @@ export default function AuthLink({
   };
 
   const linkStyle = {
-    color: "#712c9c",
+    color: "#006699",
     fontWeight: "bold",
     transition: "color 0.3s ease",
   };
 
   const hoverStyle = {
-    color: "#4b2069",
+    color: "#003f57",
   };
 
   return (

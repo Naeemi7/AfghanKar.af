@@ -45,38 +45,40 @@ const UserLogin = () => {
 
   return (
     <div className="user-login-container">
-      <h2>Login</h2>
-      <form onSubmit={handleLogin}>
-        <Input
-          labelName="Email *"
-          type="email"
-          name="email"
-          placeholder="Enter your email"
-          required
-        />
-        <div className="password-input">
+      <div className="user-login-wrapper">
+        <h2>User Login</h2>
+        <form onSubmit={handleLogin}>
           <Input
-            labelName="Password *"
-            type={showPassword ? "text" : "password"}
-            name="password"
-            placeholder="Enter your password"
+            labelName="Email *"
+            type="email"
+            name="email"
+            placeholder="Enter your email"
             required
           />
-          <Icon
-            library="fa"
-            name={showPassword ? "FaEyeSlash" : "FaEye"}
-            className="hide-and-show-pass"
-            onClick={togglePasswordVisibility}
+          <div className="password-input">
+            <Input
+              labelName="Password *"
+              type={showPassword ? "text" : "password"}
+              name="password"
+              placeholder="Enter your password"
+              required
+            />
+            <Icon
+              library="fa"
+              name={showPassword ? "FaEyeSlash" : "FaEye"}
+              className="hide-and-show-pass"
+              onClick={togglePasswordVisibility}
+            />
+          </div>
+          {error && <AlertBox message={error} />}
+          <Button name="Login" type="submit" />
+          <AuthLink
+            message="No account yet?"
+            pathName="Register"
+            pathUrl="/user-registration"
           />
-        </div>
-        {error && <AlertBox message={error} />}
-        <Button name="Login" type="submit" />
-        <AuthLink
-          message="No account yet?"
-          pathName="Register"
-          pathUrl="/user-registration"
-        />
-      </form>
+        </form>
+      </div>
     </div>
   );
 };

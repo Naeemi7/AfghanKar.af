@@ -1,2 +1,27 @@
 @import "@/styles/abstracts/variables";
 @import "@/styles/abstracts/mixin";
+
+.user-login-container {
+  width: 100%;
+  max-width: 100rem;
+  margin: 0 auto;
+  display: flex;
+  justify-content: center;
+
+  .user-login-wrapper {
+    width: 35%;
+    padding: 1.5rem;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 2rem;
+
+    h2 {
+      margin-top: 4rem;
+    }
+
+    form {
+      gap: 1.8rem;
+    }
+  }
+}
