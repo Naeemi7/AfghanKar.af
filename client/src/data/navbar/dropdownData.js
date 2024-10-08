@@ -4,7 +4,7 @@ const dropdownData = [
     name: "CiLogin",
     size: 22,
     label: "Login",
-    to: "/login",
+    to: "/user-login",
     className: "",
   },
   {
