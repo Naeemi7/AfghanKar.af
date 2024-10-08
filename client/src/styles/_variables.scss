@@ -15,7 +15,7 @@ $text-color: #212121; // Main body text color
 $primary-btn-background: #ff7043; // Primary button background (CTA)
 $primary-btn-hover: #ff8a65; // Hover state for primary buttons
 $secondary-btn-background: #4e342e; // Secondary button background (alternative actions)
-$secondary-btn-hover: #6d4c41; // Hover state fo buttons
+$secondary-btn-hover: #6d4c41; // Hover state for buttons
 
 // Links
 $link-color: #d84315; // Default link color
@@ -24,6 +24,6 @@ $link-hover: #e64a19; // Hover color for links
 // Other Elements
 $card-background-color: #ffffff; // Card or container background
 $border-color: #e0e0e0; // For borders or separators
-$error-color: #dd2d4a; // secondary buttons
-$btn-text-color: #ffffff; // Text color for all
-$success-color: #749c75;
+$error-color: #dd2d4a; // For error messages
+$btn-text-color: #ffffff; // Text color for buttons
+$success-color: #749c75; // Success color

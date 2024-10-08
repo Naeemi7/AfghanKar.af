@@ -1,4 +1,4 @@
-// Mixin template for profile and add ask icons
+// Mixin template for icons
 @mixin icon-template {
   width: 2.5rem;
   height: 2.5rem;
@@ -11,20 +11,17 @@
   position: relative;
   width: 100%;
 
-  // Remove the top border under the label
   &::before {
     content: "";
     position: absolute;
-    left: 15px; // Adjust this based on label width
+    left: 15px;
     top: 0;
-    right: auto;
+    width: calc(100% - 30px);
     height: -5px;
-    width: calc(100% - 30px); // Adjust to cover the label area
     background: white;
     z-index: 1;
   }
 
-  // Label styling
   label {
     position: absolute;
     left: 15px;
@@ -49,7 +46,6 @@
   padding-left: 1rem;
 
   &:focus {
-    outline: none;
     border-color: $primary-color;
   }
 }

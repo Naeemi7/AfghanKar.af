@@ -7,6 +7,14 @@ const currentWorkingDirectory = new URL(".", import.meta.url).pathname;
 export default defineConfig({
   plugins: [react()],
 
+  css: {
+    preprocessorOptions: {
+      scss: {
+        api: "modern-compiler",
+      },
+    },
+  },
+
   server: {
     port: 3004,
   },
