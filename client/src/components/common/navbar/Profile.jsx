@@ -1,6 +1,6 @@
 import { useState, useEffect, useRef } from "react";
 import Icon from "@reusable/Icon";
-import dropdownData from "@data/dropdownData";
+import dropdownData from "@data/navbar/dropdownData";
 import DropdownItems from "./DropdownItems";
 
 export default function Profile() {
