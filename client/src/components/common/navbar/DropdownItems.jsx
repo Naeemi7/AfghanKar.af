@@ -19,7 +19,14 @@ const DropdownItems = ({ item }) => {
 };
 
 DropdownItems.propTypes = {
-  item: PropTypes.object.isRequired,
+  item: PropTypes.shape({
+    to: PropTypes.string.isRequired,
+    className: PropTypes.string,
+    library: PropTypes.string.isRequired,
+    name: PropTypes.string.isRequired,
+    size: PropTypes.number.isRequired,
+    label: PropTypes.string.isRequired,
+  }).isRequired,
 };
 
 export default DropdownItems;

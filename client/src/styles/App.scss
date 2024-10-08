@@ -48,18 +48,15 @@ body {
           font-size: 1.6rem;
           color: $secondary-color;
           text-decoration: none;
+          transition: color 0.3s;
 
           &:hover {
             font-weight: bold;
             color: $accent-color;
-          }
 
-          .nav-icon:hover {
-            color: $accent-color;
-          }
-
-          @media (max-width: 768px) {
-            gap: 1.5rem; // Increase the gap on mobile screens for better spacing
+            .nav-icon {
+              color: $accent-color;
+            }
           }
         }
       }
@@ -94,12 +91,7 @@ body {
         align-items: center;
         position: relative;
 
-        @media (max-width: 768px) {
-          display: flex; // Show on mobile as well
-        }
-
         .profile-icon-wrapper {
-          position: relative;
           display: flex;
           align-items: center;
           gap: 0.5rem; // Default gap for larger screens
@@ -121,12 +113,9 @@ body {
           .profile-icon {
             @include icon-template;
           }
-
-          @media (max-width: 768px) {
-            gap: 1.5rem; // Increase gap between icon and text on mobile
-          }
         }
 
+        // Profile dropdown styling (hidden on mobile)
         .profile-dropdown {
           position: absolute;
           top: 3rem;
@@ -145,6 +134,11 @@ body {
             transform: translateY(0);
           }
 
+          // Hide profile dropdown on mobile screens
+          @media (max-width: 768px) {
+            display: none;
+          }
+
           ul {
             list-style: none;
             margin: 0;
@@ -160,6 +154,7 @@ body {
                 align-items: center;
                 gap: 1rem;
                 color: $primary-color;
+                transition: background-color 0.3s;
 
                 &:hover {
                   background-color: $secondary-color;
@@ -183,25 +178,28 @@ body {
 
       @media (max-width: 768px) {
         display: flex;
-        flex-direction: column;
-        align-items: center;
+        flex-direction: column; // Set flex direction to column
+        align-items: flex-start; // Align items to start
         background-color: $primary-color;
         position: absolute;
-        top: 7rem;
+        top: 7rem; // Adjusted position
         right: 0;
         width: 100%;
+        padding: 1rem 0; // Added padding for better spacing
 
         .nav-item {
-          padding: 1rem 0;
+          display: flex; // Display flex to maintain icon and text alignment
+          align-items: center;
+          padding: 1rem 2rem; // Adjusted padding
           font-size: 2rem;
           color: $secondary-color;
           text-decoration: none;
+          gap: 1rem; // Space between icon and text
+          transition: color 0.3s;
 
           &:hover {
             color: $accent-color;
           }
-
-          gap: 1.5rem; // Add gap between icons and text in the mobile dropdown
         }
       }
     }

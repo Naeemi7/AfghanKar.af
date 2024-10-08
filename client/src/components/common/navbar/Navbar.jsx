@@ -1,67 +1,43 @@
 import { useState } from "react";
-import { Link } from "react-router-dom";
 import "@styles/reusableComponents.scss";
 import Profile from "./Profile";
 import Logo from "./Logo";
 import Icon from "@reusable/Icon";
 import navItems from "@data/navbar/navItems";
+import NavLink from "./NavLink";
 
 const Navbar = () => {
   const [isMobileNavOpen, setMobileNavOpen] = useState(false);
 
-  const toggleMobileNav = () => setMobileNavOpen(!isMobileNavOpen);
-
   return (
     <nav className="navbar-container">
       <div className="navbar-items-container">
+        {/* Logo Component */}
         <Logo />
 
-        {/* Navigation links */}
-        <div className="nav-links">
-          {navItems.map((item, index) => (
-            <Link to={item.path} className="nav-item" key={index}>
-              <Icon
-                library={item.icon.library}
-                name={item.icon.name}
-                size={item.icon.size}
-                className="nav-icon"
-              />
-              <span>{item.label}</span>
-            </Link>
-          ))}
-        </div>
+        {/* Navigation Component */}
+        <NavLink items={navItems} />
 
         {/* Hamburger icon for mobile */}
-        <div className="hamburger-icon" onClick={toggleMobileNav}>
-          {isMobileNavOpen ? (
-            <Icon library="md" name="MdClose" size={30} /> // Close icon
-          ) : (
-            <Icon library="md" name="MdMenu" size={30} /> // Hamburger icon
-          )}
+        <div
+          className="hamburger-icon"
+          onClick={() => setMobileNavOpen((prev) => !prev)}
+        >
+          <Icon
+            library="md"
+            name={isMobileNavOpen ? "MdClose" : "MdMenu"}
+            size={30}
+          />
         </div>
 
         {/* Profile component */}
-        <Profile />
+        {isMobileNavOpen && <Profile />}
       </div>
 
       {/* Mobile Navigation Links */}
       {isMobileNavOpen && (
         <div className="mobile-nav">
-          {navItems.map((item, index) => (
-            <Link
-              href={item.path}
-              className="nav-item"
-              key={index}
-              onClick={toggleMobileNav}
-            >
-              <Icon
-                library={item.icon.library}
-                name={item.icon.name}
-                size={item.icon.size}
-              />
-              <span>{item.label}</span>
-            </Link>
-          ))}
+          <NavLink items={navItems} onClick={() => setMobileNavOpen(false)} />
         </div>
       )}
     </nav>

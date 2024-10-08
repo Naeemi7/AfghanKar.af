@@ -62,8 +62,8 @@ const Profile = () => {
           role="menu"
         >
           <ul>
-            {dropdownData.map((item, index) => (
-              <DropdownItems item={item} key={index} />
+            {dropdownData.map((item) => (
+              <DropdownItems item={item} key={item.to} />
             ))}
           </ul>
         </div>
