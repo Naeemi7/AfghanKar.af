@@ -2,7 +2,7 @@ import { defineConfig } from "vite";
 import react from "@vitejs/plugin-react";
 
 // Get the current working directory
-const currentWorkingDirectory = new URL(".", import.meta.url).pathname;
+const currentDir = new URL(".", import.meta.url).pathname;
 // https://vitejs.dev/config/
 export default defineConfig({
   plugins: [react()],
@@ -21,20 +21,20 @@ export default defineConfig({
 
   resolve: {
     alias: {
-      "@": `${currentWorkingDirectory}/src`, // Set the base directory for your project
-      "@styles": `${currentWorkingDirectory}/src/styles`,
-      "@images": `${currentWorkingDirectory}/src/assets/images`,
-      "@utils": `${currentWorkingDirectory}/src/utils`,
-      "@api": `${currentWorkingDirectory}/src/api`,
-      "@data": `${currentWorkingDirectory}/src/data`,
-      "@context": `${currentWorkingDirectory}/src/context`,
-      "@hooks": `${currentWorkingDirectory}/src/hooks`,
-      "@provider": `${currentWorkingDirectory}/src/provider`,
-      "@features": `${currentWorkingDirectory}/src/components/features`,
-      "@reusable": `${currentWorkingDirectory}/src/components/reusable`,
-      "@common": `${currentWorkingDirectory}/src/components/common`,
-      "@auth": `${currentWorkingDirectory}/src/components/auth`,
-      "@pages": `${currentWorkingDirectory}/src/pages`,
+      "@": `${currentDir}/src`, // Set the base directory for your project
+      "@styles": `${currentDir}/src/styles`,
+      "@images": `${currentDir}/src/assets/images`,
+      "@utils": `${currentDir}/src/utils`,
+      "@api": `${currentDir}/src/api`,
+      "@data": `${currentDir}/src/data`,
+      "@context": `${currentDir}/src/context`,
+      "@hooks": `${currentDir}/src/hooks`,
+      "@provider": `${currentDir}/src/provider`,
+      "@features": `${currentDir}/src/components/features`,
+      "@reusable": `${currentDir}/src/components/reusable`,
+      "@common": `${currentDir}/src/components/common`,
+      "@auth": `${currentDir}/src/components/auth`,
+      "@pages": `${currentDir}/src/pages`,
     },
   },
 });
