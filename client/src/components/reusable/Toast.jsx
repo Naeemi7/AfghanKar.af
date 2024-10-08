@@ -1,5 +1,5 @@
 import { toast } from "react-hot-toast";
-import "@styles/reusableComponents.scss";
+import "@styles/components/reusableComponents.scss";
 
 export default function ShowToast(message, type = "success") {
   const options = {

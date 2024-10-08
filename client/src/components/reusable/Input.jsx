@@ -1,5 +1,5 @@
 import PropTypes from "prop-types";
-import "@styles/reusableComponents.scss";
+import "@styles/components/reusableComponents.scss";
 
 export default function ReusableInput({
   labelName,

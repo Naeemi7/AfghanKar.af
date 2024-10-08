@@ -1,5 +1,5 @@
 import { useState } from "react";
-import "@styles/reusableComponents.scss";
+import "@styles/components/navbar.scss";
 import Profile from "./Profile";
 import Logo from "./Logo";
 import Icon from "@reusable/Icon";
