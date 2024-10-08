@@ -31,7 +31,7 @@ const Navbar = () => {
         </div>
 
         {/* Profile component */}
-        {isMobileNavOpen && <Profile />}
+        <Profile />
       </div>
 
       {/* Mobile Navigation Links */}
