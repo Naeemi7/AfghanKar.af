@@ -1,0 +1,147 @@
+@import "@/styles/abstracts/variables";
+@import "@/styles/abstracts/mixin";
+
+.footer-container {
+  position: fixed;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background-color: $primary-color;
+  color: $secondary-color;
+  padding-top: 3rem;
+  box-shadow: 0 -4px 10px rgba(0, 0, 0, 0.1);
+
+  //   Footer main
+  .footer-main {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+    gap: 2rem;
+    max-width: 100rem;
+    margin: 0 auto;
+    padding: 0 2rem;
+
+    .logo {
+      img {
+        height: 15rem;
+        width: 15rem;
+      }
+    }
+
+    .footer-section {
+      h3 {
+        font-size: 1.6rem;
+        color: $secondary-color;
+        margin-bottom: 1rem;
+        text-transform: uppercase;
+      }
+
+      p,
+      ul,
+      form {
+        font-size: 1.4rem;
+        color: $text-color;
+      }
+
+      ul {
+        list-style: none;
+        padding: 0;
+
+        li {
+          margin-bottom: 1rem;
+
+          a {
+            color: $link-color;
+            text-decoration: none;
+            font-size: 1.4rem;
+
+            &:hover {
+              color: $link-hover;
+              text-decoration: underline;
+            }
+          }
+        }
+      }
+    }
+
+    .social-media {
+      .social-icons {
+        display: flex;
+        gap: 1rem;
+
+        a {
+          color: $secondary-color;
+          font-size: 2.4rem;
+          transition: color 0.3s ease;
+
+          &:hover {
+            color: $accent-color;
+          }
+        }
+      }
+    }
+
+    .newsletter-form {
+      display: flex;
+      gap: 1rem;
+
+      input {
+        flex: 1;
+        padding: 0.8rem;
+        border: 1px solid $border-color;
+        border-radius: 4px;
+        font-size: 1.4rem;
+
+        &:focus {
+          border-color: $accent-color;
+        }
+      }
+
+      button {
+        padding: 0.8rem 1.6rem;
+        background-color: $primary-btn-background;
+        color: $btn-text-color;
+        border: none;
+        border-radius: 4px;
+        font-size: 1.4rem;
+        cursor: pointer;
+
+        &:hover {
+          background-color: $primary-btn-hover;
+        }
+      }
+    }
+  }
+
+  .footer-bottom {
+    margin-top: 3rem;
+    text-align: center;
+    padding: 1.5rem 0;
+    background-color: darken($primary-color, 10%);
+    border-top: 1px solid $border-color;
+
+    p {
+      color: $secondary-color;
+      font-size: 1.4rem;
+    }
+
+    .legal-links {
+      margin-top: 0.5rem;
+      display: flex;
+      justify-content: center;
+      gap: 1rem;
+
+      a {
+        color: $accent-color;
+        text-decoration: none;
+
+        &:hover {
+          color: $secondary-btn-background;
+        }
+      }
+
+      span {
+        color: $accent-color;
+      }
+    }
+  }
+}
