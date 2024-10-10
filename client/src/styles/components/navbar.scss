@@ -4,19 +4,20 @@
 .navbar-container {
   height: 7rem;
   width: 100%;
+  position: sticky;
+  top: 0;
   background-color: $primary-color;
   color: $secondary-color;
   display: flex;
   justify-content: center;
   align-items: center;
-  position: relative;
-  z-index: 1;
+  z-index: 10; // Increase z-index for the sticky effect to layer properly
 
   .navbar-items-container {
     display: flex;
     justify-content: space-between;
     align-items: center;
-    max-width: 100rem;
+    max-width: 120rem;
     width: 100%;
     padding: 0 2rem;
 
@@ -31,15 +32,14 @@
         display: none; // Hide the nav links on small screens
       }
 
-      // Nav Item
       .nav-item {
         display: flex;
         align-items: center;
-        gap: 0.5rem; // Default gap between icon and text on larger screens
+        gap: 0.5rem;
         font-size: 1.6rem;
         color: $secondary-color;
         text-decoration: none;
-        transition: color 0.3s;
+        transition: color 0.3s ease;
 
         &:hover {
           font-weight: bold;
@@ -73,7 +73,7 @@
       .profile-icon-wrapper {
         display: flex;
         align-items: center;
-        gap: 0.5rem; // Default gap for larger screens
+        gap: 0.5rem;
         cursor: pointer;
 
         &:hover {
@@ -94,7 +94,7 @@
         }
       }
 
-      // Profile dropdown styling (hidden on mobile)
+      // Profile dropdown styling
       .profile-dropdown {
         position: absolute;
         top: 3rem;
@@ -113,9 +113,8 @@
           transform: translateY(0);
         }
 
-        // Hide profile dropdown on mobile screens
         @media (max-width: 768px) {
-          display: none;
+          display: none; // Hide profile dropdown on small screens
         }
 
         ul {
@@ -150,7 +149,7 @@
     }
   }
 
-  // Dropdown menu for mobile
+  // Mobile dropdown menu
   .mobile-nav {
     display: none;
 
@@ -160,10 +159,11 @@
       align-items: flex-start;
       background-color: $primary-color;
       position: absolute;
-      top: 7rem;
+      top: 7rem; // Position right below the navbar
       right: 0;
       width: 100%;
       padding: 1rem 0;
+      z-index: 9; // Lower than navbar to ensure correct stacking order
 
       .nav-item {
         display: flex;
