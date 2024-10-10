@@ -4,7 +4,7 @@ const dropdownData = [
     name: "CiLogin",
     size: 22,
     label: "Login",
-    to: "/user-login",
+    to: "/job-seeker-login",
     className: "",
   },
   {
@@ -12,7 +12,7 @@ const dropdownData = [
     name: "FaUserPlus",
     size: 22,
     label: "Register",
-    to: "/user-register",
+    to: "/register",
     className: "",
   },
   {
@@ -20,7 +20,7 @@ const dropdownData = [
     name: "GrUserAdmin",
     size: 22,
     label: "Recruiter Login",
-    to: "/admin-user",
+    to: "/recruiter-login",
     className: "item-with-border",
   },
 ];

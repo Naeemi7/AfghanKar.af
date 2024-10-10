@@ -5,7 +5,8 @@ import UserProvider from "@provider/UserProvider";
 import Navbar from "@common/navbar/Navbar";
 import Footer from "@common/footer/Footer";
 import NotFoundPage from "@pages/not-found-page/NotFoundPage";
-import UserLogin from "@auth/user-login/UserLogin";
+import JobSeekerLogin from "@auth/job-seeker-login/JobSeekerLogin";
+import RecruiterLogin from "@auth/recruiter-login/RecruiterLogin";
 
 function App() {
   return (
@@ -13,7 +14,8 @@ function App() {
       <UserProvider>
         <Navbar />
         <Routes>
-          <Route path="/user-login" element={<UserLogin />} />
+          <Route path="/job-seeker-login" element={<JobSeekerLogin />} />
+          <Route path="/recruiter-login" element={<RecruiterLogin />} />
           {/* <Route path="*" element={<NotFoundPage />} /> */}
         </Routes>
         <Footer />

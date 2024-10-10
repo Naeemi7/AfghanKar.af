@@ -1,4 +1,6 @@
+import { useState, useCallback } from "react";
 import useNavigation from "@hooks/useNavigation";
+import PropTypes from "prop-types";
 import "@styles/components/user-login.scss";
 import Input from "@reusable/Input";
 import Button from "@reusable/Button";
@@ -6,47 +8,48 @@ import Icon from "@reusable/Icon";
 import AlertBox from "@reusable/AlertBox";
 import AuthLink from "@reusable/AuthLink";
 import usePasswordVisibility from "@hooks/usePasswordVisibility";
-import useUserContext from "@hooks/useUserContext";
 import { logBuddy, handleError } from "@utils/errorUtils";
 import ShowToast from "@reusable/Toast";
 
-const UserLogin = () => {
+export default function UserLogin({ heading, loginUser, registerPathUrl }) {
   const { goTo } = useNavigation();
   const { showPassword, togglePasswordVisibility } = usePasswordVisibility();
-  const { loginUser, error, setError } = useUserContext();
+  const [error, setError] = useState("");
 
-  const handleLogin = async (e) => {
-    e.preventDefault();
+  const handleLogin = useCallback(
+    async (e) => {
+      e.preventDefault();
 
-    const formData = new FormData(e.target);
-    const data = {
-      email: formData.get("email"),
-      password: formData.get("password"),
-    };
+      const formData = new FormData(e.target);
+      const data = {
+        email: formData.get("email"),
+        password: formData.get("password"),
+      };
 
-    setError(""); // Clear previous error before login attempt
+      setError(""); // Clear previous error before login attempt
 
-    try {
-      await loginUser(data);
-      logBuddy("Logged in successfully", data);
-      ShowToast("Logged in successfully!", "success");
+      try {
+        await loginUser(data);
+        logBuddy(`${heading} login successful`, data);
+        ShowToast("Logged in successfully!", "success");
 
-      setTimeout(() => {
-        goTo("/home");
-      }, 1500);
-    } catch (error) {
-      // Ensure handleError is called only once and does not cause multiple toasts
-      if (!error.handled) {
-        error.handled = true;
-        handleError(error, setError);
+        setTimeout(() => {
+          goTo("/home");
+        }, 1500);
+      } catch (error) {
+        if (!error.handled) {
+          error.handled = true;
+          handleError(error, setError);
+        }
       }
-    }
-  };
+    },
+    [goTo, loginUser, heading]
+  );
 
   return (
     <div className="user-login-container">
       <div className="user-login-wrapper">
-        <h2>User Login</h2>
+        <h2>{heading}</h2>
         <form onSubmit={handleLogin}>
           <Input
             labelName="Email *"
@@ -75,12 +78,17 @@ const UserLogin = () => {
           <AuthLink
             message="No account yet?"
             pathName="Register"
-            pathUrl="/user-registration"
+            pathUrl={registerPathUrl}
           />
         </form>
       </div>
     </div>
   );
-};
+}
 
-export default UserLogin;
+// Validate props
+UserLogin.propTypes = {
+  heading: PropTypes.string.isRequired,
+  loginUser: PropTypes.func.isRequired,
+  registerPathUrl: PropTypes.string.isRequired,
+};

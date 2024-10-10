@@ -30,6 +30,7 @@ export default function UserInitials({
   );
 }
 
+// Validate props
 UserInitials.propTypes = {
   firstname: PropTypes.string,
   lastname: PropTypes.string,
