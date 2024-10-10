@@ -1,30 +1,30 @@
 // Primary Theme Colors
-$primary-color: #00548f; // Deep teal for headers, titles, and important elements
-$secondary-color: #e8f0f2; // Very light gray-blue for subtle backgrounds or sections
+$primary-color: #00548f;
+$secondary-color: #e8f0f2;
 
 // Headings
-$heading-color: #00548f; // Primary color for main headings (H1, H2, etc.)
-$subheading-color: #4e4e4e; // Medium dark gray for subheadings or smaller titles (H3, H4)
-$extra-heading-color: #f39c12; // Bright amber for extra headings to enhance contrast and warmth
+$heading-color: #00548f; //(H1, H2, etc.)
+$subheading-color: #4e4e4e; // (H3, H4)
+$extra-heading-color: #f39c12;
 
 // Accent and Background
-$accent-color: #f39c12; // Bright amber for call-to-action buttons and key highlights
-$background-color: #ffffff; // Pure white for the main background for improved readability
-$text-color: #333333; // Dark gray for main body text color, ensuring contrast with backgrounds
+$accent-color: #f39c12;
+$background-color: #ffffff;
+$text-color: #333333;
 
 // Buttons
-$primary-btn-background: #f39c12; // Bright amber for primary button background (CTA)
-$primary-btn-hover: #ffb84d; // Lighter amber for hover state on primary buttons
-$secondary-btn-background: #3a3f44; // Dark gray for secondary button background
-$secondary-btn-hover: #4b4f54; // Slightly lighter gray for hover state on secondary buttons
+$primary-btn-background: #f39c12; // (CTA)
+$primary-btn-hover: #ffb84d;
+$secondary-btn-background: #3a3f44;
+$secondary-btn-hover: #4b4f54;
 
 // Links
-$link-color: #1e88e5; // Bright blue for default link color, providing strong contrast with primary deep teal
-$link-hover: #1565c0; // Darker blue for hover color for links, ensuring clear feedback
+$link-color: #00a3e0;
+$link-hover: #0081b5;
 
 // Other Elements
-$card-background-color: #f4f4f4; // Very light gray for card or container background, adding subtle depth
-$border-color: #d3d3d3; // Light gray for borders or separators, offering a clean look
-$error-color: #e74c3c; // Bright red for error messages, ensuring visibility
-$btn-text-color: #ffffff; // White for button text to maintain contrast with backgrounds
-$success-color: #27ae60; // Strong green for success messages
+$card-background-color: #f4f4f4;
+$border-color: #d3d3d3;
+$error-color: #e74c3c;
+$btn-text-color: #ffffff;
+$success-color: #27ae60;
