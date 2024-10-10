@@ -1,7 +1,7 @@
 import { useState } from "react";
 import "@styles/components/navbar.scss";
 import Profile from "./Profile";
-import Logo from "./Logo";
+import Logo from "@reusable/Logo";
 import Icon from "@reusable/Icon";
 import navItems from "@data/navbar/navItems";
 import NavLink from "./NavLink";
@@ -12,8 +12,8 @@ const Navbar = () => {
   return (
     <nav className="navbar-container">
       <div className="navbar-items-container">
-        {/* Logo Component */}
-        <Logo />
+        {/* Reusable Logo */}
+        <Logo height={8} />
 
         {/* Navigation Component */}
         <NavLink items={navItems} />

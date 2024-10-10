@@ -52,18 +52,6 @@
       }
     }
 
-    // Logo container
-    .logo-container {
-      img {
-        height: 8rem;
-        width: auto;
-
-        @media (max-width: 768px) {
-          height: 4rem;
-        }
-      }
-    }
-
     // Hamburger menu for mobile
     .hamburger-icon {
       display: none;

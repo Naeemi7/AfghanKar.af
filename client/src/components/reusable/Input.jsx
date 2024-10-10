@@ -1,7 +1,7 @@
 import PropTypes from "prop-types";
 import "@styles/components/reusableComponents.scss";
 
-export default function ReusableInput({
+export default function Input({
   labelName,
   type = "text",
   name = "",
@@ -24,7 +24,7 @@ export default function ReusableInput({
   );
 }
 
-ReusableInput.propTypes = {
+Input.propTypes = {
   labelName: PropTypes.string.isRequired,
   type: PropTypes.string,
   name: PropTypes.string,

@@ -20,13 +20,6 @@
     margin: 0 auto;
     padding: 0 2rem;
 
-    .logo {
-      img {
-        height: 15rem;
-        width: 15rem;
-      }
-    }
-
     .footer-section {
       h3 {
         font-size: 1.6rem;
@@ -65,13 +58,17 @@
 
     .social-media {
       .social-icons {
-        display: flex;
-        gap: 1rem;
+        display: flex; /* Keep the display as flex */
+        gap: 1rem; /* Space between icons */
+        justify-content: flex-start; /* Aligns items to the start */
 
         a {
           color: $secondary-color;
           font-size: 2.4rem;
           transition: color 0.3s ease;
+          display: inline-flex; /* Ensure the anchor behaves as an inline flex container */
+          align-items: center; /* Center icons vertically */
+          justify-content: center; /* Center icons horizontally */
 
           &:hover {
             color: $accent-color;
