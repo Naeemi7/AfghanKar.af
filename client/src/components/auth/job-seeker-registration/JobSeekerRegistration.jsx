@@ -14,7 +14,7 @@ const JobSeekerRegistration = () => {
 
   return (
     <div className="job-seeker-registeration-container">
-      <h2>Registration</h2>
+      <h2>Job Seeker Registration</h2>
 
       <form>
         {formFields(showPassword).map((field, index) => (

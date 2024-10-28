@@ -12,7 +12,7 @@ const dropdownData = [
     name: "FaUserPlus",
     size: 22,
     label: "Register",
-    to: "/user-registeration",
+    to: "/registration",
     className: "",
   },
   {
