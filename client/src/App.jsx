@@ -7,51 +7,47 @@ import Footer from "@common/footer/Footer";
 import NotFoundPage from "@pages/not-found-page/NotFoundPage";
 import JobSeekerLogin from "@auth/job-seeker-login/JobSeekerLogin";
 import RecruiterLogin from "@auth/recruiter-login/RecruiterLogin";
-import RegisterationPage from "@pages/registeration-page/RegisterationPage";
-import JobSeekerRegistration from "@auth/job-seeker-registeration/JobSeekerRegistration";
-import RecruiterRegisteration from "@auth/recruiter-registeration/RecruiterRegisteration";
+import RegistrationPage from "@pages/registeration-page/RegistrationPage";
+import JobSeekerRegistration from "@auth/job-seeker-registration/JobSeekerRegistration";
+import RecruiterRegistration from "@auth/recruiter-registration/RecruiterRegisteration";
+// import LandingPage from "@pages/landing-page/LandingPage";
+// import Dashboard from "@pages/dashboard/Dashboard";
+// import HomePage from "@pages/home/HomePage";
+// import MainLayout from "@layouts/MainLayout";
+// import BasicLayout from "@layouts/BasicLayout";
 
-function App() {
+export default function App() {
   return (
-    <div className="app">
+    <div className="app-grid">
       <UserProvider>
         <Navbar />
-        <Routes>
-          <Route path="/job-seeker-login" element={<JobSeekerLogin />} />
-          <Route path="/recruiter-login" element={<RecruiterLogin />} />
-          <Route path="/user-registeration" element={<RegisterationPage />} />
-          <Route
-            path="/job-seeker-registration"
-            element={<JobSeekerRegistration />}
-          />
-          <Route
-            path="/recruiter-registration"
-            element={<RecruiterRegisteration />}
-          />
-          {/* <Route path="*" element={<NotFoundPage />} /> */}
-        </Routes>
+        <main className="app-content">
+          <Routes>
+            {/* <Route path="/" element={<LandingPage />} />
+            <Route path="/home" element={<HomePage />} />
+            <Route path="/dashboard" element={<Dashboard />} /> */}
+            <Route path="/job-seeker-login" element={<JobSeekerLogin />} />
+            <Route path="/recruiter-login" element={<RecruiterLogin />} />
+            <Route path="/registration" element={<RegistrationPage />} />
+            <Route
+              path="/job-seeker-registration"
+              element={<JobSeekerRegistration />}
+            />
+            <Route
+              path="/recruiter-registration"
+              element={<RecruiterRegistration />}
+            />
+            <Route path="*" element={<NotFoundPage />} />
+          </Routes>
+        </main>
         <Footer />
-        {/* React Hot Toast setup */}
         <Toaster
           toastOptions={{
-            success: {
-              style: {
-                background: "#749c75",
-                color: "#fffafa",
-              },
-            },
-            error: {
-              style: {
-                background: "#dd2d4a",
-                color: "#fffafa",
-              },
-            },
+            success: { style: { background: "#749c75", color: "#fffafa" } },
+            error: { style: { background: "#dd2d4a", color: "#fffafa" } },
           }}
         />
-        ;
       </UserProvider>
     </div>
   );
 }
-
-export default App;

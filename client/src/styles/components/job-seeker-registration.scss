@@ -1,0 +1,21 @@
+@import "@/styles/abstracts/variables";
+@import "@/styles/abstracts/mixin";
+
+.job-seeker-registeration-container {
+  @include common-layout-template;
+  height: fit-content;
+
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+
+  h2 {
+    margin: 2rem 0;
+  }
+
+  form {
+    width: 30%;
+    display: flex;
+    gap: 1rem;
+  }
+}

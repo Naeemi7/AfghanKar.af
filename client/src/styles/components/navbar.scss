@@ -14,11 +14,10 @@
   z-index: 10;
 
   .navbar-items-container {
+    @include common-layout-template;
     display: flex;
     justify-content: space-between;
     align-items: center;
-    max-width: 120rem;
-    width: 100%;
     padding: 0 2rem;
 
     // Navigation links

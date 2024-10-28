@@ -35,6 +35,7 @@ export default defineConfig({
       "@common": `${currentDir}/src/components/common`,
       "@auth": `${currentDir}/src/components/auth`,
       "@pages": `${currentDir}/src/pages`,
+      "@layout": `${currentDir}/src/layout`,
     },
   },
 });

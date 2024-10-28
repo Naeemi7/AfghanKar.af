@@ -2,10 +2,10 @@
 @import "@/styles/abstracts/mixin";
 
 .footer-container {
-  position: fixed;
-  left: 0;
-  right: 0;
-  bottom: 0;
+  // position: fixed;
+  // left: 0;
+  // right: 0;
+  // bottom: 0;
   background-color: $primary-color;
   color: $secondary-color;
   padding-top: 3rem;
@@ -13,11 +13,10 @@
 
   //   Footer main
   .footer-main {
+    @include common-layout-template;
     display: grid;
     grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
     gap: 2rem;
-    max-width: 120rem;
-    margin: 0 auto;
     padding: 0 2rem;
 
     .footer-section {
