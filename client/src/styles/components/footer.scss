@@ -58,17 +58,17 @@
 
     .social-media {
       .social-icons {
-        display: flex; /* Keep the display as flex */
-        gap: 1rem; /* Space between icons */
-        justify-content: flex-start; /* Aligns items to the start */
+        display: flex;
+        gap: 1rem;
+        justify-content: flex-start;
 
         a {
           color: $secondary-color;
           font-size: 2.4rem;
           transition: color 0.3s ease;
-          display: inline-flex; /* Ensure the anchor behaves as an inline flex container */
-          align-items: center; /* Center icons vertically */
-          justify-content: center; /* Center icons horizontally */
+          display: inline-flex;
+          align-items: center;
+          justify-content: center;
 
           &:hover {
             color: $accent-color;

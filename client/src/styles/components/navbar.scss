@@ -11,7 +11,7 @@
   display: flex;
   justify-content: center;
   align-items: center;
-  z-index: 10; // Increase z-index for the sticky effect to layer properly
+  z-index: 10;
 
   .navbar-items-container {
     display: flex;
@@ -29,7 +29,7 @@
       gap: 2rem;
 
       @media (max-width: 768px) {
-        display: none; // Hide the nav links on small screens
+        display: none;
       }
 
       .nav-item {
@@ -159,11 +159,11 @@
       align-items: flex-start;
       background-color: $primary-color;
       position: absolute;
-      top: 7rem; // Position right below the navbar
+      top: 7rem;
       right: 0;
       width: 100%;
       padding: 1rem 0;
-      z-index: 9; // Lower than navbar to ensure correct stacking order
+      z-index: 9;
 
       .nav-item {
         display: flex;

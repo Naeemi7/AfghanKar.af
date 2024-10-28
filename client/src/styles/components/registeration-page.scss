@@ -1,0 +1,23 @@
+@import "@/styles/abstracts/variables";
+@import "@/styles/abstracts/mixin";
+
+.registeration-page-container {
+  width: 100%;
+  max-width: 120rem;
+  height: 55vh;
+  margin: 0 auto;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+
+  .registeration-heading {
+    h2 {
+      margin: 3rem 0;
+    }
+  }
+
+  .registeration-page-wrapper {
+    display: flex;
+    gap: 2rem;
+  }
+}

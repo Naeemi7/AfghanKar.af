@@ -23,7 +23,7 @@ const ICON_LIBRARIES = {
   gr: GriIcons,
 };
 
-export default function ReusableIcon({
+export default function Icon({
   library = "fa",
   name,
   size = 24,
@@ -49,7 +49,7 @@ export default function ReusableIcon({
   );
 }
 
-ReusableIcon.propTypes = {
+Icon.propTypes = {
   library: PropTypes.string,
   name: PropTypes.string.isRequired,
   size: PropTypes.number,
