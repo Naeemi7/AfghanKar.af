@@ -22,7 +22,7 @@ const RegisterationPage = () => {
   return (
     <div className="registeration-page-container">
       <div className="registeration-heading">
-        <h2>Registeration Page</h2>
+        <h2>Choose Your Registration Type</h2>
       </div>
 
       <div className="registeration-page-wrapper">
