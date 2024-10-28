@@ -6,7 +6,7 @@ export default function JobSeekerLogin({ loginJobSeeker }) {
     <UserLogin
       heading="Job Seeker Login"
       loginUser={loginJobSeeker}
-      registerPathUrl="/user-registeration"
+      registerPathUrl="/job-seeker-registration"
     />
   );
 }

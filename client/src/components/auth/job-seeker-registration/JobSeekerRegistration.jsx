@@ -46,7 +46,7 @@ const JobSeekerRegistration = () => {
         <AuthLink
           message="Already signed up? "
           pathName="Login"
-          pathUrl="/user-login"
+          pathUrl="/job-seeker-login"
         />
       </form>
     </div>

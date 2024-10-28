@@ -1,21 +1,16 @@
 import PropTypes from "prop-types";
-import { Link, useNavigate } from "react-router-dom";
+import { Link } from "react-router-dom";
 
 export default function AuthLink({
   message = "",
   pathName = "",
   pathUrl = "",
 }) {
-  const navigate = useNavigate();
-
-  const handleClick = () => {
-    navigate(pathUrl);
-  };
-
   const linkStyle = {
     color: "#006699",
     fontWeight: "bold",
     transition: "color 0.3s ease",
+    padding: "0.6rem",
   };
 
   const hoverStyle = {
@@ -28,7 +23,6 @@ export default function AuthLink({
         {message}{" "}
         <Link
           to={pathUrl}
-          onClick={handleClick}
           style={linkStyle}
           onMouseEnter={(e) => (e.target.style.color = hoverStyle.color)}
           onMouseLeave={(e) => (e.target.style.color = linkStyle.color)}
