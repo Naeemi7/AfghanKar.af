@@ -7,6 +7,7 @@ import Footer from "@common/footer/Footer";
 import NotFoundPage from "@pages/not-found-page/NotFoundPage";
 import JobSeekerLogin from "@auth/job-seeker-login/JobSeekerLogin";
 import RecruiterLogin from "@auth/recruiter-login/RecruiterLogin";
+import RegisterationPage from "@pages/registeration-page/RegisterationPage";
 
 function App() {
   return (
@@ -16,6 +17,7 @@ function App() {
         <Routes>
           <Route path="/job-seeker-login" element={<JobSeekerLogin />} />
           <Route path="/recruiter-login" element={<RecruiterLogin />} />
+          <Route path="/user-registeration" element={<RegisterationPage />} />
           {/* <Route path="*" element={<NotFoundPage />} /> */}
         </Routes>
         <Footer />

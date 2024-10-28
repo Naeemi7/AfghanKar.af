@@ -6,7 +6,7 @@ export default function RecruiterLogin({ loginRecruiter }) {
     <UserLogin
       heading="Recruiter Login"
       loginUser={loginRecruiter}
-      registerPathUrl="/"
+      registerPathUrl="/user-registeration"
     />
   );
 }
