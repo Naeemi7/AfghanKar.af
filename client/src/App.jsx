@@ -8,13 +8,9 @@ import NotFoundPage from "@pages/not-found-page/NotFoundPage";
 import JobSeekerLogin from "@auth/job-seeker-login/JobSeekerLogin";
 import RecruiterLogin from "@auth/recruiter-login/RecruiterLogin";
 import RegistrationPage from "@pages/registeration-page/RegistrationPage";
+import HomePage from "@pages/home/HomePage";
 import JobSeekerRegistration from "@auth/job-seeker-registration/JobSeekerRegistration";
 import RecruiterRegistration from "@auth/recruiter-registration/RecruiterRegisteration";
-// import LandingPage from "@pages/landing-page/LandingPage";
-// import Dashboard from "@pages/dashboard/Dashboard";
-// import HomePage from "@pages/home/HomePage";
-// import MainLayout from "@layouts/MainLayout";
-// import BasicLayout from "@layouts/BasicLayout";
 
 export default function App() {
   return (
@@ -23,9 +19,7 @@ export default function App() {
         <Navbar />
         <main className="app-content">
           <Routes>
-            {/* <Route path="/" element={<LandingPage />} />
-            <Route path="/home" element={<HomePage />} />
-            <Route path="/dashboard" element={<Dashboard />} /> */}
+            <Route path="/" element={<HomePage />} />
             <Route path="/job-seeker-login" element={<JobSeekerLogin />} />
             <Route path="/recruiter-login" element={<RecruiterLogin />} />
             <Route path="/registration" element={<RegistrationPage />} />
