@@ -1,0 +1,23 @@
+@import "@/styles/abstracts/variables";
+@import "@/styles/abstracts/mixin";
+
+.not-found-page-container {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+
+  .not-found-content {
+    display: flex;
+    flex-direction: column;
+    gap: 2rem;
+
+    h1 {
+      font-size: 10rem;
+    }
+
+    p {
+      font-size: 2.5rem;
+      color: $text-color;
+    }
+  }
+}
