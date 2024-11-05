@@ -1,10 +1,12 @@
 @use "@/styles/abstracts/variables" as *;
 @use "@/styles/abstracts/mixin" as *;
 
-.job-seeker-sidebar {
+.sidebar {
   width: 25rem;
-  height: 91vh;
-  background-color: $sidebar-background-color;
+  height: 92.4vh;
+
+  background: linear-gradient(135deg, #1a2a4d, #00548f);
+
   padding: 2rem;
 
   ul {
@@ -21,7 +23,7 @@
         font-size: 1.3rem;
 
         &:hover {
-          color: $link-hover;
+          color: red;
         }
       }
     }

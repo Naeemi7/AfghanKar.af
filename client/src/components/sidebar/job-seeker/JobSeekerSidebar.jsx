@@ -1,21 +1,11 @@
-import "@styles/components/sidebar.scss";
+import Sidebar from "@reusable/Sidebar";
 
-const JobSeekerSidebar = () => {
-  return (
-    <nav className="job-seeker-sidebar">
-      <ul>
-        <li>
-          <a href="/job-seeker-dashboard/profile">Profile</a>
-        </li>
-        <li>
-          <a href="/job-seeker-dashboard/jobs">Jobs</a>
-        </li>
-        <li>
-          <a href="/job-seeker-dashboard/settings">Settings</a>
-        </li>
-      </ul>
-    </nav>
-  );
-};
+export default function JobSeekerSidebar() {
+  const jobSeekerLinks = [
+    { href: "/job-seeker-dashboard/profile", label: "Profile" },
+    { href: "/job-seeker-dashboard/jobs", label: "Jobs" },
+    { href: "/job-seeker-dashboard/settings", label: "Settings" },
+  ];
 
-export default JobSeekerSidebar;
+  return <Sidebar links={jobSeekerLinks} />;
+}

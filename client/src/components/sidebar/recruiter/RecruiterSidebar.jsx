@@ -1,21 +1,11 @@
-import "@styles/components/recruiter-sidebar.scss";
+import Sidebar from "@reusable/Sidebar";
 
-const RecruiterSidebar = () => {
-  return (
-    <nav className="recruiter-sidebar">
-      <ul>
-        <li>
-          <a href="/recruiter-dashboard/profile">Profile</a>
-        </li>
-        <li>
-          <a href="/recruiter-dashboard/applicants">Applicants</a>
-        </li>
-        <li>
-          <a href="/recruiter-dashboard/settings">Settings</a>
-        </li>
-      </ul>
-    </nav>
-  );
-};
+export default function RecruiterSidebar() {
+  const recruiterLinks = [
+    { href: "/recruiter-dashboard/profile", label: "Profile" },
+    { href: "/recruiter-dashboard/applicants", label: "Applicants" },
+    { href: "/recruiter-dashboard/settings", label: "Settings" },
+  ];
 
-export default RecruiterSidebar;
+  return <Sidebar links={recruiterLinks} />;
+}

@@ -1,4 +1,4 @@
-import "@styles/components/sidebar.scss"; // Verify this path
+import "@styles/components/sidebar.scss";
 import PropTypes from "prop-types";
 
 export default function Sidebar({ links }) {
