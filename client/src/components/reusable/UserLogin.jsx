@@ -1,15 +1,16 @@
+// UserLogin.jsx
+import PropTypes from "prop-types";
 import { useState, useCallback } from "react";
 import useNavigation from "@hooks/useNavigation";
-import PropTypes from "prop-types";
-import "@styles/components/user-login.scss";
+import usePasswordVisibility from "@hooks/usePasswordVisibility";
 import Input from "@reusable/Input";
 import Button from "@reusable/Button";
 import Icon from "@reusable/Icon";
 import AlertBox from "@reusable/AlertBox";
 import AuthLink from "@reusable/AuthLink";
-import usePasswordVisibility from "@hooks/usePasswordVisibility";
-import { logBuddy, handleError } from "@utils/errorUtils";
 import ShowToast from "@reusable/Toast";
+import { logBuddy, handleError } from "@utils/errorUtils";
+import "@styles/components/user-login.scss";
 
 export default function UserLogin({ heading, loginUser, registerPathUrl }) {
   const { goTo } = useNavigation();
@@ -19,23 +20,17 @@ export default function UserLogin({ heading, loginUser, registerPathUrl }) {
   const handleLogin = useCallback(
     async (e) => {
       e.preventDefault();
-
       const formData = new FormData(e.target);
       const data = {
         email: formData.get("email"),
         password: formData.get("password"),
       };
-
-      setError(""); // Clear previous error before login attempt
-
+      setError("");
       try {
         await loginUser(data);
         logBuddy(`${heading} login successful`, data);
         ShowToast("Logged in successfully!", "success");
-
-        setTimeout(() => {
-          goTo("/home");
-        }, 1500);
+        setTimeout(() => goTo("/home"), 1500);
       } catch (error) {
         if (!error.handled) {
           error.handled = true;
@@ -86,7 +81,6 @@ export default function UserLogin({ heading, loginUser, registerPathUrl }) {
   );
 }
 
-// Validate props
 UserLogin.propTypes = {
   heading: PropTypes.string.isRequired,
   loginUser: PropTypes.func.isRequired,
