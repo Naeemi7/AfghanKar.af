@@ -1,0 +1,13 @@
+@import "@/styles/abstracts/variables";
+@import "@/styles/abstracts/mixin";
+
+.job-seeker-layout {
+  display: flex;
+  flex-direction: column;
+
+  .job-seeker-content {
+    flex-grow: 1;
+    padding: 2rem;
+    background-color: $background-color;
+  }
+}
