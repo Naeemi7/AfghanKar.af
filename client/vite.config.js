@@ -32,6 +32,7 @@ export default defineConfig({
       "@provider": `${currentDir}/src/provider`,
       "@features": `${currentDir}/src/components/features`,
       "@reusable": `${currentDir}/src/components/reusable`,
+      "@dashboards": `${currentDir}/src/components/dashboards`,
       "@common": `${currentDir}/src/components/common`,
       "@auth": `${currentDir}/src/components/auth`,
       "@pages": `${currentDir}/src/pages`,

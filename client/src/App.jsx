@@ -11,6 +11,8 @@ import RegistrationPage from "@pages/registeration-page/RegistrationPage";
 import HomePage from "@pages/home/HomePage";
 import JobSeekerRegistration from "@auth/job-seeker-registration/JobSeekerRegistration";
 import RecruiterRegistration from "@auth/recruiter-registration/RecruiterRegisteration";
+import JobSeekerDashboard from "@dashboards/JobSeekerDashboard";
+import RecruiterDashboard from "@dashboards/RecruiterDashboard";
 
 export default function App() {
   return (
@@ -30,6 +32,14 @@ export default function App() {
             <Route
               path="/recruiter-registration"
               element={<RecruiterRegistration />}
+            />
+            <Route
+              path="/job-seeker-dashboard"
+              element={<JobSeekerDashboard />}
+            />
+            <Route
+              path="/recruiter-dashboard"
+              element={<RecruiterDashboard />}
             />
             <Route path="*" element={<NotFoundPage />} />
           </Routes>

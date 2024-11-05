@@ -12,7 +12,12 @@ import ShowToast from "@reusable/Toast";
 import { logBuddy, handleError } from "@utils/errorUtils";
 import "@styles/components/user-login.scss";
 
-export default function UserLogin({ heading, loginUser, registerPathUrl }) {
+export default function UserLogin({
+  heading,
+  loginUser,
+  registerPathUrl,
+  goToUrl,
+}) {
   const { goTo } = useNavigation();
   const { showPassword, togglePasswordVisibility } = usePasswordVisibility();
   const [error, setError] = useState("");
@@ -30,7 +35,7 @@ export default function UserLogin({ heading, loginUser, registerPathUrl }) {
         await loginUser(data);
         logBuddy(`${heading} login successful`, data);
         ShowToast("Logged in successfully!", "success");
-        setTimeout(() => goTo("/home"), 1500);
+        setTimeout(() => goTo(goToUrl), 1500);
       } catch (error) {
         if (!error.handled) {
           error.handled = true;
@@ -38,7 +43,7 @@ export default function UserLogin({ heading, loginUser, registerPathUrl }) {
         }
       }
     },
-    [goTo, loginUser, heading]
+    [goTo, loginUser, heading, goToUrl]
   );
 
   return (
@@ -82,7 +87,8 @@ export default function UserLogin({ heading, loginUser, registerPathUrl }) {
 }
 
 UserLogin.propTypes = {
-  heading: PropTypes.string.isRequired,
-  loginUser: PropTypes.func.isRequired,
-  registerPathUrl: PropTypes.string.isRequired,
+  heading: PropTypes.string,
+  loginUser: PropTypes.func,
+  registerPathUrl: PropTypes.string,
+  goToUrl: PropTypes.string,
 };

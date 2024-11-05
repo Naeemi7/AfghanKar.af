@@ -10,10 +10,11 @@ export default function JobSeekerLogin() {
       heading="Job Seeker Login"
       loginUser={loginJobSeeker}
       registerPathUrl="/job-seeker-registration"
+      goToUrl="job-seeker-dashboard"
     />
   );
 }
 
 JobSeekerLogin.propTypes = {
-  loginJobSeeker: PropTypes.func.isRequired,
+  loginJobSeeker: PropTypes.func,
 };
