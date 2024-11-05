@@ -1,0 +1,31 @@
+@import "@/styles/abstracts/variables";
+@import "@/styles/abstracts/mixin";
+
+// App-layout Style
+.app-grid {
+  display: grid;
+  grid-template-rows: auto 1fr auto;
+  min-height: 100vh;
+
+  // App-layout content
+  .app-content {
+    @include common-layout-template;
+    padding: 2rem;
+    background-color: $background-color;
+  }
+}
+
+// Job Seeker and Recruiter Layout
+.job-seeker-layout,
+.recruiter-layout {
+  display: flex;
+  flex-direction: column;
+}
+
+// Job Seeker and Recruiter content
+.job-seeker-content,
+.recruiter-content {
+  flex-grow: 1;
+  padding: 2rem;
+  background-color: $background-color;
+}

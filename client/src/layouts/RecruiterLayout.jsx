@@ -1,7 +1,7 @@
 import { Outlet } from "react-router-dom";
+import "@styles/layouts/layouts.scss";
 import RecruiterSidebar from "@sidebar/recruiter/RecruiterSidebar";
 import Navbar from "@common/navbar/Navbar";
-import "@styles/layouts/recruiter-layout.scss";
 
 export default function RecruiterLayout() {
   return (

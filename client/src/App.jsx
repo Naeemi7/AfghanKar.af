@@ -1,27 +1,14 @@
-import { Routes, Route, Outlet } from "react-router-dom";
+import { Routes, Route } from "react-router-dom";
 import { Toaster } from "react-hot-toast";
-import "@styles/layouts/App.scss";
 import UserProvider from "@provider/UserProvider";
-import Navbar from "@common/navbar/Navbar";
-import Footer from "@common/footer/Footer";
 import NotFoundPage from "@pages/not-found-page/NotFoundPage";
 import HomePage from "@pages/home/HomePage";
 import JobSeekerLogin from "@auth/job-seeker-login/JobSeekerLogin";
 import RecruiterLogin from "@auth/recruiter-login/RecruiterLogin";
 import RegistrationPage from "@pages/registeration-page/RegistrationPage";
+import AppLayout from "@layouts/AppLayout";
 import JobSeekerLayout from "@layouts/JobSeekerLayout";
 import RecruiterLayout from "@layouts/RecruiterLayout";
-
-// Main App Layout with Navbar and Footer
-const AppLayout = () => (
-  <div className="app-grid">
-    <Navbar />
-    <main className="app-content">
-      <Outlet />
-    </main>
-    <Footer />
-  </div>
-);
 
 export default function App() {
   return (

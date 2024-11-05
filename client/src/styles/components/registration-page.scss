@@ -1,21 +1,57 @@
 @import "@/styles/abstracts/variables";
 @import "@/styles/abstracts/mixin";
 
-.registeration-page-container {
-  @include common-layout-template;
-  height: 55vh;
+.not-found-page-container {
   display: flex;
-  flex-direction: column;
   align-items: center;
+  justify-content: center;
+  flex-direction: column;
+  min-height: 100vh;
+  background-color: $background-color;
+  color: $text-color;
+  text-align: center;
+  padding: 20px;
 
-  .registeration-heading {
-    h2 {
-      margin: 3rem 0;
+  .not-found-content {
+    max-width: 500px;
+    padding: 20px;
+
+    h1 {
+      font-size: 4rem;
+      color: $extra-heading-color;
+    }
+
+    .divider {
+      display: block;
+      width: 80px;
+      height: 4px;
+      background-color: $accent-color;
+      margin: 10px auto;
+    }
+
+    p {
+      font-size: 1.2rem;
+      color: $subheading-color;
+      margin-bottom: 20px;
+    }
+
+    button {
+      background-color: $primary-btn-background;
+      color: $btn-text-color;
+      &:hover {
+        background-color: $primary-btn-hover;
+      }
     }
   }
 
-  .registeration-page-wrapper {
-    display: flex;
-    gap: 2rem;
+  .not-found-image {
+    margin-top: 20px;
+    img {
+      max-width: 100%;
+      height: auto;
+      border: 1px solid $border-color;
+      border-radius: 8px;
+      box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    }
   }
 }

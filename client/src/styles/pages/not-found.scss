@@ -2,22 +2,31 @@
 @import "@/styles/abstracts/mixin";
 
 .not-found-page-container {
+  height: 100vh;
+  width: 100vw;
   display: flex;
-  justify-content: space-between;
-  align-items: center;
 
-  .not-found-content {
+  .not-found-wrapper {
+    max-width: 120rem;
     display: flex;
-    flex-direction: column;
-    gap: 2rem;
+    justify-content: center;
 
-    h1 {
-      font-size: 10rem;
-    }
+    .not-found-content {
+      display: flex;
+      flex-direction: column;
+      align-items: flex-start;
+      justify-content: center;
+      gap: 2rem;
 
-    p {
-      font-size: 2.5rem;
-      color: $text-color;
+      h1 {
+        font-size: 10rem;
+      }
+
+      p {
+        font-size: 2.5rem;
+        color: $text-color;
+        text-align: left;
+      }
     }
   }
 }
