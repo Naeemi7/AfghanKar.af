@@ -1,4 +1,4 @@
-import "@styles/components/job-seeker-sidebar.scss";
+import "@styles/components/sidebar.scss";
 
 const JobSeekerSidebar = () => {
   return (

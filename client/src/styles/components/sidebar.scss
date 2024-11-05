@@ -2,9 +2,10 @@
 @import "@/styles/abstracts/mixin";
 
 .job-seeker-sidebar {
-  background-color: $secondary-color;
+  width: 25rem;
+  height: 91vh;
+  background-color: $sidebar-background-color;
   padding: 2rem;
-  width: 250px;
 
   ul {
     list-style: none;
@@ -14,9 +15,10 @@
       margin-bottom: 1rem;
 
       a {
-        color: $primary-color;
+        color: $background-color;
         text-decoration: none;
         font-weight: bold;
+        font-size: 1.3rem;
 
         &:hover {
           color: $link-hover;
