@@ -1,7 +1,8 @@
-import User from "../models/User.js";
+import JobSeeker from "../models/JobSeeker.js";
+import Recruiter from "../models/Recruiter.js";
 
 /**
- * Helper to make the first letter  uppercase
+ * Helper to make the first letter uppercase
  * @param {*} word
  * @returns
  */
@@ -10,11 +11,18 @@ export const uppercaseFirstLetter = (word) => {
 };
 
 /**
- * Helper to check if the user with the provided email exists
- * @param {*} value
+ * Helper to check if a user with the provided email exists
+ * @param {*} email
+ * @param {*} userType - "jobSeeker" or "recruiter"
  */
-export const checkUserExistenceByEmail = async (email) => {
-  const existedUser = await User.findOne({ email });
+export const checkUserExistenceByEmail = async (email, userType) => {
+  let existedUser;
+
+  if (userType === "jobSeeker") {
+    existedUser = await JobSeeker.findOne({ email });
+  } else if (userType === "recruiter") {
+    existedUser = await Recruiter.findOne({ email });
+  }
 
   if (existedUser) {
     throw new Error("A user already exists with this email address");
@@ -23,10 +31,17 @@ export const checkUserExistenceByEmail = async (email) => {
 
 /**
  * Helper to check if a username already exists
- * @param {*} value
+ * @param {*} username
+ * @param {*} userType - "jobSeeker" or "recruiter"
  */
-export const checkUserExistenceByUsername = async (username) => {
-  const existedUsername = await User.findOne({ username });
+export const checkUserExistenceByUsername = async (username, userType) => {
+  let existedUsername;
+
+  if (userType === "jobSeeker") {
+    existedUsername = await JobSeeker.findOne({ username });
+  } else if (userType === "recruiter") {
+    existedUsername = await Recruiter.findOne({ username });
+  }
 
   if (existedUsername) {
     throw new Error("A user already exists with this username");

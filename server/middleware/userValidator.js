@@ -38,7 +38,7 @@ export const userValidator = (req, res, next) => {
         msg: customMsg, // Updated message to reflect the missing or invalid field
         path: error.path,
         location: error.location || "body", // Default to "body" if location is not provided
-        code: getCodeForError(error.path), // Ensure error code is fetched and included
+        code: getCodeForError(error.path, req.body.role), // Ensure error code is fetched and included based on user role
       };
     });
 
@@ -52,15 +52,29 @@ export const userValidator = (req, res, next) => {
 
 // Error codes map for different fields
 const errorCodes = {
-  firstname: "01",
-  lastname: "02",
-  username: "03",
-  email: "04",
-  password: "05",
-  role: "06",
+  jobSeeker: {
+    firstname: "01",
+    lastname: "02",
+    username: "03",
+    email: "04",
+    password: "05",
+    phoneNumber: "06",
+    resume: "07",
+    skills: "08",
+    experience: "09",
+  },
+  recruiter: {
+    firstname: "10",
+    lastname: "11",
+    username: "12",
+    email: "13",
+    password: "14",
+    phoneNumber: "15",
+    position: "16",
+  },
 };
 
-// Get the error code from the field name, with a default fallback
-const getCodeForError = (field) => {
-  return errorCodes[field] || "00"; // Return error code or default "00"
+// Get the error code from the field name and role, with a default fallback
+const getCodeForError = (field, role) => {
+  return (errorCodes[role] && errorCodes[role][field]) || "00"; // Return error code or default "00"
 };

@@ -5,15 +5,15 @@ dotenv.config(); // configuring dotenv to access the .env variables
 // Internal imports
 import app from "./app.js";
 import connectToMongoDB from "./config/db.js";
-import userRouters from "./routes/userRoutes.js";
+// import userRouters from "./routes/userRoutes.js";
+import jobSeekerRoutes from "./routes/jobSeekerRoutes.js";
 import { logBuddy } from "./utils/logUtils.js";
 
 // Define the PORT variable
-
 const PORT = process.env.PORT || 3001;
 
 // Registering routes
-app.use("/api/users", userRouters);
+app.use("/api/job-seeker", jobSeekerRoutes);
 
 // Server is listening the specified port
 connectToMongoDB().then(() =>
