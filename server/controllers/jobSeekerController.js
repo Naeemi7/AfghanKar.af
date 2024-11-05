@@ -111,7 +111,9 @@ export const jobSeekerLogin = async (req, res) => {
 export const jobSeekerLogout = async (req, res) => {
   try {
     res.clearCookie("userToken", { httpOnly: true, secure: false });
-    return res.status(StatusCodes.OK).json({ message: "User logged out!" });
+    return res
+      .status(StatusCodes.OK)
+      .json({ message: "Job Seeker logged out!" });
   } catch (error) {
     logError("Error in job seeker logout:", error);
     return res

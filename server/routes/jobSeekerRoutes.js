@@ -17,4 +17,7 @@ router.post(
   createJobSeeker
 );
 
+router.post("/login", jobSeekerLogin);
+router.get("/logout", jobSeekerLogout);
+
 export default router;
