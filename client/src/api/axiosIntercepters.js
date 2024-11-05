@@ -1,39 +1,34 @@
 import { api } from "./axiosConfig";
-import { logBuddy, logError } from "../utils/errorUtils";
+import { logBuddy, logError } from "@utils/errorUtils";
 
 // Function to setup intercepters
-export const setupIntercepters = () => {
-  // Request intercepters
+export const setupInterceptors = () => {
   api.interceptors.request.use(
     (req) => {
       logBuddy("A request has been made");
       return req;
     },
     (error) => {
-      logError("An error occurd while requesting", error.response);
+      logError("An error occurred during the request", error.response);
       return Promise.reject(error);
     }
   );
 
-  // Response intercepters
   api.interceptors.response.use(
     (res) => {
-      logBuddy("A response has been recieved");
+      logBuddy("A response has been received");
       return res;
     },
     (error) => {
-      logError("An error occured while recieving a response ", error.response);
+      logError("An error occurred while receiving a response", error.response);
 
       // Handle 401 errors
-      if (error.response && error.response.this.status === 401) {
+      if (error.response && error.response.status === 401) {
         if (error.response.data.error === "Incorrect password") {
-          logError("401 Intercepter exeption: incorrect password");
+          logError("401 Interceptor exception: incorrect password");
         } else {
-          // Handle other 401 errors
-          logError("401 intercepter: ", error.response.data.error);
+          logError("401 Interceptor:", error.response.data.error);
           window.location.href = "/user-logout";
-
-          return Promise.reject(error);
         }
       }
 

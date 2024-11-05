@@ -9,13 +9,11 @@ const getBaseURL = () => {
   }
 };
 
-// Create axios instance with BaseURL
 const api = axios.create({
   baseURL: getBaseURL(),
   headers: {
     "Content-type": "application/json",
   },
-
   withCredentials: true,
   timeout: 5000,
 });
