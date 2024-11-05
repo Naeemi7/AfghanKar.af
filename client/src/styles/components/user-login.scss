@@ -1,5 +1,5 @@
-@import "@/styles/abstracts/variables";
-@import "@/styles/abstracts/mixin";
+@use "@/styles/abstracts/variables" as *;
+@use "@/styles/abstracts/mixin" as *;
 
 .user-login-container {
   @include common-layout-template;

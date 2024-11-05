@@ -1,7 +1,5 @@
-@import "@/styles/abstracts/variables";
-@import "@/styles/abstracts/mixin";
-
-// Reusable Input component style
+@use "@/styles/abstracts/variables" as *;
+@use "@/styles/abstracts/mixin" as *;
 
 // Reusable button
 .reusable-button {

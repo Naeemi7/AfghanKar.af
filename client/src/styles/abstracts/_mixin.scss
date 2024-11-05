@@ -1,3 +1,5 @@
+@use "@/styles/abstracts/variables" as *;
+
 // Mixin template for icons
 @mixin icon-template {
   width: 2.5rem;
