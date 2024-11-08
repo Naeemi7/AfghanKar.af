@@ -26,17 +26,12 @@
 .recruiter-layout {
   display: flex;
   flex-direction: column;
-  align-items: center;
-  justify-content: flex-start;
-  padding: 2rem;
 }
 
-// Job Seeker and Recruiter Content
+// Job Seeker and Recruiter content
 .job-seeker-content,
 .recruiter-content {
   flex-grow: 1;
   padding: 2rem;
   background-color: $background-color;
-  border-radius: 12px;
-  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.05);
 }
