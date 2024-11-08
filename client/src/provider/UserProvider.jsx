@@ -67,12 +67,12 @@ export default function UserProvider({ children }) {
   const login = async (url, data, userType) => {
     try {
       const response = await post(url, data, setError);
-      logBuddy(response.user);
 
+      // For job seeker, set user data and store it in localStorage
       if (userType === "jobSeeker") {
-        setJobSeeker(response.user);
+        setJobSeeker(response.jobSeeker);
         setIsJobSeekerLoggedIn(true);
-        localStorage.setItem("jobSeeker", JSON.stringify(response.user));
+        localStorage.setItem("jobSeeker", JSON.stringify(response.jobSeeker));
       } else if (userType === "recruiter") {
         setRecruiter(response.user);
         setIsRecruiterLoggedIn(true);
@@ -89,10 +89,15 @@ export default function UserProvider({ children }) {
     }
   };
 
-  const logoutJobSeeker = () => {
-    setJobSeeker(null);
-    setIsJobSeekerLoggedIn(false);
-    localStorage.removeItem("jobSeeker");
+  const logoutJobSeeker = async () => {
+    try {
+      await post("/job-seeker/logout", null, setError); // Assuming the API has logout functionality
+      setJobSeeker(null);
+      setIsJobSeekerLoggedIn(false);
+      localStorage.removeItem("jobSeeker");
+    } catch (error) {
+      logError("Logout Error", error);
+    }
   };
 
   const logoutRecruiter = () => {
