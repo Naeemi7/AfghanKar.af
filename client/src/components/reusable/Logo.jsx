@@ -9,7 +9,7 @@ export default function Logo({ height, width }) {
   };
   return (
     <div className="logo-container">
-      <Link to="/home">
+      <Link to="/">
         <img src={logo} alt="AfghanKar.af logo" style={logoStyle} />
       </Link>
     </div>

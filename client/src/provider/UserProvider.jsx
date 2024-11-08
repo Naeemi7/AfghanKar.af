@@ -17,14 +17,26 @@ export default function UserProvider({ children }) {
     const storedJobSeeker = localStorage.getItem("jobSeeker");
     const storedRecruiter = localStorage.getItem("recruiter");
 
+    // Parse and validate storedJobSeeker JSON
     if (storedJobSeeker) {
-      setJobSeeker(JSON.parse(storedJobSeeker));
-      setIsJobSeekerLoggedIn(true);
+      try {
+        setJobSeeker(JSON.parse(storedJobSeeker));
+        setIsJobSeekerLoggedIn(true);
+      } catch (e) {
+        console.error("Error parsing jobSeeker JSON:", e);
+        localStorage.removeItem("jobSeeker"); // Clear invalid data
+      }
     }
 
+    // Parse and validate storedRecruiter JSON
     if (storedRecruiter) {
-      setRecruiter(JSON.parse(storedRecruiter));
-      setIsRecruiterLoggedIn(true);
+      try {
+        setRecruiter(JSON.parse(storedRecruiter));
+        setIsRecruiterLoggedIn(true);
+      } catch (e) {
+        console.error("Error parsing recruiter JSON:", e);
+        localStorage.removeItem("recruiter"); // Clear invalid data
+      }
     }
   }, []);
 
@@ -38,7 +50,7 @@ export default function UserProvider({ children }) {
   };
 
   /**
-   * Function to login Recruiters
+   * Function to login recruiters
    * @param {*} data
    * @returns
    */

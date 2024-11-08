@@ -1,0 +1,21 @@
+@use "@/styles/abstracts/variables" as *;
+@use "@/styles/abstracts/mixin" as *;
+
+.registeration-page-container {
+  @include common-layout-template;
+
+  display: flex;
+  flex-direction: column;
+
+  .registeration-heading {
+    display: flex;
+    justify-content: center;
+  }
+
+  .registeration-page-wrapper {
+    padding: 3rem;
+    display: flex;
+    gap: 2rem;
+    justify-content: center;
+  }
+}

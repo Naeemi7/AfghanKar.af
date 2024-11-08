@@ -1,6 +1,6 @@
 import { useState } from "react";
 import { useNavigate } from "react-router-dom";
-import "@styles/components/registration-page.scss";
+import "@styles/pages/registration-page.scss";
 import SelectionCard from "@reusable/SelectionCard";
 
 const RegistrationPage = () => {
@@ -8,15 +8,15 @@ const RegistrationPage = () => {
   const navigate = useNavigate();
 
   const handleSelection = (cardType) => {
-    setSelectedCard(cardType); // Set the selected card type
+    setSelectedCard(cardType);
   };
 
   const handleNextJobSeeker = () => {
-    navigate("/job-seeker-registration"); // Corrected path
+    navigate("/job-seeker-registration");
   };
 
   const handleNextRecruiter = () => {
-    navigate("/recruiter-registration"); // Assuming this is the intended route
+    navigate("/recruiter-registration");
   };
 
   return (
@@ -27,18 +27,18 @@ const RegistrationPage = () => {
 
       <div className="registeration-page-wrapper">
         <SelectionCard
-          select={selectedCard === "jobSeeker"} // Check if this card is selected
-          handleSelection={() => handleSelection("jobSeeker")} // Pass identifier for Job Seeker
-          handleNext={handleNextJobSeeker} // Pass specific handler for Job Seeker
+          select={selectedCard === "jobSeeker"}
+          handleSelection={() => handleSelection("jobSeeker")}
+          handleNext={handleNextJobSeeker}
           iconLib="fa"
           iconName="FaUserTie"
           heading="Job Seeker"
           content="Looking for a job?"
         />
         <SelectionCard
-          select={selectedCard === "recruiter"} // Check if this card is selected
-          handleSelection={() => handleSelection("recruiter")} // Pass identifier for Recruiter
-          handleNext={handleNextRecruiter} // Pass specific handler for Recruiter
+          select={selectedCard === "recruiter"}
+          handleSelection={() => handleSelection("recruiter")}
+          handleNext={handleNextRecruiter}
           iconLib="fa"
           iconName="FaUserCheck"
           heading="Recruiter"
