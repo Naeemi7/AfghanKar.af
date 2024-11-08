@@ -1,32 +1,32 @@
 // Primary Theme Colors
-$primary-color: #00548f;
-$secondary-color: #c2d6db;
+$primary-color: #00548f; // Deep teal (no change)
+$secondary-color: #a0c1c7; // Slightly darker, better contrast
 
 // Headings
-$heading-color: #00548f; //(H1, H2, etc.)
-$subheading-color: #4e4e4e; // (H3, H4)
-$extra-heading-color: #f39c12;
+$heading-color: #00548f; // Main headings (no change)
+$subheading-color: #3c3c3c; // Darker for better readability
+$extra-heading-color: #e67e22; // Slightly darker, less saturated
 
 // Accent and Background
-$accent-color: #f39c12;
+$accent-color: #e67e22; // Darker and more muted than before
 $background-color: #ffffff;
-$text-color: #333333;
+$text-color: #2c2c2c; // Darker for better readability
 
 // Buttons
-$primary-btn-background: #f39c12; // (CTA)
-$primary-btn-hover: #ffb84d;
-$secondary-btn-background: #3a3f44;
-$secondary-btn-hover: #4b4f54;
+$primary-btn-background: #e67e22; // Darker and richer orange
+$primary-btn-hover: #d35400; // Darker hover state for better contrast
+$secondary-btn-background: #33383e; // Darker shade for better visibility
+$secondary-btn-hover: #4a4e53; // Slightly darker hover state
 
 // Links
-$link-color: #00a3e0;
-$link-hover: #0081b5;
+$link-color: #007bb5; // Darker shade for better visibility
+$link-hover: #005a8b; // Even darker on hover
 
 // Other Elements
-$sidebar-background-color: #1a2a4d;
-$footer-bottom-background-color: #022b4a;
-$card-background-color: #f4f4f4;
-$border-color: #d3d3d3;
-$error-color: #e74c3c;
-$btn-text-color: #ffffff;
-$success-color: #27ae60;
+$sidebar-background-color: #15233b; // Darker for better contrast
+$footer-bottom-background-color: #01233a; // Darker shade
+$card-background-color: #f1f1f1; // Slightly darker for contrast with pure white
+$border-color: #c0c0c0; // Darker border color for better definition
+$error-color: #c0392b; // Slightly darker red
+$btn-text-color: #ffffff; // No change (white text)
+$success-color: #229954; // Slightly darker, more muted green

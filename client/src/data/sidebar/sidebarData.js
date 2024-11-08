@@ -5,6 +5,7 @@ const sidebarData = [
     size: 22,
     label: "Calender",
     to: "calender",
+    clasName: "",
   },
   {
     library: "pi",
@@ -12,6 +13,7 @@ const sidebarData = [
     size: 22,
     label: "Edit Profile",
     to: "/",
+    clasName: "",
   },
   {
     library: "fa",
@@ -19,6 +21,7 @@ const sidebarData = [
     size: 22,
     label: "Task Priorities",
     to: "/",
+    clasName: "",
   },
   {
     library: "fa",
@@ -26,6 +29,7 @@ const sidebarData = [
     size: 22,
     label: "Collaborate",
     to: "/",
+    clasName: "",
   },
   {
     library: "fa",
@@ -33,6 +37,7 @@ const sidebarData = [
     size: 22,
     label: "Support & Help",
     to: "/",
+    clasName: "",
   },
   {
     library: "fa",
@@ -40,6 +45,7 @@ const sidebarData = [
     size: 22,
     label: "Logout",
     to: "/",
+    clasName: "logout-button",
   },
 ];
 

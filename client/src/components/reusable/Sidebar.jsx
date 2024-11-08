@@ -17,10 +17,13 @@ export default function Sidebar({
         avatarHeading={avatarHeading}
         avatarParagraph={avatarParagraph}
       />
-      <ul className="sidebar-links">
+      <ul className="sidebar-link-container">
         {links.map((link, index) => (
           <li key={index}>
-            <Link to={link.to} className="sidebar-link">
+            <Link
+              to={link.to}
+              className={link.clasName ? `logout-button` : `sidebar-link`}
+            >
               <Icon library={link.library} name={link.name} />
               <span>{link.label}</span>
             </Link>
