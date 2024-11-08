@@ -1,15 +1,15 @@
 const recruiterSidebarData = [
   {
     library: "io5",
-    name: "IoCalendarNumberSharp",
+    name: "IoBriefcaseSharp",
     size: 22,
     label: "Job Posts",
     to: "/job-posts",
     className: "",
   },
   {
-    library: "pi",
-    name: "PiUserCircleGearFill",
+    library: "md",
+    name: "MdManageAccounts",
     size: 22,
     label: "Edit Profile",
     to: "/edit-profile",
@@ -17,7 +17,7 @@ const recruiterSidebarData = [
   },
   {
     library: "fa",
-    name: "FaPlusCircle",
+    name: "FaClipboardList",
     size: 22,
     label: "Post a Job",
     to: "/post-job",

@@ -1,15 +1,15 @@
 const jobSeekerSidebarData = [
   {
-    library: "io5",
-    name: "IoCalendarNumberSharp",
+    library: "fa",
+    name: "FaClipboardCheck",
     size: 22,
     label: "My Applications",
     to: "/applications",
     className: "",
   },
   {
-    library: "pi",
-    name: "PiUserCircleGearFill",
+    library: "md",
+    name: "MdManageAccounts",
     size: 22,
     label: "Edit Profile",
     to: "/edit-profile",
