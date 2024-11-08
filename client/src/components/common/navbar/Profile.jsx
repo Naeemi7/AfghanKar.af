@@ -1,21 +1,27 @@
 import { useState, useEffect, useRef } from "react";
+import { useLocation } from "react-router-dom";
 import Icon from "@reusable/Icon";
+import UserInitials from "@reusable/UserInitials";
+import useUserContext from "@hooks/useUserContext";
 import dropdownData from "@data/navbar/dropdownData";
 import DropdownItems from "./DropdownItems";
 
 export default function Profile() {
   const [showDropdown, setShowDropdown] = useState(false);
   const profileRef = useRef(null);
+  const location = useLocation();
   let timeout;
+  const { isJobSeekerLoggedIn, jobSeeker } = useUserContext();
+  const jobSeekerDashboard = location.pathname === "/job-seeker-dashboard";
 
   const handleMouseEnter = () => {
     clearTimeout(timeout);
-    timeout = setTimeout(() => setShowDropdown(true), 100); // Add slight delay
+    timeout = setTimeout(() => setShowDropdown(true), 100);
   };
 
   const handleMouseLeave = () => {
     clearTimeout(timeout);
-    timeout = setTimeout(() => setShowDropdown(false), 100); // Add slight delay
+    timeout = setTimeout(() => setShowDropdown(false), 100);
   };
 
   const handleKeyDown = (e) => {
@@ -47,15 +53,27 @@ export default function Profile() {
       aria-haspopup="true"
       aria-expanded={showDropdown}
     >
-      <div className="profile-icon-wrapper">
-        <Icon
-          library="pi"
-          name="PiUserCircleGearFill"
-          size={10}
-          className="profile-icon"
+      {/* Conditionally render Profile-icon-wrapper or UserInitials */}
+
+      {isJobSeekerLoggedIn && jobSeekerDashboard ? (
+        <UserInitials
+          firstname={jobSeeker.firstName}
+          lastname={jobSeeker.lastName}
+          radius={5}
         />
-        <span>Login</span>
-      </div>
+      ) : (
+        <div className="profile-icon-wrapper">
+          <Icon
+            library="pi"
+            name="PiUserCircleGearFill"
+            size={10}
+            className="profile-icon"
+          />
+
+          <span>Login</span>
+        </div>
+      )}
+
       {showDropdown && (
         <div
           className={`profile-dropdown ${showDropdown ? "open" : ""}`}
