@@ -1,21 +1,14 @@
-import "@styles/components/sidebar.scss";
+import Sidebar from "@reusable/Sidebar";
+import recruiterSidebarData from "@data/sidebar/recruiterSidebarData";
+import profileImage from "@images/navbar/profile.png";
 
-const RecruiterSidebar = () => {
+export default function RecruiterSidebar() {
   return (
-    <nav className="recruiter-sidebar">
-      <ul>
-        <li>
-          <a href="/recruiter-dashboard/profile">Profile</a>
-        </li>
-        <li>
-          <a href="/recruiter-dashboard/applicants">Applicants</a>
-        </li>
-        <li>
-          <a href="/recruiter-dashboard/settings">Settings</a>
-        </li>
-      </ul>
-    </nav>
+    <Sidebar
+      links={recruiterSidebarData}
+      avatarImage={profileImage}
+      avatarHeading="Sumaya Naeemi"
+      avatarParagraph="sumayanaeemi001@gmail.com"
+    />
   );
-};
-
-export default RecruiterSidebar;
+}

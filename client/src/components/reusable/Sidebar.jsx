@@ -10,6 +10,10 @@ export default function Sidebar({
   avatarHeading,
   avatarParagraph,
 }) {
+  // Separate the logout link from the rest of the links
+  const logoutLink = links.find((link) => link.className === "logout-button");
+  const otherLinks = links.filter((link) => link.className !== "logout-button");
+
   return (
     <nav className="sidebar-container" aria-label="Main Navigation">
       <SidebarAvatar
@@ -18,18 +22,22 @@ export default function Sidebar({
         avatarParagraph={avatarParagraph}
       />
       <ul className="sidebar-link-container">
-        {links.map((link, index) => (
+        {otherLinks.map((link, index) => (
           <li key={index}>
-            <Link
-              to={link.to}
-              className={link.clasName ? `logout-button` : `sidebar-link`}
-            >
+            <Link to={link.to} className="sidebar-link">
               <Icon library={link.library} name={link.name} />
               <span>{link.label}</span>
             </Link>
           </li>
         ))}
       </ul>
+      {/* Render the logout button separately */}
+      {logoutLink && (
+        <Link to={logoutLink.to} className="logout-button">
+          <Icon library={logoutLink.library} name={logoutLink.name} />
+          <span>{logoutLink.label}</span>
+        </Link>
+      )}
     </nav>
   );
 }
@@ -41,6 +49,7 @@ Sidebar.propTypes = {
       label: PropTypes.string.isRequired,
       library: PropTypes.string,
       name: PropTypes.string,
+      className: PropTypes.string,
     })
   ).isRequired,
   avatarImage: PropTypes.string.isRequired,

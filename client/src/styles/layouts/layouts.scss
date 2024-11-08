@@ -22,8 +22,9 @@
 }
 
 // Job Seeker Layout
-.job-seeker-layout {
-  display: flex; // Flex container to align sidebar and content side by side
+.job-seeker-layout,
+.recruiter-layout {
+  display: flex;
   height: 100vh;
 
   .content-container {
