@@ -13,7 +13,7 @@ const JobSeekerRegistration = () => {
   const { showPassword, togglePasswordVisibility } = usePasswordVisibility();
 
   return (
-    <div className="job-seeker-registeration-container">
+    <div className="job-seeker-registration-container">
       <h2>Job Seeker Registration</h2>
 
       <form>
