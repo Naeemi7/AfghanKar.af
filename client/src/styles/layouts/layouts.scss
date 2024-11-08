@@ -5,13 +5,19 @@
 .app-grid {
   display: grid;
   grid-template-rows: auto 1fr auto;
-  min-height: 100vh;
+  background-color: $card-background-color;
 
-  // App-layout content
+  // Main App Layout Content
   .app-content {
     @include common-layout-template;
     padding: 2rem;
+    margin-bottom: 2rem;
+    border-bottom-left-radius: 1rem;
+    border-bottom-right-radius: 1rem;
+    min-height: 70vh;
     background-color: $background-color;
+    box-shadow: 0 6px 12px rgba(0, 0, 0, 0.15), 0 12px 24px rgba(0, 0, 0, 0.15);
+    transform: translateY(-2px);
   }
 }
 
@@ -20,12 +26,17 @@
 .recruiter-layout {
   display: flex;
   flex-direction: column;
+  align-items: center;
+  justify-content: flex-start;
+  padding: 2rem;
 }
 
-// Job Seeker and Recruiter content
+// Job Seeker and Recruiter Content
 .job-seeker-content,
 .recruiter-content {
   flex-grow: 1;
   padding: 2rem;
   background-color: $background-color;
+  border-radius: 12px;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.05);
 }
