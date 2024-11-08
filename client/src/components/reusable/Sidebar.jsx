@@ -1,6 +1,6 @@
 import PropTypes from "prop-types";
 import { Link } from "react-router-dom";
-import "@styles/components/sidebar.scss";
+
 import SidebarAvatar from "./SidebarAvatar";
 import Icon from "@reusable/Icon";
 

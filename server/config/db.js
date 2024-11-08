@@ -16,10 +16,15 @@ export default async function connectToMongoDB() {
     DB_PASS
   )}@${DB_HOST}/${DB_NAME}?retryWrites=true&w=majority`;
 
+  const options = {
+    serverSelectionTimeoutMS: 45000, // Increased timeout to 45 seconds
+  };
+
   try {
-    await mongoose.connect(mongoURI);
+    await mongoose.connect(mongoURI, options);
     logBuddy("Database connected! 👍");
   } catch (error) {
     logError("Database connection error:", error.message);
+    logError("Stack Trace:", error.stack); // Log the stack trace for more detailed error info
   }
 }
