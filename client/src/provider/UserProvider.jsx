@@ -92,7 +92,7 @@ export default function UserProvider({ children }) {
 
   const logoutJobSeeker = async () => {
     try {
-      await post("/job-seeker/logout", null, setError); // Assuming the API has logout functionality
+      await post("/job-seeker/logout", null, setError);
       setJobSeeker(null);
       setIsJobSeekerLoggedIn(false);
       localStorage.removeItem("jobSeeker");
