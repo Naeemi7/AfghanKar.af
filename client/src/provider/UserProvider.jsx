@@ -72,6 +72,7 @@ export default function UserProvider({ children }) {
       if (userType === "jobSeeker") {
         setJobSeeker(response.jobSeeker);
         setIsJobSeekerLoggedIn(true);
+        logBuddy("Provider: ", response.jobSeeker);
         localStorage.setItem("jobSeeker", JSON.stringify(response.jobSeeker));
       } else if (userType === "recruiter") {
         setRecruiter(response.user);
