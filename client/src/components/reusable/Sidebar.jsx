@@ -1,13 +1,29 @@
-import "@styles/components/sidebar.scss";
 import PropTypes from "prop-types";
+import { Link } from "react-router-dom";
+import "@styles/components/sidebar.scss";
+import SidebarAvatar from "./SidebarAvatar";
+import Icon from "@reusable/Icon";
 
-export default function Sidebar({ links }) {
+export default function Sidebar({
+  links,
+  avatarImage,
+  avatarHeading,
+  avatarParagraph,
+}) {
   return (
-    <nav className="sidebar">
-      <ul>
+    <nav className="sidebar-container" aria-label="Main Navigation">
+      <SidebarAvatar
+        avatarImage={avatarImage}
+        avatarHeading={avatarHeading}
+        avatarParagraph={avatarParagraph}
+      />
+      <ul className="sidebar-links">
         {links.map((link, index) => (
           <li key={index}>
-            <a href={link.href}>{link.label}</a>
+            <Link to={link.to} className="sidebar-link">
+              <Icon library={link.library} name={link.name} />
+              <span>{link.label}</span>
+            </Link>
           </li>
         ))}
       </ul>
@@ -18,8 +34,13 @@ export default function Sidebar({ links }) {
 Sidebar.propTypes = {
   links: PropTypes.arrayOf(
     PropTypes.shape({
-      href: PropTypes.string.isRequired,
+      to: PropTypes.string.isRequired,
       label: PropTypes.string.isRequired,
+      library: PropTypes.string,
+      name: PropTypes.string,
     })
   ).isRequired,
+  avatarImage: PropTypes.string.isRequired,
+  avatarHeading: PropTypes.string.isRequired,
+  avatarParagraph: PropTypes.string.isRequired,
 };

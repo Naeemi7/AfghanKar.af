@@ -21,17 +21,21 @@
   }
 }
 
-// Job Seeker and Recruiter Layout
-.job-seeker-layout,
-.recruiter-layout {
-  display: flex;
-  flex-direction: column;
-}
+// Job Seeker Layout
+.job-seeker-layout {
+  display: flex; // Flex container to align sidebar and content side by side
+  height: 100vh;
 
-// Job Seeker and Recruiter content
-.job-seeker-content,
-.recruiter-content {
-  flex-grow: 1;
-  padding: 2rem;
-  background-color: $background-color;
+  .content-container {
+    display: flex;
+    flex-direction: column;
+    margin-left: 25rem; // Adjust based on the sidebar width
+    width: 100%;
+  }
+
+  .layout-content {
+    padding: 2rem;
+    background-color: $background-color;
+    flex-grow: 1; // Ensure content takes the remaining space
+  }
 }

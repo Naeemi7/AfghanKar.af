@@ -34,7 +34,6 @@ export default defineConfig({
       "@reusable": `${currentDir}/src/components/reusable`,
       "@dashboards": `${currentDir}/src/components/dashboards`,
       "@common": `${currentDir}/src/components/common`,
-      "@sidebar": `${currentDir}/src/components/sidebar`,
       "@auth": `${currentDir}/src/components/auth`,
       "@pages": `${currentDir}/src/pages`,
       "@layouts": `${currentDir}/src/layouts`,

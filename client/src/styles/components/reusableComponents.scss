@@ -188,3 +188,83 @@ form {
     }
   }
 }
+
+// Reusable Sidebar Component
+.sidebar-container {
+  background: $sidebar-background-color;
+  height: 100vh;
+  width: 25rem;
+  position: fixed;
+  top: 0;
+  left: 0;
+  z-index: 10;
+  box-shadow: 2px 0 5px rgba(0, 0, 0, 0.1);
+
+  .avatar {
+    background: rgba(0, 0, 0, 0.1);
+    padding: 2.5rem 1rem;
+    text-align: center;
+
+    img {
+      width: 12rem;
+      border-radius: 50%;
+      border: 3px solid $accent-color;
+      box-shadow: 0 0 0 3px rgba(255, 255, 255, 0.3);
+    }
+
+    h4 {
+      font-weight: 500;
+      margin-bottom: 0.5rem;
+    }
+  }
+
+  .sidebar-links {
+    list-style: none;
+    padding: 0;
+    margin-top: 2rem;
+
+    .sidebar-link {
+      display: flex;
+      align-items: center;
+      padding: 1rem 1.5rem;
+      color: $text-color;
+      text-decoration: none;
+      font-size: 1.5rem;
+      transition: background 0.2s ease;
+
+      &:hover {
+        background-color: $secondary-color;
+        color: $primary-color;
+        border-radius: 0.5rem;
+      }
+
+      &:focus {
+        outline: 2px solid $primary-color;
+      }
+
+      span {
+        margin-left: 1rem;
+      }
+    }
+  }
+
+  // Responsive styles
+  @media (max-width: 768px) {
+    width: 20rem;
+
+    .avatar {
+      img {
+        width: 10rem;
+      }
+    }
+
+    .sidebar-link {
+      padding: 0.8rem 1rem;
+    }
+  }
+
+  @media (max-width: 576px) {
+    width: 100%;
+    position: absolute;
+  }
+}
