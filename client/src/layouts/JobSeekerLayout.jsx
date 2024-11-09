@@ -1,6 +1,6 @@
 import { Outlet } from "react-router-dom";
 import "@styles/layouts/layouts.scss";
-import JobSeekerSidebar from "@features/sidebar/job-seeker/JobSeekerSidebar";
+import JobSeekerSidebar from "@features/sidebar/JobSeekerSidebar";
 import Navbar from "@common/navbar/Navbar";
 
 export default function JobSeekerLayout() {
