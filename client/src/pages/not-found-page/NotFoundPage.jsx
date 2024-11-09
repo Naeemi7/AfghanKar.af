@@ -10,7 +10,9 @@ const NotFoundPage = () => {
     <div className="not-found-page-container">
       <div className="not-found-wrapper">
         <div className="not-found-content">
-          <h1>404</h1>
+          <h1>
+            Afghan<span>kar.af</span>
+          </h1>
           <span></span>
           <p>Sorry, the page you are looking for could not be found</p>
           <Button
