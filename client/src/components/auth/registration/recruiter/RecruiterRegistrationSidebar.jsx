@@ -2,8 +2,7 @@ import PropTypes from "prop-types";
 import Logo from "@reusable/Logo";
 
 export default function RecruiterRegistrationSidebar({ currentStep }) {
-  const getStepClass = (step) =>
-    currentStep === step ? "step active" : "step";
+  const getStepClass = (step) => (currentStep >= step ? "step active" : "step");
 
   return (
     <div className="recruiter-registration-sidebar">
