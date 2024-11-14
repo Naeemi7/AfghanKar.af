@@ -67,6 +67,30 @@ form {
       padding-top: 1rem;
     }
   }
+
+  // Resuable select component
+  .select-container {
+    select {
+      appearance: none; /* Removes default browser styling */
+      -webkit-appearance: none; /* For Safari */
+      -moz-appearance: none; /* For Firefox */
+      padding: 10px 20px;
+      font-size: 16px;
+      cursor: pointer;
+    }
+
+    option {
+      padding: 10px; /* Add padding for option text */
+      color: white; /* Default text color for options */
+      font-size: 16px;
+    }
+
+    /* Optional: Style the select box when it's focused */
+    select:focus {
+      border-color: $accent-color;
+      outline: none;
+    }
+  }
 }
 
 // Alert box styles
