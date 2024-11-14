@@ -1,6 +1,7 @@
+import PropTypes from "prop-types";
 import Logo from "@reusable/Logo";
 
-const RecruiterRegistrationSidebar = ({ currentStep }) => {
+export default function RecruiterRegistrationSidebar({ currentStep }) {
   const getStepClass = (step) =>
     currentStep === step ? "step active" : "step";
 
@@ -30,6 +31,8 @@ const RecruiterRegistrationSidebar = ({ currentStep }) => {
       </div>
     </div>
   );
-};
+}
 
-export default RecruiterRegistrationSidebar;
+RecruiterRegistrationSidebar.propTypes = {
+  currentStep: PropTypes.number,
+};

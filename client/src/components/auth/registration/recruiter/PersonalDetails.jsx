@@ -1,4 +1,5 @@
 import { useState } from "react";
+import PropTypes from "prop-types";
 import personalDetails from "@data/registration/recruiter-registration-data";
 import Input from "@reusable/Input";
 import Icon from "@reusable/Icon";
@@ -6,7 +7,7 @@ import AlertBox from "@reusable/AlertBox";
 import Button from "@reusable/Button";
 import usePasswordVisibility from "@hooks/usePasswordVisibility";
 
-const PersonalDetails = ({ onNext }) => {
+export default function PersonalDetails({ onNext }) {
   const { showPassword, togglePasswordVisibility } = usePasswordVisibility();
   const [password, setPassword] = useState("");
   const [confirmPassword, setConfirmPassword] = useState("");
@@ -88,6 +89,8 @@ const PersonalDetails = ({ onNext }) => {
       </form>
     </div>
   );
-};
+}
 
-export default PersonalDetails;
+PersonalDetails.propTypes = {
+  onNext: PropTypes.func,
+};
