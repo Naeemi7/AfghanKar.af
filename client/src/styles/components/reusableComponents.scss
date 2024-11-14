@@ -80,12 +80,12 @@ form {
     }
 
     option {
-      padding: 10px; /* Add padding for option text */
-      color: white; /* Default text color for options */
+      padding: 10px;
+      color: white;
       font-size: 16px;
     }
 
-    /* Optional: Style the select box when it's focused */
+    // Style the select box when it's focused
     select:focus {
       border-color: $accent-color;
       outline: none;
@@ -95,8 +95,8 @@ form {
 
 // Alert box styles
 .alert-box {
-  color: $error-color; /* Replace with your actual color variable or value */
-  animation: alertAnimation 1s infinite alternate; /* Adjust animation duration and type as needed */
+  color: $error-color;
+  animation: alertAnimation 1s infinite alternate;
 }
 
 @keyframes alertAnimation {
@@ -109,19 +109,18 @@ form {
 }
 
 // Style for the reusable custom toast
-// styles/ToastStyles.scss
 .custom-toast {
-  font-size: 16px; // Set the font size
-  background-color: #333; // Customize background color
-  color: #fff; // Customize text color
-  padding: 10px 20px; // Customize padding
-  border-radius: 5px; // Customize border radius
-  text-align: center; // Center the text
-  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1); // Add a shadow for better visibility
+  font-size: 16px;
+  background-color: #333;
+  color: #fff;
+  padding: 10px 20px;
+  border-radius: 5px;
+  text-align: center;
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
 }
 
 .custom-toast .toast-icon {
-  margin-right: 10px; // Add space between icon and text
+  margin-right: 10px;
 }
 
 // Goback ICON
