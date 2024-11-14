@@ -5,7 +5,6 @@ import useNavigation from "@hooks/useNavigation";
 import SidebarAvatar from "./SidebarAvatar";
 import Icon from "@reusable/Icon";
 import ShowToast from "@reusable/Toast";
-import { get } from "@api/apiService";
 import useUserContext from "@hooks/useUserContext";
 import { logError, handleError } from "@utils/errorUtils";
 
@@ -19,21 +18,27 @@ export default function Sidebar({
   const otherLinks = links.filter((link) => link.className !== "logout-button");
   const hasToastShown = useRef(false);
   const { goTo } = useNavigation();
-  const { setError } = useUserContext();
+  const { isJobSeekerLoggedIn, logoutUser, setError } = useUserContext();
 
+  // Unified logout handler
   const handleLogout = async () => {
+    const userType = isJobSeekerLoggedIn ? "jobSeeker" : "recruiter";
+
     try {
-      await get("/job-seeker/logout");
-      localStorage.removeItem("jobSeeker");
+      await logoutUser(userType);
 
       if (!hasToastShown.current) {
         ShowToast("Logged out successfully", "success");
         hasToastShown.current = true;
       }
 
-      // Navigate to login page after delay
+      // Navigate to appropriate login page after delay
+      const redirectUrl = isJobSeekerLoggedIn
+        ? "/job-seeker-login"
+        : "/recruiter-login";
+
       setTimeout(() => {
-        goTo("/job-seeker-login");
+        goTo(redirectUrl);
       }, 1500);
     } catch (error) {
       if (!error.handled) {
@@ -65,11 +70,7 @@ export default function Sidebar({
         ))}
       </ul>
       {logoutLink && (
-        <Link
-          to={logoutLink.to}
-          className="logout-button"
-          onClick={handleLogout}
-        >
+        <Link className="logout-button" onClick={handleLogout}>
           <Icon library={logoutLink.library} name={logoutLink.name} />
           <span>{logoutLink.label}</span>
         </Link>

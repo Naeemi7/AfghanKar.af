@@ -24,7 +24,8 @@ export default function UserProvider({ children }) {
         setIsJobSeekerLoggedIn(true);
       } catch (e) {
         console.error("Error parsing jobSeeker JSON:", e);
-        localStorage.removeItem("jobSeeker"); // Clear invalid data
+        // Clear invalid data
+        localStorage.removeItem("jobSeeker");
       }
     }
 
@@ -35,13 +36,14 @@ export default function UserProvider({ children }) {
         setIsRecruiterLoggedIn(true);
       } catch (e) {
         console.error("Error parsing recruiter JSON:", e);
-        localStorage.removeItem("recruiter"); // Clear invalid data
+        // Clear invalid data
+        localStorage.removeItem("recruiter");
       }
     }
   }, []);
 
   /**
-   * Function to login job seekers
+   * Login function for job seekers
    * @param {*} data
    * @returns
    */
@@ -50,7 +52,7 @@ export default function UserProvider({ children }) {
   };
 
   /**
-   * Function to login recruiters
+   * Login function for recruiters
    * @param {*} data
    * @returns
    */
@@ -59,7 +61,7 @@ export default function UserProvider({ children }) {
   };
 
   /**
-   * Function to login users based on their user type
+   * Generic login function
    * @param {*} url
    * @param {*} data
    * @param {*} userType
@@ -90,21 +92,36 @@ export default function UserProvider({ children }) {
     }
   };
 
-  const logoutJobSeeker = async () => {
+  /**
+   * Logout function for both user types
+   * @param {*} userType
+   */
+  const logoutUser = async (userType) => {
     try {
-      await get("/job-seeker/logout", null, setError);
-      setJobSeeker(null);
-      setIsJobSeekerLoggedIn(false);
-      localStorage.removeItem("jobSeeker");
+      const logoutUrl =
+        userType === "jobSeeker"
+          ? "/job-seeker/logout"
+          : "/users/logout-recruiter";
+
+      await get(logoutUrl);
+
+      if (userType === "jobSeeker") {
+        setJobSeeker(null);
+        setIsJobSeekerLoggedIn(false);
+        localStorage.removeItem("jobSeeker");
+      } else if (userType === "recruiter") {
+        setRecruiter(null);
+        setIsRecruiterLoggedIn(false);
+        localStorage.removeItem("recruiter");
+      }
     } catch (error) {
       logError("Logout Error", error);
+      setError(
+        error.response?.data.error ||
+          error.message ||
+          "An error occurred during logout"
+      );
     }
-  };
-
-  const logoutRecruiter = () => {
-    setRecruiter(null);
-    setIsRecruiterLoggedIn(false);
-    localStorage.removeItem("recruiter");
   };
 
   return (
@@ -118,8 +135,7 @@ export default function UserProvider({ children }) {
         setError,
         loginJobSeeker,
         loginRecruiter,
-        logoutJobSeeker,
-        logoutRecruiter,
+        logoutUser,
       }}
     >
       {children}
