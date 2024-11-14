@@ -1,6 +1,8 @@
 import { Routes, Route } from "react-router-dom";
+import { useEffect } from "react";
 import { Toaster } from "react-hot-toast";
 import UserProvider from "@provider/UserProvider";
+import { setupInterceptors } from "@api/axiosIntercepters";
 import NotFoundPage from "@pages/not-found-page/NotFoundPage";
 import HomePage from "@pages/home/HomePage";
 import JobSeekerLogin from "@auth/login/JobSeekerLogin";
@@ -13,6 +15,10 @@ import JobSeekerLayout from "@layouts/JobSeekerLayout";
 import RecruiterLayout from "@layouts/RecruiterLayout";
 
 export default function App() {
+  useEffect(() => {
+    setupInterceptors();
+  }, []);
+
   return (
     <UserProvider>
       <Routes>
