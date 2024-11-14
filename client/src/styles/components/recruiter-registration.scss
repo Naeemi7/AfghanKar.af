@@ -1,0 +1,16 @@
+@use "@/styles/abstracts/variables" as *;
+@use "@/styles/abstracts/mixin" as *;
+
+.recruiter-registration-sidebar {
+  background-color: $primary-color;
+  width: 40vw;
+  height: 100vh;
+}
+
+.recruiter-registration-main-content {
+  background-color: $background-color; /* Updated to use your existing palette */
+  width: 60vw;
+  height: 100vh;
+  padding: 20px; /* Add padding for the content */
+  box-sizing: border-box; /* Ensure padding is included in width calculation */
+}

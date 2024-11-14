@@ -1,14 +1,13 @@
 import "@styles/layouts/layouts.scss";
+import "@styles/components/recruiter-registration.scss";
+import RecruiterRegistrationSidebar from "@auth/registration/recruiter/RecruiterRegistrationSidebar";
+import RecruiterRegistrationMainContent from "@auth/registration/recruiter/RecruiterRegistrationMainContent";
 
 export default function RecruiterRegistrationLayout() {
   return (
     <div className="recruiter-registration-layout">
-      <div className="content-container">
-        <main className="layout-content">
-          <h1>Recruiter Registration Layout</h1>
-        </main>
-      </div>
-      <h1></h1>
+      <RecruiterRegistrationSidebar /> {/* Left Sidebar */}
+      <RecruiterRegistrationMainContent /> {/* Right Main Content */}
     </div>
   );
 }

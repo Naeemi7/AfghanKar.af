@@ -42,3 +42,8 @@
 }
 
 // Recruiter Registration Layout
+.recruiter-registration-layout {
+  display: flex;
+  width: 100vw;
+  height: 100vh; /* Fix typo (was 100lvh) */
+}

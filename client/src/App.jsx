@@ -10,7 +10,6 @@ import JobSeekerLogin from "@auth/login/JobSeekerLogin";
 import RecruiterLogin from "@auth/login/RecruiterLogin";
 import RegistrationPage from "@pages/registeration-page/RegistrationPage";
 import JobSeekerRegistration from "@auth/registration/job-seeker/JobSeekerRegistration";
-import RecruiterRegistration from "@auth/registration/recruiter/RecruiterRegisteration";
 import AppLayout from "@layouts/AppLayout";
 import JobSeekerLayout from "@layouts/JobSeekerLayout";
 import RecruiterLayout from "@layouts/RecruiterLayout";
@@ -39,12 +38,10 @@ export default function App() {
         </Route>
 
         {/* Routes using Recruiter Registration Layout */}
-        <Route element={<RecruiterRegistrationLayout />}>
-          <Route
-            path="/recruiter-registration"
-            element={<RecruiterRegistration />}
-          />
-        </Route>
+        <Route
+          path="/recruiter-registration"
+          element={<RecruiterRegistrationLayout />}
+        />
 
         {/* Protected Routes for Job Seeker Dashboard */}
         <Route element={<ProtectedRoute role="jobSeeker" />}>
