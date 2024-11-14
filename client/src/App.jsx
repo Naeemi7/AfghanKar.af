@@ -5,8 +5,6 @@ import NotFoundPage from "@pages/not-found-page/NotFoundPage";
 import HomePage from "@pages/home/HomePage";
 import JobSeekerLogin from "@auth/login/JobSeekerLogin";
 import RecruiterLogin from "@auth/login/RecruiterLogin";
-import JobSeekerLogout from "@auth/logout/JobSeekerLogout";
-import RecruiterLogout from "@auth/logout/RecruiterLogout";
 import RegistrationPage from "@pages/registeration-page/RegistrationPage";
 import JobSeekerRegistration from "@auth/registration/JobSeekerRegistration";
 import RecruiterRegistration from "@auth/registration/RecruiterRegisteration";
@@ -23,8 +21,6 @@ export default function App() {
           <Route path="/" element={<HomePage />} />
           <Route path="/job-seeker-login" element={<JobSeekerLogin />} />
           <Route path="/recruiter-login" element={<RecruiterLogin />} />
-          <Route path="/job-seeker-logout" element={<JobSeekerLogout />} />
-          <Route path="recruiter-logout" element={<RecruiterLogout />} />
 
           {/* Registration Routes */}
           <Route path="/registration" element={<RegistrationPage />} />

@@ -1,7 +1,13 @@
+import { useEffect, useRef } from "react";
 import PropTypes from "prop-types";
 import { Link } from "react-router-dom";
+import useNavigation from "@hooks/useNavigation";
 import SidebarAvatar from "./SidebarAvatar";
 import Icon from "@reusable/Icon";
+import ShowToast from "@reusable/Toast";
+import { get } from "@api/apiService";
+import useUserContext from "@hooks/useUserContext";
+import { logError, handleError } from "@utils/errorUtils";
 
 export default function Sidebar({
   links,
@@ -9,9 +15,37 @@ export default function Sidebar({
   avatarHeading,
   avatarParagraph,
 }) {
-  // Separate the logout link from the rest of the links
   const logoutLink = links.find((link) => link.className === "logout-button");
   const otherLinks = links.filter((link) => link.className !== "logout-button");
+  const hasToastShown = useRef(false);
+  const { goTo } = useNavigation();
+  const { setError } = useUserContext();
+
+  const handleLogout = async () => {
+    try {
+      await get("/job-seeker/logout");
+      localStorage.removeItem("jobSeeker");
+
+      if (!hasToastShown.current) {
+        ShowToast("Logged out successfully", "success");
+        hasToastShown.current = true;
+      }
+
+      // Navigate to login page after delay
+      setTimeout(() => {
+        goTo("/job-seeker-login");
+      }, 1500);
+    } catch (error) {
+      if (!error.handled) {
+        error.handled = true;
+        logError("Logout failed", error);
+        handleError(error, setError);
+      }
+    }
+  };
+
+  // Run the effect once when the component is mounted
+  useEffect(() => {}, []);
 
   return (
     <nav className="sidebar-container" aria-label="Main Navigation">
@@ -30,9 +64,12 @@ export default function Sidebar({
           </li>
         ))}
       </ul>
-      {/* Render the logout button separately */}
       {logoutLink && (
-        <Link to={logoutLink.to} className="logout-button">
+        <Link
+          to={logoutLink.to}
+          className="logout-button"
+          onClick={handleLogout}
+        >
           <Icon library={logoutLink.library} name={logoutLink.name} />
           <span>{logoutLink.label}</span>
         </Link>

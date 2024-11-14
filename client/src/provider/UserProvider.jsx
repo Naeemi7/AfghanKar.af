@@ -1,7 +1,7 @@
 import { useState, useEffect } from "react";
 import PropTypes from "prop-types";
 import UserContext from "@context/UserContext";
-import { post } from "@api/apiService";
+import { post, get } from "@api/apiService";
 import { logBuddy, logError } from "@utils/errorUtils";
 
 export default function UserProvider({ children }) {
@@ -92,7 +92,7 @@ export default function UserProvider({ children }) {
 
   const logoutJobSeeker = async () => {
     try {
-      await post("/job-seeker/logout", null, setError);
+      await get("/job-seeker/logout", null, setError);
       setJobSeeker(null);
       setIsJobSeekerLoggedIn(false);
       localStorage.removeItem("jobSeeker");
