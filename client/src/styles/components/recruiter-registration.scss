@@ -3,14 +3,159 @@
 
 .recruiter-registration-sidebar {
   background-color: $primary-color;
-  width: 40vw;
-  height: 100vh;
+  width: 35%;
+  padding: 2rem;
+  color: #fff;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+
+  .sidebar-content {
+    .logo {
+      font-size: 1.5rem;
+      font-weight: bold;
+      margin-bottom: 1.5rem;
+    }
+
+    h2 {
+      font-size: 1.8rem;
+      margin-bottom: 0.5rem;
+    }
+
+    p {
+      margin-bottom: 2rem;
+    }
+
+    .stepper {
+      position: relative;
+      display: flex;
+      flex-direction: column;
+      gap: 2.5rem;
+
+      /* Top Line Segment */
+      &::before {
+        content: "";
+        position: absolute;
+        left: 1.25rem; /* Aligns with the center of the circles */
+        top: 1.25rem;
+        height: 3.8rem; /* Adjust this to end at the bottom of the first circle */
+        width: 2px;
+        background-color: rgba(255, 255, 255, 0.6);
+        z-index: 0;
+      }
+
+      // /* Middle Line Segment */
+      // &::after {
+      //   content: "";
+      //   position: absolute;
+      //   left: 1.25rem;
+      //   top: 1.25rem; /* Start from the bottom of the first circle */
+      //   height: 2rem; /* Gap between the first and second circles */
+      //   width: 2px;
+      //   background-color: transparent; /* Leave this part transparent */
+      //   z-index: 0;
+      // }
+
+      /* Bottom Line Segment */
+      .line-bottom {
+        content: "";
+        position: absolute;
+        left: 1.25rem;
+        top: 7.3rem; /* Start from the bottom of the second circle */
+        height: 2.7rem; /* Adjust this to reach the top of the third circle */
+        width: 2px;
+        background-color: rgba(255, 255, 255, 0.6);
+        z-index: 0;
+      }
+
+      .step {
+        position: relative;
+        display: flex;
+        align-items: center;
+        color: rgba(255, 255, 255, 0.6);
+        z-index: 10;
+
+        .circle {
+          width: 2.5rem;
+          height: 2.5rem;
+          border: 2px solid rgba(255, 255, 255, 0.6);
+          border-radius: 50%;
+          display: flex;
+          justify-content: center;
+          align-items: center;
+          margin-right: 1rem;
+          font-size: 1.2rem;
+          background-color: transparent;
+        }
+
+        span {
+          font-size: 1.2rem;
+        }
+
+        &.active {
+          color: #fff;
+
+          .circle {
+            border-color: #fff;
+            background-color: #fff;
+            color: $primary-color;
+            font-weight: bold;
+          }
+        }
+      }
+    }
+  }
 }
 
 .recruiter-registration-main-content {
-  background-color: $background-color; /* Updated to use your existing palette */
-  width: 60vw;
-  height: 100vh;
-  padding: 20px; /* Add padding for the content */
-  box-sizing: border-box; /* Ensure padding is included in width calculation */
+  width: 65%;
+  padding: 3rem;
+  background-color: $background-color;
+
+  .content-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 2rem;
+
+    .back-button {
+      background: none;
+      border: none;
+      color: $text-color;
+      font-size: 1rem;
+      cursor: pointer;
+    }
+
+    .signin-link {
+      color: $link-color;
+      span {
+        font-weight: bold;
+      }
+    }
+  }
+
+  h1 {
+    font-size: 2rem;
+    margin-bottom: 1.5rem;
+  }
+
+  .registration-form {
+    .form-group {
+      margin-bottom: 1.5rem;
+
+      label {
+        display: block;
+        font-weight: bold;
+        margin-bottom: 0.5rem;
+      }
+
+      input {
+        width: 100%;
+        padding: 0.75rem;
+        border: 1px solid $border-color;
+        border-radius: 0.5rem;
+        font-size: 1rem;
+      }
+    }
+  }
 }
