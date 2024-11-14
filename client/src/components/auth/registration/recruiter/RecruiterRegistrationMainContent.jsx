@@ -1,12 +1,10 @@
+import RecruiterRegistrationHeader from "./RecruiterRegistrationHeader";
+
 const RecruiterRegistrationMainContent = () => {
   return (
     <div className="recruiter-registration-main-content">
-      <div className="content-header">
-        <button className="back-button">← Back</button>
-        <a href="/signin" className="signin-link">
-          Already have an account? <span>Sign in</span>
-        </a>
-      </div>
+      {/* Recruiter Registration Header Component */}
+      <RecruiterRegistrationHeader />
       <h1>Personal Details</h1>
       <form className="registration-form">
         <div className="form-group">

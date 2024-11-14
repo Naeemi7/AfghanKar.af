@@ -108,18 +108,28 @@
     align-items: center;
     margin-bottom: 2rem;
 
-    .back-button {
-      background: none;
-      border: none;
-      color: $text-color;
-      font-size: 1rem;
+    .back-btn-container {
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      gap: 0.5rem;
       cursor: pointer;
-    }
+      color: $secondary-btn-background;
 
-    .signin-link {
-      color: $link-color;
+      .back-icon {
+        color: $primary-color;
+      }
+
       span {
-        font-weight: bold;
+        font-size: 1.5rem;
+      }
+
+      &:hover {
+        .back-icon,
+        span {
+          color: $accent-color;
+          font-weight: bold;
+        }
       }
     }
   }
