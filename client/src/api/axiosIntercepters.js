@@ -2,7 +2,7 @@ import api from "./axiosConfig";
 import { logBuddy, logError } from "@utils/errorUtils";
 
 // Function to setup intercepters
-export const setupInterceptors = () => {
+export default function setupInterceptors() {
   api.interceptors.request.use(
     (req) => {
       logBuddy("A request has been made");
@@ -35,4 +35,4 @@ export const setupInterceptors = () => {
       return Promise.reject(error);
     }
   );
-};
+}

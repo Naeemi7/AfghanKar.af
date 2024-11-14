@@ -2,7 +2,7 @@ import { Routes, Route } from "react-router-dom";
 import { useEffect } from "react";
 import { Toaster } from "react-hot-toast";
 import UserProvider from "@provider/UserProvider";
-import { setupInterceptors } from "@api/axiosIntercepters";
+import setupInterceptors from "@api/axiosIntercepters";
 import NotFoundPage from "@pages/not-found-page/NotFoundPage";
 import HomePage from "@pages/home/HomePage";
 import JobSeekerLogin from "@auth/login/JobSeekerLogin";
