@@ -1,8 +1,12 @@
+import Logo from "@reusable/Logo";
+
 const RecruiterRegistrationSidebar = () => {
   return (
     <div className="recruiter-registration-sidebar">
+      <div className="logo">
+        <Logo height={30} />
+      </div>
       <div className="sidebar-content">
-        <div className="logo">JOBS.AF</div>
         <h2>Have your account now</h2>
         <p>Register as an employer</p>
         <div className="stepper">

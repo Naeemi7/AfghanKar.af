@@ -4,26 +4,28 @@
 .recruiter-registration-sidebar {
   background-color: $primary-color;
   width: 35%;
-  padding: 2rem;
   color: #fff;
   display: flex;
   flex-direction: column;
-  justify-content: center;
+
+  .logo {
+    display: flex;
+    justify-content: center;
+  }
 
   .sidebar-content {
-    .logo {
-      font-size: 1.5rem;
-      font-weight: bold;
-      margin-bottom: 1.5rem;
-    }
+    padding-left: 4rem;
 
     h2 {
-      font-size: 1.8rem;
-      margin-bottom: 0.5rem;
+      color: $background-color;
+
+      margin-bottom: 2rem;
     }
 
     p {
-      margin-bottom: 2rem;
+      font-size: 1.8rem;
+      margin-bottom: 6rem;
+      color: $accent-color;
     }
 
     .stepper {
@@ -36,32 +38,20 @@
       &::before {
         content: "";
         position: absolute;
-        left: 1.25rem; /* Aligns with the center of the circles */
-        top: 1.25rem;
+        left: 1.8rem; /* Aligns with the center of the circles */
+        top: 2.8rem;
         height: 3.8rem; /* Adjust this to end at the bottom of the first circle */
         width: 2px;
         background-color: rgba(255, 255, 255, 0.6);
         z-index: 0;
       }
 
-      // /* Middle Line Segment */
-      // &::after {
-      //   content: "";
-      //   position: absolute;
-      //   left: 1.25rem;
-      //   top: 1.25rem; /* Start from the bottom of the first circle */
-      //   height: 2rem; /* Gap between the first and second circles */
-      //   width: 2px;
-      //   background-color: transparent; /* Leave this part transparent */
-      //   z-index: 0;
-      // }
-
       /* Bottom Line Segment */
       .line-bottom {
         content: "";
         position: absolute;
-        left: 1.25rem;
-        top: 7.3rem; /* Start from the bottom of the second circle */
+        left: 1.8rem;
+        top: 10.3rem; /* Start from the bottom of the second circle */
         height: 2.7rem; /* Adjust this to reach the top of the third circle */
         width: 2px;
         background-color: rgba(255, 255, 255, 0.6);
@@ -76,24 +66,25 @@
         z-index: 10;
 
         .circle {
-          width: 2.5rem;
-          height: 2.5rem;
+          width: 4rem;
+          height: 4rem;
           border: 2px solid rgba(255, 255, 255, 0.6);
           border-radius: 50%;
           display: flex;
           justify-content: center;
           align-items: center;
           margin-right: 1rem;
-          font-size: 1.2rem;
+          font-size: 1.5rem;
           background-color: transparent;
         }
 
         span {
-          font-size: 1.2rem;
+          font-size: 1.5rem;
         }
 
         &.active {
           color: #fff;
+          font-weight: bold;
 
           .circle {
             border-color: #fff;
