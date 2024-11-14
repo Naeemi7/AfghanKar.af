@@ -1,6 +1,6 @@
 import { useState } from "react";
 import PropTypes from "prop-types";
-import personalDetails from "@data/registration/recruiter-registration-data";
+import personalDetails from "@data/registration/recruiter/personalDetails";
 import Input from "@reusable/Input";
 import Icon from "@reusable/Icon";
 import AlertBox from "@reusable/AlertBox";
@@ -9,26 +9,19 @@ import usePasswordVisibility from "@hooks/usePasswordVisibility";
 
 export default function PersonalDetails({ onNext }) {
   const { showPassword, togglePasswordVisibility } = usePasswordVisibility();
-  const [password, setPassword] = useState("");
-  const [confirmPassword, setConfirmPassword] = useState("");
-  const [error, setError] = useState(""); // To store general errors
-  const [passwordMatched, setPasswordMatched] = useState(true); // To check if passwords match
+  const [formData, setFormData] = useState({
+    password: "",
+    confirmPassword: "",
+  });
+  const [error, setError] = useState("");
+  const [passwordMatched, setPasswordMatched] = useState(true);
 
-  const handlePasswordChange = (e) => {
-    setPassword(e.target.value);
-    if (confirmPassword !== e.target.value) {
-      setPasswordMatched(false);
-    } else {
-      setPasswordMatched(true);
-    }
-  };
+  const handleChange = (e) => {
+    const { name, value } = e.target;
+    setFormData((prevData) => ({ ...prevData, [name]: value }));
 
-  const handleConfirmPasswordChange = (e) => {
-    setConfirmPassword(e.target.value);
-    if (password !== e.target.value) {
-      setPasswordMatched(false);
-    } else {
-      setPasswordMatched(true);
+    if (name === "confirm-password" || name === "password") {
+      setPasswordMatched(formData.password === value);
     }
   };
 
@@ -47,20 +40,8 @@ export default function PersonalDetails({ onNext }) {
               name={field.name}
               placeholder={field.placeholder}
               required
-              value={
-                field.name === "password"
-                  ? password
-                  : field.name === "confirm-password"
-                  ? confirmPassword
-                  : ""
-              }
-              onChange={
-                field.name === "password"
-                  ? handlePasswordChange
-                  : field.name === "confirm-password"
-                  ? handleConfirmPasswordChange
-                  : null
-              }
+              value={formData[field.name] || ""}
+              onChange={handleChange}
             />
             {field.name.includes("password") && (
               <Icon
@@ -78,13 +59,12 @@ export default function PersonalDetails({ onNext }) {
         )}
         {error && <AlertBox message={error} type="error" />}
 
-        {/* The Next button now triggers onNext without form submission */}
         <Button
           name="Next"
           type="button"
           iconLibrary="gr"
           iconName="GrFormNextLink"
-          onClick={onNext} // Call onNext when the button is clicked
+          onClick={onNext}
         />
       </form>
     </div>

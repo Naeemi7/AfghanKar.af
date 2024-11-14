@@ -29,21 +29,43 @@ form {
     }
   }
 
+  // Common style for Input-box, text-area-container and -select-container
+  .input-box,
+  .text-area-container,
+  .select-container {
+    @include common-input-container-template;
+  }
+
+  .input-box,
+  .select-container {
+    height: 5rem;
+  }
+
+  input,
+  textarea,
+  select {
+    @include common-input-template;
+  }
+
   // Input box style
   .input-box {
-    height: 5rem;
-
-    @include common-input-container-template;
-
     input {
-      padding-top: 0.3rem; // Fixed deprecated warning by wrapping padding in &
-      @include common-input-template;
+      padding-top: 0.3rem;
     }
   }
 
   // Reusable Navigator
   .navigator-container {
     margin-top: -10px;
+  }
+
+  // Reusable TextArea
+  .text-area-container {
+    height: 10rem;
+
+    textarea {
+      padding-top: 1rem;
+    }
   }
 }
 

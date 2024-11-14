@@ -137,7 +137,8 @@
   }
 
   // Personal Details Componenet style
-  .personal-details-container {
+  .personal-details-container,
+  .company-details-container {
     display: flex;
     flex-direction: column;
     align-items: center;
