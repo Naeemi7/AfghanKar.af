@@ -38,8 +38,8 @@
         content: "";
         position: absolute;
         left: 1.8rem;
-        top: 2.8rem;
-        height: 3.8rem;
+        top: 4rem;
+        height: 2.5rem;
         width: 2px;
         background-color: $accent-color;
         z-index: 0;
@@ -90,6 +90,7 @@
             border-color: $accent-color;
             background-color: $accent-color;
             font-weight: bold;
+            padding: 2px;
           }
         }
       }

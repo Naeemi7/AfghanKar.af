@@ -4,10 +4,9 @@ import Input from "@reusable/Input";
 import Icon from "@reusable/Icon";
 import AlertBox from "@reusable/AlertBox";
 import Button from "@reusable/Button";
-import useUserContext from "@hooks/useUserContext";
 import usePasswordVisibility from "@hooks/usePasswordVisibility";
 
-const RecruiterRegistrationPersonalDetails = () => {
+const PersonalDetails = ({ onNext }) => {
   const { showPassword, togglePasswordVisibility } = usePasswordVisibility();
   const [password, setPassword] = useState("");
   const [confirmPassword, setConfirmPassword] = useState("");
@@ -62,7 +61,6 @@ const RecruiterRegistrationPersonalDetails = () => {
                   : null
               }
             />
-
             {field.name.includes("password") && (
               <Icon
                 library="fa"
@@ -79,15 +77,17 @@ const RecruiterRegistrationPersonalDetails = () => {
         )}
         {error && <AlertBox message={error} type="error" />}
 
+        {/* The Next button now triggers onNext without form submission */}
         <Button
           name="Next"
-          type="submit"
+          type="button"
           iconLibrary="gr"
           iconName="GrFormNextLink"
+          onClick={onNext} // Call onNext when the button is clicked
         />
       </form>
     </div>
   );
 };
 
-export default RecruiterRegistrationPersonalDetails;
+export default PersonalDetails;

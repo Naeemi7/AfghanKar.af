@@ -3,7 +3,7 @@ import AuthLink from "@reusable/AuthLink";
 import useNavigation from "@hooks/useNavigation";
 // import { goTo } from "@hooks/useNavigation";
 
-export default function RecruiterRegistrationHeader() {
+export default function Header() {
   const { goTo } = useNavigation();
 
   return (
