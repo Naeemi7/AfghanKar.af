@@ -8,7 +8,7 @@ import Button from "@reusable/Button";
 import Icon from "@reusable/Icon";
 import AlertBox from "@reusable/AlertBox";
 import AuthLink from "@reusable/AuthLink";
-import ShowToast from "@reusable/Toast";
+import ShowToast from "@reusable/ShowToast";
 import { logBuddy, handleError } from "@utils/errorUtils";
 import "@styles/components/user-login.scss";
 

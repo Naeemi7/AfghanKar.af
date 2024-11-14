@@ -4,7 +4,7 @@ import { Link } from "react-router-dom";
 import useNavigation from "@hooks/useNavigation";
 import SidebarAvatar from "./SidebarAvatar";
 import Icon from "@reusable/Icon";
-import ShowToast from "@reusable/Toast";
+import ShowToast from "@reusable/ShowToast";
 import useUserContext from "@hooks/useUserContext";
 import { logError, handleError } from "@utils/errorUtils";
 

@@ -1,4 +1,4 @@
-import ShowToast from "@reusable/Toast";
+import ShowToast from "@reusable/ShowToast";
 
 /**
  * Utility function for logging the success on development environment
