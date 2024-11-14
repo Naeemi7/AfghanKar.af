@@ -96,7 +96,7 @@ export default function UserProvider({ children }) {
    * Logout function for both user types
    * @param {*} userType
    */
-  const logoutUser = async (userType) => {
+  const userLogoutHandler = async (userType) => {
     try {
       const logoutUrl =
         userType === "jobSeeker"
@@ -135,7 +135,7 @@ export default function UserProvider({ children }) {
         setError,
         loginJobSeeker,
         loginRecruiter,
-        logoutUser,
+        userLogoutHandler,
       }}
     >
       {children}

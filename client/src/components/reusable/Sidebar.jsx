@@ -18,14 +18,14 @@ export default function Sidebar({
   const otherLinks = links.filter((link) => link.className !== "logout-button");
   const hasToastShown = useRef(false);
   const { goTo } = useNavigation();
-  const { isJobSeekerLoggedIn, logoutUser, setError } = useUserContext();
+  const { isJobSeekerLoggedIn, userLogoutHandler, setError } = useUserContext();
 
   // Unified logout handler
   const handleLogout = async () => {
     const userType = isJobSeekerLoggedIn ? "jobSeeker" : "recruiter";
 
     try {
-      await logoutUser(userType);
+      await userLogoutHandler(userType);
 
       if (!hasToastShown.current) {
         ShowToast("Logged out successfully", "success");
