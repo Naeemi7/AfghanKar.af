@@ -1,10 +1,15 @@
 import Icon from "@reusable/Icon";
 import AuthLink from "@reusable/AuthLink";
+import { goTo } from "@hooks/useNavigation";
 
 export default function RecruiterRegistrationHeader() {
+  const handleNavigation = () => {
+    goTo("/");
+  };
+
   return (
     <div className="content-header">
-      <div className="back-btn-container">
+      <div className="back-btn-container" onClick={handleNavigation}>
         <Icon
           library="io"
           name="IoMdArrowRoundBack"
