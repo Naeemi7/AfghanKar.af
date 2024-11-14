@@ -1,6 +1,7 @@
 // UserLogin.jsx
 import PropTypes from "prop-types";
 import { useState, useCallback } from "react";
+import "@styles/components/user-login.scss";
 import useNavigation from "@hooks/useNavigation";
 import usePasswordVisibility from "@hooks/usePasswordVisibility";
 import Input from "@reusable/Input";
@@ -10,7 +11,6 @@ import AlertBox from "@reusable/AlertBox";
 import AuthLink from "@reusable/AuthLink";
 import ShowToast from "@reusable/ShowToast";
 import { logBuddy, handleError } from "@utils/errorUtils";
-import "@styles/components/user-login.scss";
 
 export default function UserLogin({
   heading,

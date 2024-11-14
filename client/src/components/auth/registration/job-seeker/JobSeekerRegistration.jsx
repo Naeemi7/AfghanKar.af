@@ -10,7 +10,7 @@ import useUserContext from "@hooks/useUserContext";
 import AlertBox from "@reusable/AlertBox";
 import { post } from "@api/apiService";
 import ShowToast from "@reusable/ShowToast";
-import formFields from "@data/registration/job-seeker-registration";
+import formFields from "@data/registration/job-seeker-registration-data";
 import { logBuddy, logError, handleError } from "@utils/errorUtils";
 
 const JobSeekerRegistration = () => {
@@ -100,7 +100,7 @@ const JobSeekerRegistration = () => {
         <AuthLink
           message="Already signed up? "
           pathName="Login"
-          pathUrl="/user-login"
+          pathUrl="/job-seeker-login"
         />
       </form>
     </div>
