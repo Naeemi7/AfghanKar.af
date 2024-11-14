@@ -3,6 +3,7 @@ import { useEffect } from "react";
 import { Toaster } from "react-hot-toast";
 import UserProvider from "@provider/UserProvider";
 import setupInterceptors from "@api/axiosIntercepters";
+import ProtectedRoute from "@auth/protected-routes/ProtectedRoute";
 import NotFoundPage from "@pages/not-found-page/NotFoundPage";
 import HomePage from "@pages/home/HomePage";
 import JobSeekerLogin from "@auth/login/JobSeekerLogin";
@@ -40,11 +41,15 @@ export default function App() {
           />
         </Route>
 
-        {/* Job Seeker Dashboard Layout */}
-        <Route path="/job-seeker-dashboard/*" element={<JobSeekerLayout />} />
+        {/* Protected Routes for Job Seeker Dashboard */}
+        <Route element={<ProtectedRoute role="jobSeeker" />}>
+          <Route path="/job-seeker-dashboard/*" element={<JobSeekerLayout />} />
+        </Route>
 
-        {/* Recruiter Dashboard Layout */}
-        <Route path="/recruiter-dashboard/*" element={<RecruiterLayout />} />
+        {/* Protected Routes for Recruiter Dashboard */}
+        <Route element={<ProtectedRoute role="recruiter" />}>
+          <Route path="/recruiter-dashboard/*" element={<RecruiterLayout />} />
+        </Route>
 
         {/* 404 Not Found */}
         <Route path="*" element={<NotFoundPage />} />
