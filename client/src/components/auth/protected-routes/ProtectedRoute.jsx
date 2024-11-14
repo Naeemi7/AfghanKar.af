@@ -1,48 +1,48 @@
+import PropTypes from "prop-types";
 import { Outlet, Navigate } from "react-router-dom";
 import { useEffect, useState } from "react";
-import PropTypes from "prop-types";
 import useUserContext from "@hooks/useUserContext";
 import ShowToast from "@reusable/ShowToast";
 
+/**
+ * A generic protected route component that handles redirection based on user role
+ * @param {*} param0
+ * @returns
+ */
 export default function ProtectedRoute({ role }) {
   const { isJobSeekerLoggedIn, isRecruiterLoggedIn } = useUserContext();
   const [redirect, setRedirect] = useState(null);
-  const [isToastShown, setIsToastShown] = useState(false); // Track if toast is shown
+  const [toastMessage, setToastMessage] = useState(null);
+
+  const redirectToLogin = (role) => {
+    const route =
+      role === "jobSeeker" ? "/job-seeker-login" : "/recruiter-login";
+    const message =
+      role === "jobSeeker"
+        ? "Log in to access the Job Seeker Dashboard"
+        : "Log in to access the Recruiter Dashboard";
+
+    setToastMessage(message); // Set toast message
+    setRedirect(route); // Set redirection route
+  };
 
   useEffect(() => {
-    let timeoutId;
-
-    // Based on the role props, check if the user is logged in
     if (role === "jobSeeker" && !isJobSeekerLoggedIn) {
-      // Show the toast
-      ShowToast("Please log in to access the Job Seeker dashboard.", "error");
-      setIsToastShown(true);
-
-      // Set timeout for redirect after showing the toast
-      timeoutId = setTimeout(() => {
-        setRedirect("/job-seeker-login");
-      }, 3000); // Timeout of 3 seconds before redirect
+      redirectToLogin("jobSeeker");
     } else if (role === "recruiter" && !isRecruiterLoggedIn) {
-      // Show the toast
-      ShowToast("Please log in to access the Recruiter dashboard.", "error");
-      setIsToastShown(true);
-
-      // Set timeout for redirect after showing the toast
-      timeoutId = setTimeout(() => {
-        setRedirect("/recruiter-login");
-      }, 3000); // Timeout of 3 seconds before redirect
+      redirectToLogin("recruiter");
     }
-
-    // Cleanup timeout on component unmount or when dependencies change
-    return () => {
-      if (timeoutId) {
-        clearTimeout(timeoutId);
-      }
-    };
   }, [role, isJobSeekerLoggedIn, isRecruiterLoggedIn]);
 
-  // If redirect is set, perform navigation (only after timeout)
-  if (redirect && isToastShown) {
+  // Show the toast message before redirecting
+  useEffect(() => {
+    if (toastMessage) {
+      ShowToast(toastMessage, "error");
+    }
+  }, [toastMessage]); // This effect depends on the toastMessage state
+
+  // If redirect is set, perform navigation
+  if (redirect) {
     return <Navigate to={redirect} />;
   }
 
