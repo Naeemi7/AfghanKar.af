@@ -9,11 +9,12 @@ import HomePage from "@pages/home/HomePage";
 import JobSeekerLogin from "@auth/login/JobSeekerLogin";
 import RecruiterLogin from "@auth/login/RecruiterLogin";
 import RegistrationPage from "@pages/registeration-page/RegistrationPage";
-import JobSeekerRegistration from "@auth/registration/JobSeekerRegistration";
-import RecruiterRegistration from "@auth/registration/RecruiterRegisteration";
+import JobSeekerRegistration from "@auth/registration/job-seeker/JobSeekerRegistration";
+import RecruiterRegistration from "@auth/registration/recruiter/RecruiterRegisteration";
 import AppLayout from "@layouts/AppLayout";
 import JobSeekerLayout from "@layouts/JobSeekerLayout";
 import RecruiterLayout from "@layouts/RecruiterLayout";
+import RecruiterRegistrationLayout from "@layouts/RecruiterRegistrationLayout";
 
 export default function App() {
   useEffect(() => {
@@ -35,6 +36,10 @@ export default function App() {
             path="/job-seeker-registration"
             element={<JobSeekerRegistration />}
           />
+        </Route>
+
+        {/* Routes using Recruiter Registration Layout */}
+        <Route element={<RecruiterRegistrationLayout />}>
           <Route
             path="/recruiter-registration"
             element={<RecruiterRegistration />}
