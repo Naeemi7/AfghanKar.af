@@ -2,14 +2,14 @@ const formFields = (showPassword) => [
   {
     labelName: "Firstname",
     type: "text",
-    name: "firstname",
+    name: "firstName",
     placeholder: "Enter your firstname",
     required: true,
   },
   {
     labelName: "Lastname",
     type: "text",
-    name: "lastname",
+    name: "lastName",
     placeholder: "Enter your lastname",
     required: true,
   },
