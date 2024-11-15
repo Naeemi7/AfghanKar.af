@@ -52,6 +52,49 @@ form {
     input {
       padding-top: 0.3rem;
     }
+
+    .custom-date-input {
+      /* Style the date input */
+      input {
+        padding: 10px;
+        font-size: 16px;
+        color: #333;
+        background-color: #fff;
+        cursor: pointer;
+
+        /* Remove the default appearance in Webkit browsers */
+        -webkit-appearance: none;
+        -moz-appearance: none;
+        appearance: none;
+
+        /* Custom background for the input */
+        background-color: #f5f5f5; /* Light gray background */
+        padding-right: 30px; /* Space for custom icon if needed */
+      }
+
+      /* Hide the default calendar icon */
+      input::-webkit-calendar-picker-indicator {
+        display: none; /* Hides the calendar icon in Webkit browsers */
+      }
+
+      /* Firefox: Hide the default date picker icon */
+      input::-moz-calendar-picker-indicator {
+        display: none;
+      }
+
+      /* Optional: Add a custom background image for the input */
+      input {
+        background-image: url("path/to/your/icon.svg"); /* Path to your custom calendar icon */
+        background-position: right 10px center;
+        background-repeat: no-repeat;
+        background-size: 20px; /* Adjust the size */
+      }
+
+      /* Optional: Add a hover effect to the input */
+      input:hover {
+        border-color: $accent-color; /* Replace with your hover color */
+      }
+    }
   }
 
   // Reusable Navigator

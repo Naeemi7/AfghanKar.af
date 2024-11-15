@@ -2,8 +2,8 @@ import { useState } from "react";
 import PropTypes from "prop-types";
 import companyDetails from "@data/registration/recruiter/companyDetails";
 import Input from "@reusable/Input";
-import Select from "@reusable/Select"; // Assuming you have a reusable Select component
-import Textarea from "@reusable/Textarea"; // Assuming you have a reusable Textarea component
+import Select from "@reusable/Select";
+import Textarea from "@reusable/Textarea";
 import AlertBox from "@reusable/AlertBox";
 import Button from "@reusable/Button";
 
@@ -31,6 +31,9 @@ export default function CompanyDetails({ onNext }) {
           const { labelName, type, name, options, placeholder, required } =
             field;
 
+          // Conditionally add className for date input type
+          const inputClassName = type === "date" ? "custom-date-input" : "";
+
           return (
             <div key={index}>
               {type === "text" || type === "date" ? (
@@ -42,6 +45,7 @@ export default function CompanyDetails({ onNext }) {
                   required={required}
                   value={formData[name] || ""}
                   onChange={handleChange}
+                  className={inputClassName} // Apply the conditional className
                 />
               ) : type === "select" ? (
                 <Select

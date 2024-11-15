@@ -8,7 +8,7 @@ export default function RecruiterRegistrationLayout() {
   const [currentStep, setCurrentStep] = useState(1);
 
   const handleNext = () => {
-    setCurrentStep(2);
+    setCurrentStep(currentStep + 1);
   };
 
   return (
