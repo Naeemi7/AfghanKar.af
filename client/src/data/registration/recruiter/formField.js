@@ -55,6 +55,21 @@ const formFields = {
     placeholder,
     required,
   }),
+
+  countrySelectField: (
+    label,
+    name,
+    countries,
+    placeholder,
+    required = true
+  ) => ({
+    labelName: label,
+    type: "select",
+    name,
+    options: countries,
+    placeholder,
+    required,
+  }),
 };
 
 export default formFields;
