@@ -9,20 +9,45 @@ import usePasswordVisibility from "@hooks/usePasswordVisibility";
 
 export default function PersonalDetails({ onNext }) {
   const { showPassword, togglePasswordVisibility } = usePasswordVisibility();
+
+  // Track all form data
   const [formData, setFormData] = useState({
     password: "",
     confirmPassword: "",
   });
-  const [error, setError] = useState("");
-  const [passwordMatched, setPasswordMatched] = useState(true);
 
+  // Track error state
+  const [error, setError] = useState("");
+
+  // Check if passwords match
+  const passwordsMatch = formData.password === formData.confirmPassword;
+
+  // Handle input changes
   const handleChange = (e) => {
     const { name, value } = e.target;
-    setFormData((prevData) => ({ ...prevData, [name]: value }));
+    setFormData((prevData) => ({
+      ...prevData,
+      [name]: value,
+    }));
+    if (error) setError(""); // Clear error when user starts typing
+  };
 
-    if (name === "confirm-password" || name === "password") {
-      setPasswordMatched(formData.password === value);
+  // Handle form submission or next step
+  const handleNext = () => {
+    // Ensure both passwords are filled
+    if (!formData.password || !formData.confirmPassword) {
+      setError("Please fill in all required fields.");
+      // return;
     }
+
+    // Ensure the passwords match
+    if (!passwordsMatch) {
+      setError("Passwords do not match.");
+      // return;
+    }
+
+    // If no errors, proceed to the next step
+    onNext();
   };
 
   return (
@@ -39,7 +64,6 @@ export default function PersonalDetails({ onNext }) {
               type={field.type}
               name={field.name}
               placeholder={field.placeholder}
-              required
               value={formData[field.name] || ""}
               onChange={handleChange}
             />
@@ -54,9 +78,6 @@ export default function PersonalDetails({ onNext }) {
           </div>
         ))}
 
-        {!passwordMatched && (
-          <AlertBox message="Passwords do not match." type="error" />
-        )}
         {error && <AlertBox message={error} type="error" />}
 
         <Button
@@ -64,7 +85,7 @@ export default function PersonalDetails({ onNext }) {
           type="button"
           iconLibrary="gr"
           iconName="GrFormNextLink"
-          onClick={onNext}
+          onClick={handleNext}
         />
       </form>
     </div>
@@ -72,5 +93,5 @@ export default function PersonalDetails({ onNext }) {
 }
 
 PersonalDetails.propTypes = {
-  onNext: PropTypes.func,
+  onNext: PropTypes.func.isRequired,
 };

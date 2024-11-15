@@ -7,15 +7,24 @@ import MainContent from "@auth/registration/recruiter/MainContent";
 export default function RecruiterRegistrationLayout() {
   const [currentStep, setCurrentStep] = useState(1);
 
+  // Handles moving forward to the next step
   const handleNext = () => {
-    setCurrentStep(currentStep + 1);
+    if (currentStep < 3) setCurrentStep((prevStep) => prevStep + 1);
+  };
+
+  // Handles moving backward one step at a time
+  const handlePrevious = () => {
+    if (currentStep > 1) setCurrentStep((prevStep) => prevStep - 1);
   };
 
   return (
     <div className="recruiter-registration-layout">
       <RecruiterRegistrationSidebar currentStep={currentStep} />
-      {/* Left Sidebar */}
-      <MainContent currentStep={currentStep} onNext={handleNext} />
+      <MainContent
+        currentStep={currentStep}
+        onNext={handleNext}
+        onPrevious={handlePrevious}
+      />
     </div>
   );
 }

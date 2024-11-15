@@ -1,14 +1,10 @@
 import Icon from "@reusable/Icon";
 import AuthLink from "@reusable/AuthLink";
-import useNavigation from "@hooks/useNavigation";
-// import { goTo } from "@hooks/useNavigation";
 
-export default function Header() {
-  const { goTo } = useNavigation();
-
+export default function Header({ onPrevious }) {
   return (
     <div className="content-header">
-      <div className="back-btn-container" onClick={() => goTo("/")}>
+      <div className="back-btn-container" onClick={onPrevious}>
         <Icon library="ti" name="TiArrowBack" size={24} className="back-icon" />
         <span className="back-text">Back</span>
       </div>

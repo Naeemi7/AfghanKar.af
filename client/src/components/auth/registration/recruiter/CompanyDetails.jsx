@@ -21,6 +21,18 @@ export default function CompanyDetails({ onNext }) {
   const handleChange = (e) => {
     const { name, value } = e.target;
     setFormData((prevData) => ({ ...prevData, [name]: value }));
+    if (error) setError("");
+  };
+
+  const handleNext = () => {
+    const requiredFields = ["companyName", "companyType", "industryType"];
+    const emptyField = requiredFields.find((field) => !formData[field]);
+
+    if (emptyField) {
+      setError(`Please fill in the required field: ${emptyField}`);
+      // return;
+    }
+    onNext();
   };
 
   return (
@@ -31,21 +43,16 @@ export default function CompanyDetails({ onNext }) {
           const { labelName, type, name, options, placeholder, required } =
             field;
 
-          // Conditionally add className for date input type
-          const inputClassName = type === "date" ? "custom-date-input" : "";
-
           return (
-            <div key={index}>
-              {type === "text" || type === "date" ? (
-                <Input
+            <div key={index} className="form-field">
+              {type === "textarea" ? (
+                <Textarea
                   labelName={labelName}
-                  type={type}
                   name={name}
                   placeholder={placeholder}
-                  required={required}
                   value={formData[name] || ""}
                   onChange={handleChange}
-                  className={inputClassName} // Apply the conditional className
+                  required={required}
                 />
               ) : type === "select" ? (
                 <Select
@@ -55,16 +62,19 @@ export default function CompanyDetails({ onNext }) {
                   placeholder={placeholder}
                   value={formData[name] || ""}
                   onChange={handleChange}
+                  required={required}
                 />
-              ) : type === "textarea" ? (
-                <Textarea
+              ) : (
+                <Input
                   labelName={labelName}
+                  type={type}
                   name={name}
                   placeholder={placeholder}
                   value={formData[name] || ""}
                   onChange={handleChange}
+                  required={required}
                 />
-              ) : null}
+              )}
             </div>
           );
         })}
@@ -76,7 +86,7 @@ export default function CompanyDetails({ onNext }) {
           type="button"
           iconLibrary="gr"
           iconName="GrFormNextLink"
-          onClick={onNext}
+          onClick={handleNext}
         />
       </form>
     </div>
@@ -84,5 +94,5 @@ export default function CompanyDetails({ onNext }) {
 }
 
 CompanyDetails.propTypes = {
-  onNext: PropTypes.func,
+  onNext: PropTypes.func.isRequired,
 };

@@ -4,26 +4,30 @@ import PersonalDetails from "./PersonalDetails";
 import CompanyDetails from "./CompanyDetails";
 import AddressDetails from "./AddressDetails";
 
-export default function MainContent({ currentStep, onNext }) {
+export default function MainContent({ currentStep, onNext, onPrevious }) {
+  const renderStep = () => {
+    switch (currentStep) {
+      case 1:
+        return <PersonalDetails onNext={onNext} />;
+      case 2:
+        return <CompanyDetails onNext={onNext} onPrevious={onPrevious} />;
+      case 3:
+        return <AddressDetails onNext={onNext} onPrevious={onPrevious} />;
+      default:
+        return null;
+    }
+  };
+
   return (
     <div className="recruiter-registration-main-content">
-      {/* Recruiter Registration Header Component */}
-      <Header />
-
-      {/* {currentStep === 1 ? (
-        <PersonalDetails onNext={onNext} />
-      ) : (
-        <CompanyDetails />
-      )} */}
-
-      {currentStep === 1 && <PersonalDetails onNext={onNext} />}
-      {currentStep === 2 && <CompanyDetails onNext={onNext} />}
-      {currentStep === 3 && <AddressDetails onNext={onNext} />}
+      <Header onPrevious={onPrevious} />
+      {renderStep()}
     </div>
   );
 }
 
 MainContent.propTypes = {
-  currentStep: PropTypes.number,
-  onNext: PropTypes.func,
+  currentStep: PropTypes.number.isRequired,
+  onNext: PropTypes.func.isRequired,
+  onPrevious: PropTypes.func.isRequired,
 };

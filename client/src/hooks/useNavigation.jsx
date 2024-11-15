@@ -1,4 +1,5 @@
 import { useNavigate } from "react-router-dom";
+
 export default function useNavigation() {
   const navigate = useNavigate();
 
@@ -7,7 +8,7 @@ export default function useNavigation() {
   };
 
   const goBack = () => {
-    navigate(-1);
+    navigate(-1); // Adjusted to go back one step only
   };
 
   const goForward = () => {

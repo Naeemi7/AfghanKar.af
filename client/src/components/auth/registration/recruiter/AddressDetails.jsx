@@ -7,18 +7,30 @@ import AlertBox from "@reusable/AlertBox";
 import Button from "@reusable/Button";
 
 export default function AddressDetails({ onNext }) {
-  const [error, setError] = useState("");
   const [formData, setFormData] = useState({
     country: "",
     state: "",
     city: "",
-    address: "",
+    postalCode: "",
+    addressLine: "",
   });
+  const [error, setError] = useState("");
 
-  // Handle input changes
   const handleChange = (e) => {
     const { name, value } = e.target;
     setFormData((prevData) => ({ ...prevData, [name]: value }));
+    if (error) setError("");
+  };
+
+  const handleNext = () => {
+    const requiredFields = ["country", "state", "city", "postalCode"];
+    const emptyField = requiredFields.find((field) => !formData[field]);
+
+    if (emptyField) {
+      setError(`Please fill in the required field: ${emptyField}`);
+      return;
+    }
+    onNext();
   };
 
   return (
@@ -29,7 +41,6 @@ export default function AddressDetails({ onNext }) {
           const { labelName, type, name, options, placeholder, required } =
             field;
 
-          // Render Input or Select based on field type
           return (
             <div key={index} className="form-field">
               {type === "select" ? (
@@ -57,16 +68,14 @@ export default function AddressDetails({ onNext }) {
           );
         })}
 
-        {/* Display error message if any */}
         {error && <AlertBox message={error} type="error" />}
 
-        {/* Submit Button */}
         <Button
           name="Next"
           type="button"
           iconLibrary="gr"
           iconName="GrFormNextLink"
-          onClick={onNext}
+          onClick={handleNext}
         />
       </form>
     </div>
