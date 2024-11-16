@@ -2,18 +2,27 @@ import formFields from "./formField";
 
 const companyDetails = () => [
   formFields.textField(
-    "Company Name",
+    "Company Name *",
     "companyName",
     "Enter your company name"
   ),
   formFields.selectField(
-    "Company Type",
+    "Company Type *",
     "companyType",
-    ["Private", "Public", "Non-Profit", "Government", "Other"],
+    [
+      "Private",
+      "Public",
+      "Non-Profit",
+      "Government",
+      "Cooperative",
+      "Startup",
+      "Multinational",
+      "Other",
+    ],
     "Select company type"
   ),
   formFields.selectField(
-    "Industry Type",
+    "Industry Type *",
     "industryType",
     [
       "IT",
@@ -22,18 +31,23 @@ const companyDetails = () => [
       "Education",
       "Retail",
       "Manufacturing",
+      "Construction",
+      "Real Estate",
+      "Agriculture",
+      "Hospitality",
+      "Telecommunication",
       "Other",
     ],
     "Select industry type"
   ),
-  formFields.dateField("Founded In", "foundedIn", "Select founding date"),
+  formFields.dateField("Founded In *", "foundedIn", "Select founding date"),
   formFields.textField(
-    "Company Website",
+    "Company Website *",
     "companyWebsite",
     "Enter company website"
   ),
   formFields.textareaField(
-    "Company Description",
+    "Company Description *",
     "companyDescription",
     "Describe your company"
   ),

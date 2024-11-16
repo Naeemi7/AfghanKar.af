@@ -10,8 +10,8 @@ export default function RecruiterRegistrationSidebar({ currentStep }) {
         <div className="logo">
           <Logo height={30} />
         </div>
-        <h2>Have your account now</h2>
-        <p>Register as an employer</p>
+        <h2>Create Your Recruiter Account</h2>
+        <p>Complete the steps to start hiring top talent.</p>
         <div className="stepper">
           <div className={getStepClass(1)}>
             <div className="circle">1</div>

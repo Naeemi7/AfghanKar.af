@@ -8,10 +8,17 @@ export default function Input({
   placeholder = "",
   className = "",
 }) {
+  // Check if label is required (contains a star)
+  const isRequired = labelName.includes("*");
+
+  // Remove the asterisk from the label text
+  const labelText = labelName.replace("*", "").trim();
+
   return (
     <div className="input-box">
       <label htmlFor={labelName.replace(" ", "-").toLowerCase()}>
-        {labelName}
+        {labelText}
+        {isRequired && <span style={{ color: "red" }}> *</span>}
       </label>
       <input
         className={className}

@@ -9,9 +9,18 @@ export default function Select({
   value,
   onChange,
 }) {
+  // Check if label is required (contains a star)
+  const isRequired = labelName.includes("*");
+
+  // Remove the asterisk from the label text
+  const labelText = labelName.replace("*", "").trim();
+
   return (
     <div className="select-container">
-      <label htmlFor={name}>{labelName}</label>
+      <label htmlFor={labelName.replace(" ", "-").toLowerCase()}>
+        {labelText}
+        {isRequired && <span style={{ color: "red" }}> *</span>}
+      </label>
       <select
         id={name}
         name={name}

@@ -201,14 +201,14 @@ const countryList = [
 
 const addressDetails = () => [
   formFields.countrySelectField(
-    "Country",
+    "Country *",
     "country",
     countryList,
     "Select your country"
   ),
-  formFields.textField("State", "state", "Enter your state"),
-  formFields.textField("City", "city", "Enter your city"),
-  formFields.textField("Address", "address", "Enter your address"),
+  formFields.textField("State *", "state", "Enter your state"),
+  formFields.textField("City *", "city", "Enter your city"),
+  formFields.textField("Address *", "address", "Enter your address"),
 ];
 
 export default addressDetails;

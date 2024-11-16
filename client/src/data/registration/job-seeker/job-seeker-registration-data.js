@@ -1,13 +1,13 @@
 const formFields = (showPassword) => [
   {
-    labelName: "Firstname",
+    labelName: "Firstname *",
     type: "text",
     name: "firstName",
     placeholder: "Enter your firstname",
     required: true,
   },
   {
-    labelName: "Lastname",
+    labelName: "Lastname *",
     type: "text",
     name: "lastName",
     placeholder: "Enter your lastname",
@@ -21,7 +21,7 @@ const formFields = (showPassword) => [
     required: true,
   },
   {
-    labelName: "Email",
+    labelName: "Email *",
     type: "email",
     name: "email",
     placeholder: "Enter your email",
@@ -35,7 +35,7 @@ const formFields = (showPassword) => [
     required: true,
   },
   {
-    labelName: "Confirm password",
+    labelName: "Confirm password *",
     type: showPassword ? "text" : "password",
     name: "confirm-password",
     placeholder: "Confirm your password",
