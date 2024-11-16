@@ -1,3 +1,4 @@
+import PropTypes from "prop-types";
 import Icon from "@reusable/Icon";
 import AuthLink from "@reusable/AuthLink";
 
@@ -17,3 +18,7 @@ export default function Header({ onPrevious }) {
     </div>
   );
 }
+
+Header.propTypes = {
+  onPrevious: PropTypes.func,
+};
