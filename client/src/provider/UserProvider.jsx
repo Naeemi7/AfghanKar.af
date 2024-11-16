@@ -5,72 +5,53 @@ import { post, get } from "@api/apiService";
 import { logBuddy, logError } from "@utils/errorUtils";
 
 export default function UserProvider({ children }) {
-  // Separate states for job seeker and recruiter
   const [jobSeeker, setJobSeeker] = useState(null);
   const [recruiter, setRecruiter] = useState(null);
   const [isJobSeekerLoggedIn, setIsJobSeekerLoggedIn] = useState(false);
   const [isRecruiterLoggedIn, setIsRecruiterLoggedIn] = useState(false);
   const [error, setError] = useState("");
+  const [loading, setLoading] = useState(true); // Loading state to track initialization
 
-  // Load users from localStorage on mount
   useEffect(() => {
     const storedJobSeeker = localStorage.getItem("jobSeeker");
     const storedRecruiter = localStorage.getItem("recruiter");
 
-    // Parse and validate storedJobSeeker JSON
     if (storedJobSeeker) {
       try {
         setJobSeeker(JSON.parse(storedJobSeeker));
         setIsJobSeekerLoggedIn(true);
       } catch (e) {
         console.error("Error parsing jobSeeker JSON:", e);
-        // Clear invalid data
         localStorage.removeItem("jobSeeker");
       }
     }
 
-    // Parse and validate storedRecruiter JSON
     if (storedRecruiter) {
       try {
         setRecruiter(JSON.parse(storedRecruiter));
         setIsRecruiterLoggedIn(true);
       } catch (e) {
         console.error("Error parsing recruiter JSON:", e);
-        // Clear invalid data
         localStorage.removeItem("recruiter");
       }
     }
+
+    // Once the checks are done, set loading to false
+    setLoading(false);
   }, []);
 
-  /**
-   * Login function for job seekers
-   * @param {*} data
-   * @returns
-   */
   const loginJobSeeker = async (data) => {
     return login("/job-seeker/login", data, "jobSeeker");
   };
 
-  /**
-   * Login function for recruiters
-   * @param {*} data
-   * @returns
-   */
   const loginRecruiter = async (data) => {
     return login("/users/login-recruiter", data, "recruiter");
   };
 
-  /**
-   * Generic login function
-   * @param {*} url
-   * @param {*} data
-   * @param {*} userType
-   */
   const login = async (url, data, userType) => {
     try {
       const response = await post(url, data, setError);
 
-      // For job seeker, set user data and store it in localStorage
       if (userType === "jobSeeker") {
         setJobSeeker(response.jobSeeker);
         setIsJobSeekerLoggedIn(true);
@@ -92,10 +73,6 @@ export default function UserProvider({ children }) {
     }
   };
 
-  /**
-   * Logout function for both user types
-   * @param {*} userType
-   */
   const userLogoutHandler = async (userType) => {
     try {
       const logoutUrl =
@@ -123,6 +100,10 @@ export default function UserProvider({ children }) {
       );
     }
   };
+
+  if (loading) {
+    return null; // Optionally, return a loading spinner or null until the state is set
+  }
 
   return (
     <UserContext.Provider

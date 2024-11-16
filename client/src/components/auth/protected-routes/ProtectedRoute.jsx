@@ -13,6 +13,27 @@ export default function ProtectedRoute({ role }) {
   const { isJobSeekerLoggedIn, isRecruiterLoggedIn } = useUserContext();
   const [redirect, setRedirect] = useState(null);
   const [toastMessage, setToastMessage] = useState(null);
+  const [loading, setLoading] = useState(true); // Loading state to prevent redirecting too early
+
+  useEffect(() => {
+    // Wait for the login state to be initialized
+    if (
+      isJobSeekerLoggedIn !== undefined &&
+      isRecruiterLoggedIn !== undefined
+    ) {
+      setLoading(false); // Once state is set, stop loading
+    }
+  }, [isJobSeekerLoggedIn, isRecruiterLoggedIn]);
+
+  useEffect(() => {
+    if (!loading) {
+      if (role === "jobSeeker" && !isJobSeekerLoggedIn) {
+        redirectToLogin("jobSeeker");
+      } else if (role === "recruiter" && !isRecruiterLoggedIn) {
+        redirectToLogin("recruiter");
+      }
+    }
+  }, [loading, role, isJobSeekerLoggedIn, isRecruiterLoggedIn]);
 
   const redirectToLogin = (role) => {
     const route =
@@ -27,26 +48,16 @@ export default function ProtectedRoute({ role }) {
   };
 
   useEffect(() => {
-    if (role === "jobSeeker" && !isJobSeekerLoggedIn) {
-      redirectToLogin("jobSeeker");
-    } else if (role === "recruiter" && !isRecruiterLoggedIn) {
-      redirectToLogin("recruiter");
-    }
-  }, [role, isJobSeekerLoggedIn, isRecruiterLoggedIn]);
-
-  // Show the toast message before redirecting
-  useEffect(() => {
     if (toastMessage) {
       ShowToast(toastMessage, "error");
     }
-  }, [toastMessage]); // This effect depends on the toastMessage state
+  }, [toastMessage]);
 
   // If redirect is set, perform navigation
   if (redirect) {
     return <Navigate to={redirect} />;
   }
 
-  // Otherwise, render the Outlet for the protected route
   return <Outlet />;
 }
 
