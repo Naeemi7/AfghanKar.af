@@ -8,7 +8,7 @@ import Button from "@reusable/Button";
 import Icon from "@reusable/Icon";
 import AlertBox from "@reusable/AlertBox";
 import AuthLink from "@reusable/AuthLink";
-import useToast from "@hooks/useToast";
+import ShowToast from "@reusable/ShowToast";
 import { logBuddy, handleError } from "@utils/errorUtils";
 
 export default function UserLogin({
@@ -18,7 +18,6 @@ export default function UserLogin({
   goToUrl,
 }) {
   const { goTo } = useNavigation();
-  const { showToast } = useToast();
   const { showPassword, togglePasswordVisibility } = usePasswordVisibility();
   const [error, setError] = useState("");
 
@@ -34,7 +33,7 @@ export default function UserLogin({
       try {
         await loginUser(data);
         logBuddy(`${heading} login successful`, data);
-        showToast("Logged in successfully!", "success");
+        ShowToast("Logged in successfully!", "success");
         setTimeout(() => goTo(goToUrl), 1500);
       } catch (error) {
         if (!error.handled) {
@@ -43,7 +42,7 @@ export default function UserLogin({
         }
       }
     },
-    [goTo, loginUser, heading, goToUrl, showToast]
+    [goTo, loginUser, heading, goToUrl]
   );
 
   return (
