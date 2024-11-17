@@ -1,17 +1,19 @@
 export default function QuickLinks() {
+  const links = [
+    { href: "/jobs", name: "Find Jobs" },
+    { href: "/recruiters", name: "For Recruiters" },
+    { href: "/contact", name: "Contact Us" },
+  ];
+
   return (
     <div className="footer-section quick-links">
       <h3>Quick Links</h3>
       <ul>
-        <li>
-          <a href="/jobs">Find Jobs</a>
-        </li>
-        <li>
-          <a href="/recruiters">For Recruiters</a>
-        </li>
-        <li>
-          <a href="/contact">Contact Us</a>
-        </li>
+        {links.map((item, index) => (
+          <li key={index}>
+            <a href={item.href}>{item.name}</a>
+          </li>
+        ))}
       </ul>
     </div>
   );
