@@ -26,6 +26,7 @@ const RegistrationPage = () => {
       </div>
 
       <div className="registeration-page-wrapper">
+        {/* Reusable SelectionCard Component */}
         <SelectionCard
           select={selectedCard === "jobSeeker"}
           handleSelection={() => handleSelection("jobSeeker")}
@@ -35,6 +36,8 @@ const RegistrationPage = () => {
           heading="Job Seeker"
           content="Looking for a job?"
         />
+
+        {/* Reusable SelectionCard Component */}
         <SelectionCard
           select={selectedCard === "recruiter"}
           handleSelection={() => handleSelection("recruiter")}

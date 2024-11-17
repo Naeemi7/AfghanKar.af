@@ -15,7 +15,7 @@ export default function SelectionCard({
   return (
     <div className="selection-card-container">
       <div
-        className={`buttons-container ${select ? "selected" : ""}`} // Apply selected class
+        className={`buttons-container ${select ? "selected" : ""}`}
         onClick={handleSelection} // Handle click to select this card
       >
         <div className="buttons-wrapper">
@@ -48,7 +48,7 @@ export default function SelectionCard({
 }
 
 SelectionCard.propTypes = {
-  select: PropTypes.bool.isRequired, // Ensure this is a boolean
+  select: PropTypes.bool.isRequired,
   handleSelection: PropTypes.func,
   iconName: PropTypes.string,
   iconLib: PropTypes.string,
