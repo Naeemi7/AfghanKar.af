@@ -19,6 +19,11 @@ const JobSeekerRegistration = () => {
   const { showPassword, togglePasswordVisibility } = usePasswordVisibility();
   const { error, setError } = useUserContext();
 
+  /**
+   * Handles the registration
+   * @param {*} e
+   * @returns
+   */
   const handleRegistration = async (e) => {
     e.preventDefault();
 
@@ -72,6 +77,7 @@ const JobSeekerRegistration = () => {
             key={index}
             className={field.name.includes("password") ? "password-input" : ""}
           >
+            {/* Reusable Input Component */}
             <Input
               labelName={field.labelName}
               type={field.type}
@@ -80,6 +86,7 @@ const JobSeekerRegistration = () => {
               required
             />
             {field.name.includes("password") && (
+              // Reusable Icon Component
               <Icon
                 library="fa"
                 name={showPassword ? "FaEyeSlash" : "FaEye"}
@@ -90,6 +97,7 @@ const JobSeekerRegistration = () => {
           </div>
         ))}
 
+        {/* Reusable AlertBox component to display the error message on UI */}
         {!passwordMatched && (
           <AlertBox message="Passwords do not match." type="error" />
         )}
@@ -97,6 +105,7 @@ const JobSeekerRegistration = () => {
 
         <Button name="Register" type="submit" />
 
+        {/* Reusable AuthLink component to redirect the user to login page */}
         <AuthLink
           message="Already signed up? "
           pathName="Login"

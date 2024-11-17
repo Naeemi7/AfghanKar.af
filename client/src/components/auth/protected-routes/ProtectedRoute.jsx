@@ -13,7 +13,8 @@ export default function ProtectedRoute({ role }) {
   const { isJobSeekerLoggedIn, isRecruiterLoggedIn } = useUserContext();
   const [redirect, setRedirect] = useState(null);
   const [toastMessage, setToastMessage] = useState(null);
-  const [loading, setLoading] = useState(true); // Loading state to prevent redirecting too early
+  // Loading state to prevent redirecting too early
+  const [loading, setLoading] = useState(true);
 
   useEffect(() => {
     // Wait for the login state to be initialized
@@ -21,7 +22,8 @@ export default function ProtectedRoute({ role }) {
       isJobSeekerLoggedIn !== undefined &&
       isRecruiterLoggedIn !== undefined
     ) {
-      setLoading(false); // Once state is set, stop loading
+      // Once state is set, stop loading
+      setLoading(false);
     }
   }, [isJobSeekerLoggedIn, isRecruiterLoggedIn]);
 
