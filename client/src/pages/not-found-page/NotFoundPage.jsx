@@ -17,7 +17,9 @@ const NotFoundPage = () => {
           <p>Sorry, the page you are looking for could not be found</p>
           <Button
             name="Go to Main"
-            width={120}
+            width={135}
+            iconLibrary="ti"
+            iconName="TiArrowBack"
             onClick={() => {
               goTo("/");
             }}
