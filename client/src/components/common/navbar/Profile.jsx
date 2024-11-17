@@ -48,6 +48,7 @@ export default function Profile() {
       aria-expanded={showDropdown}
     >
       <div className="profile-icon-wrapper">
+        {/* Reusable Icon Component */}
         <Icon
           library="pi"
           name="PiUserCircleGearFill"
