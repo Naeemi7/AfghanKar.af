@@ -7,6 +7,7 @@ export default function Input({
   name = "",
   placeholder = "",
   className = "",
+  autocomplete = "", // **Added autocomplete**
 }) {
   // Check if label is required (contains a star)
   const isRequired = labelName.includes("*");
@@ -14,18 +15,22 @@ export default function Input({
   // Remove the asterisk from the label text
   const labelText = labelName.replace("*", "").trim();
 
+  // Generate a sanitized ID for the input
+  const inputId = labelName.replace(/\s+/g, "-").toLowerCase();
+
   return (
     <div className="input-box">
-      <label htmlFor={labelName.replace(" ", "-").toLowerCase()}>
+      <label htmlFor={inputId}>
         {labelText}
         {isRequired && <span style={{ color: "red" }}> *</span>}
       </label>
       <input
         className={className}
-        id={labelName.replace(" ", "-").toLowerCase()}
+        id={inputId}
         type={type}
         placeholder={placeholder}
         name={name}
+        autoComplete={autocomplete} // **Pass autocomplete to input**
       />
     </div>
   );
@@ -37,4 +42,13 @@ Input.propTypes = {
   name: PropTypes.string,
   placeholder: PropTypes.string,
   className: PropTypes.string,
+  autocomplete: PropTypes.string, // **PropType for autocomplete**
+};
+
+Input.defaultProps = {
+  type: "text",
+  name: "",
+  placeholder: "",
+  className: "",
+  autocomplete: "", // **Default empty autocomplete**
 };

@@ -83,6 +83,8 @@ const JobSeekerRegistration = () => {
               name={field.name}
               placeholder={field.placeholder}
               required
+              // **Changes made here**: Added autocomplete="new-password" for both password fields
+              autocomplete="new-password"
             />
             {field.name.includes("password") && (
               // Reusable Icon Component
