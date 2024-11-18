@@ -15,7 +15,18 @@ const commonValidations = (userType) => [
     .isAlpha("en-GB", { ignore: " " }) // Ignores spaces
     .withMessage(
       "The full name must contain only alphabets and a space between first and last name."
-    ),
+    )
+    .custom((value) => {
+      // Capitalize the full name (first and last name)
+      try {
+        const { firstName, lastName } = splitAndCapitalizeName(value);
+        // Modify the value directly to capitalize the names
+        value = `${firstName} ${lastName}`;
+      } catch (error) {
+        throw new Error(error.message); // Throw error if fullName is invalid
+      }
+      return value; // Return the modified capitalized name
+    }),
 
   // Sanitize and validate the username
   body("username")

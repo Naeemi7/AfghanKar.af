@@ -2,36 +2,29 @@ import JobSeeker from "../models/JobSeeker.js";
 import Recruiter from "../models/Recruiter.js";
 
 /**
- * Helper function to capitalize the first letter of a word
- * @param {*} word
- * @returns
- */
-export const uppercaseFirstLetter = (word) => {
-  return word.charAt(0).toUpperCase() + word.slice(1);
-};
-
-/**
  * Helper function to split the full name and capitalize the first letter of both first and last name
  * @param {*} fullName
  * @returns
  */
 export const splitAndCapitalizeName = (fullName) => {
-  if (!fullName || fullName.trim().split(" ").length < 2) {
-    throw new Error("Full name must contain both first and last names.");
+  // Check if fullName is provided and not empty
+  if (!fullName || fullName.trim() === "") {
+    throw new Error("Full name is missing.");
   }
 
-  // Trim and split full name into parts
-  const nameParts = fullName.trim().split(/\s+/); // Split on multiple spaces if there are any
+  // Trim and split the full name into parts (split by spaces)
+  const nameParts = fullName.trim().split(/\s+/); // Split on multiple spaces if any
 
-  // Ensure there are at least two name parts
-  if (nameParts.length < 2) {
-    throw new Error("Full name must contain both first and last names.");
+  // If there is only one part (first name), throw an error for missing last name
+  if (nameParts.length === 1) {
+    throw new Error("The full name must contain both first and last names.");
   }
 
-  const firstName = nameParts[0]; // First name is the first word
-  const lastName = nameParts.slice(1).join(" "); // Join remaining parts for the last name
+  // If both names are present, capitalize first and last names
+  const firstName = nameParts[0]; // First name
+  const lastName = nameParts.slice(1).join(" "); // Last name (joins multiple parts if needed)
 
-  // Capitalize both names
+  // Return capitalized names
   return {
     firstName: capitalizeName(firstName),
     lastName: capitalizeName(lastName),
@@ -39,7 +32,7 @@ export const splitAndCapitalizeName = (fullName) => {
 };
 
 /**
- * Capitalize the first letter of each word.
+ * Capitalize the first letter of a name.
  * @param {string} name - The name to capitalize.
  * @returns {string} - The capitalized name.
  */
