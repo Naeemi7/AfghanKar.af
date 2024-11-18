@@ -29,13 +29,9 @@ const JobSeekerRegistration = () => {
 
     const formData = new FormData(e.target);
 
-    // Get full name and split into first name and last name
-    const fullName = formData.get("fullName") || "";
-    const [firstName, lastName = ""] = fullName.split(" ");
-
     const data = {
-      firstName: firstName?.trim() || "",
-      lastName: lastName?.trim() || "",
+      firstName: formData.get("firstName"),
+      lastName: formData.get("lastName"),
       username: formData.get("username"),
       email: formData.get("email"),
       password: formData.get("password"),

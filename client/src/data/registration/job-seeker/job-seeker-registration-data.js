@@ -1,9 +1,16 @@
 const formFields = (showPassword) => [
   {
-    labelName: "Full Name *",
+    labelName: "First Name *",
     type: "text",
-    name: "fullName",
-    placeholder: "Enter your full name",
+    name: "firstName",
+    placeholder: "Enter your first name",
+    required: true,
+  },
+  {
+    labelName: "Last Name *",
+    type: "text",
+    name: "lastName",
+    placeholder: "Enter your last name",
     required: true,
   },
   {
