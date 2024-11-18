@@ -10,37 +10,14 @@ import { logBuddy } from "../utils/logUtils.js";
  * @returns
  */
 export const userValidator = (req, res, next) => {
-  // Extract the validation errors from the request object
   const errors = validationResult(req);
 
-  // If there are errors
+  // If there are validation errors
   if (!errors.isEmpty()) {
-    const formattedErrors = errors.array().map((error) => {
-      const fieldValue = req.body[error.path];
-      let customMsg = error.msg;
+    const formattedErrors = formatValidationErrors(errors.array(), req);
 
-      // Check if the value is missing or invalid
-      if (!fieldValue) {
-        customMsg = `The ${error.path} is missing`; // Customized message for missing fields
-      } else if (customMsg.toLowerCase() === "invalid value") {
-        customMsg = `The ${error.path} has an invalid value`; // Customized message for invalid values
-      }
-
-      logBuddy("Validation Error: ", {
-        field: error.path,
-        value: fieldValue || "undefined",
-        message: customMsg,
-      }); // Enhanced logging for each error
-
-      return {
-        type: error.type || "field",
-        value: fieldValue || "", // Fallback to empty string if value is missing
-        msg: customMsg, // Updated message to reflect the missing or invalid field
-        path: error.path,
-        location: error.location || "body", // Default to "body" if location is not provided
-        code: getCodeForError(error.path, req.body.role), // Ensure error code is fetched and included based on user role
-      };
-    });
+    // Log the errors after formatting
+    logBuddy("Validation Errors: ", { errors: formattedErrors });
 
     return res
       .status(StatusCodes.BAD_REQUEST)
@@ -50,31 +27,90 @@ export const userValidator = (req, res, next) => {
   next();
 };
 
-// Error codes map for different fields
-const errorCodes = {
-  jobSeeker: {
-    firstname: "01",
-    lastname: "02",
-    username: "03",
-    email: "04",
-    password: "05",
-    phoneNumber: "06",
-    resume: "07",
-    skills: "08",
-    experience: "09",
-  },
-  recruiter: {
-    firstname: "10",
-    lastname: "11",
-    username: "12",
-    email: "13",
-    password: "14",
-    phoneNumber: "15",
-    position: "16",
-  },
+/**
+ * Format validation errors for better readability and structure
+ * @param {*} errors
+ * @param {*} req
+ * @returns Formatted error objects
+ */
+const formatValidationErrors = (errors, req) => {
+  return errors.map((error) => {
+    const fieldValue = req.body[error.path];
+    const customMsg = getCustomMessage(error, fieldValue);
+
+    return {
+      type: error.type || "field",
+      value: fieldValue || "",
+      msg: customMsg,
+      path: error.path,
+      location: error.location || "body",
+      code: getCodeForError(error.path, req.body.role),
+    };
+  });
 };
 
-// Get the error code from the field name and role, with a default fallback
+/**
+ * Get custom error message based on validation error and field value
+ * @param {*} error
+ * @param {*} fieldValue
+ * @returns Custom error message
+ */
+const getCustomMessage = (error, fieldValue) => {
+  let customMsg = error.msg;
+
+  // Customize error messages based on field value
+  if (!fieldValue) {
+    // Custom message for missing fields
+    customMsg = `The ${error.path} is missing.`;
+  } else if (customMsg.toLowerCase() === "invalid value") {
+    customMsg = `The ${error.path} has an invalid value.`; // Custom message for invalid values
+  }
+
+  // Handle full name specific error
+  if (error.path === "fullName") {
+    // If the full name error is related to missing first and last name
+    if (error.msg === "Full name must contain both first and last names.") {
+      customMsg = "The full name must contain both first and last names.";
+    } else if (!fieldValue) {
+      customMsg = "Full name is missing."; // Customize for missing full name
+    }
+  }
+
+  return customMsg;
+};
+
+/**
+ * Get the error code from the field name and role, with a fallback
+ * @param {*} field
+ * @param {*} role
+ * @returns Error code for the given field and role
+ */
 const getCodeForError = (field, role) => {
-  return (errorCodes[role] && errorCodes[role][field]) || "00"; // Return error code or default "00"
+  if (!role || !errorCodes[role]) {
+    return "00"; // Default error code if role is not provided or invalid
+  }
+  return errorCodes[role][field] || "00"; // Return error code or default "00"
+};
+
+// Error codes for job seekers and recruiters
+const errorCodes = {
+  jobSeeker: {
+    fullName: "01",
+    username: "02",
+    email: "03",
+    password: "04",
+    phoneNumber: "05",
+    resume: "06",
+    skills: "07",
+    experience: "08",
+    address: "09",
+  },
+  recruiter: {
+    fullName: "10",
+    username: "11",
+    email: "12",
+    password: "13",
+    phoneNumber: "14",
+    position: "15",
+  },
 };

@@ -2,12 +2,49 @@ import JobSeeker from "../models/JobSeeker.js";
 import Recruiter from "../models/Recruiter.js";
 
 /**
- * Helper to make the first letter uppercase
+ * Helper function to capitalize the first letter of a word
  * @param {*} word
  * @returns
  */
 export const uppercaseFirstLetter = (word) => {
   return word.charAt(0).toUpperCase() + word.slice(1);
+};
+
+/**
+ * Helper function to split the full name and capitalize the first letter of both first and last name
+ * @param {*} fullName
+ * @returns
+ */
+export const splitAndCapitalizeName = (fullName) => {
+  if (!fullName || fullName.trim().split(" ").length < 2) {
+    throw new Error("Full name must contain both first and last names.");
+  }
+
+  // Trim and split full name into parts
+  const nameParts = fullName.trim().split(/\s+/); // Split on multiple spaces if there are any
+
+  // Ensure there are at least two name parts
+  if (nameParts.length < 2) {
+    throw new Error("Full name must contain both first and last names.");
+  }
+
+  const firstName = nameParts[0]; // First name is the first word
+  const lastName = nameParts.slice(1).join(" "); // Join remaining parts for the last name
+
+  // Capitalize both names
+  return {
+    firstName: capitalizeName(firstName),
+    lastName: capitalizeName(lastName),
+  };
+};
+
+/**
+ * Capitalize the first letter of each word.
+ * @param {string} name - The name to capitalize.
+ * @returns {string} - The capitalized name.
+ */
+const capitalizeName = (name) => {
+  return name.charAt(0).toUpperCase() + name.slice(1).toLowerCase();
 };
 
 /**

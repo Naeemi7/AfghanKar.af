@@ -7,7 +7,7 @@ export default function Input({
   name = "",
   placeholder = "",
   className = "",
-  autocomplete = "", // **Added autocomplete**
+  autocomplete = "",
 }) {
   // Check if label is required (contains a star)
   const isRequired = labelName.includes("*");
@@ -30,7 +30,7 @@ export default function Input({
         type={type}
         placeholder={placeholder}
         name={name}
-        autoComplete={autocomplete} // **Pass autocomplete to input**
+        autoComplete={autocomplete} // Pass autocomplete to input
       />
     </div>
   );
@@ -42,13 +42,5 @@ Input.propTypes = {
   name: PropTypes.string,
   placeholder: PropTypes.string,
   className: PropTypes.string,
-  autocomplete: PropTypes.string, // **PropType for autocomplete**
-};
-
-Input.defaultProps = {
-  type: "text",
-  name: "",
-  placeholder: "",
-  className: "",
-  autocomplete: "", // **Default empty autocomplete**
+  autocomplete: PropTypes.string, // PropType for autocomplete
 };

@@ -1,18 +1,21 @@
 import { body } from "express-validator";
 import {
-  uppercaseFirstLetter,
+  splitAndCapitalizeName,
   checkUserExistenceByEmail,
   checkUserExistenceByUsername,
-} from "../helpers/userHelper.js";
+} from "../helpers/userHelper.js"; // Updated import
 
 // Common validations for both job seekers and recruiters
 const commonValidations = (userType) => [
   // Sanitize and validate the first and last name
-  body(["firstName", "lastName"])
+  body("fullName")
     .trim()
+    .notEmpty()
+    .withMessage("Full name is required.")
     .isAlpha("en-GB", { ignore: " " }) // Ignores spaces
-    .customSanitizer((value) => uppercaseFirstLetter(value))
-    .withMessage("The first name and last name shouldn't contain numbers"),
+    .withMessage(
+      "The full name must contain only alphabets and a space between first and last name."
+    ),
 
   // Sanitize and validate the username
   body("username")
@@ -20,7 +23,6 @@ const commonValidations = (userType) => [
     .isAlphanumeric()
     .isLength({ max: 20 })
     .withMessage("Username can't be longer than 20 characters.")
-    // Custom validator to check if a username already existed
     .custom(async (value) => {
       await checkUserExistenceByUsername(value, userType);
     }),
@@ -29,9 +31,10 @@ const commonValidations = (userType) => [
   body("email")
     .trim()
     .isEmail()
-    .normalizeEmail() // Normalize email address
-    .customSanitizer((value) => value.toLowerCase()) // Convert the email to all lowercase
-    // Custom validator to check if an email address already existed
+    // Ensure dots are not removed, keep Gmail-specific handling if needed
+    .normalizeEmail({ all_lowercase: true, gmail_remove_dots: false })
+    .customSanitizer((value) => value.toLowerCase()) // Normalize the email to lowercase
+    .withMessage("Please provide a valid email address.")
     .custom(async (value) => {
       await checkUserExistenceByEmail(value, userType);
     }),
@@ -48,7 +51,7 @@ const commonValidations = (userType) => [
 export const validateJobSeekerRules = [
   ...commonValidations("jobSeeker"),
   // Specific fields for job seekers
-  body("resume").optional().isURL().withMessage("Resume must be a valid URL."), // Assuming job seekers can provide a URL to their resume
+  body("resume").optional().isURL().withMessage("Resume must be a valid URL."),
 ];
 
 // Recruiter Validation Rules

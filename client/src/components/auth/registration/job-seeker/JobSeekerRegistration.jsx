@@ -30,8 +30,7 @@ const JobSeekerRegistration = () => {
     const formData = new FormData(e.target);
 
     const data = {
-      firstName: formData.get("firstName"),
-      lastName: formData.get("lastName"),
+      fullName: formData.get("fullName"),
       username: formData.get("username"),
       email: formData.get("email"),
       password: formData.get("password"),

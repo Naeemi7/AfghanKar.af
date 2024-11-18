@@ -12,10 +12,10 @@ import { logError } from "../utils/logUtils.js";
  * @returns
  */
 export const createJobSeeker = async (req, res) => {
-  const { firstName, lastName, username, email, password } = req.body;
+  const { fullName, username, email, password } = req.body;
 
   // Check if all the required fields are provided
-  if (!firstName || !lastName || !username || !email || !password) {
+  if (!fullName || !username || !email || !password) {
     return res.status(StatusCodes.BAD_REQUEST).json({
       message: "You need to provide the required information to sign up!",
     });
@@ -27,8 +27,7 @@ export const createJobSeeker = async (req, res) => {
 
     // Create the user
     const newUser = await JobSeeker.create({
-      firstName,
-      lastName,
+      fullName,
       username,
       email,
       password: hashedPassword,
