@@ -1,8 +1,7 @@
 import formFields from "./formField";
 
 const personalDetails = (showPassword) => [
-  formFields.textField("Firstname *", "firstName", "Enter your firstname"),
-  formFields.textField("Lastname *", "lastName", "Enter your lastname"),
+  formFields.textField("Full Name *", "fullName", "Enter your full name"),
   formFields.emailField("Email *", "email", "Enter your email"),
   formFields.textField("Position *", "position", "e.g. IT Manager"),
   formFields.telField("Mobile *", "mobile", "+93 000000000"),
