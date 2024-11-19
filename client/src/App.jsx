@@ -44,9 +44,9 @@ export default function App() {
         />
 
         {/* Protected Routes for Job Seeker Dashboard */}
-        <Route element={<ProtectedRoute role="jobSeeker" />}>
-          <Route path="/job-seeker-dashboard/*" element={<JobSeekerLayout />} />
-        </Route>
+        {/* <Route element={<ProtectedRoute role="jobSeeker" />}> */}
+        <Route path="/job-seeker-dashboard/*" element={<JobSeekerLayout />} />
+        {/* </Route> */}
 
         {/* Protected Routes for Recruiter Dashboard */}
         <Route element={<ProtectedRoute role="recruiter" />}>

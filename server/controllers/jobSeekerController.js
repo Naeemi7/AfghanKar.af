@@ -60,7 +60,7 @@ export const jobSeekerLogin = async (req, res) => {
   const { email, password } = req.body;
 
   try {
-    // Convert the user's email to lowercase
+    // Normalize the email to lowercase
     const lowercaseEmail = email.toLowerCase();
     const jobSeeker = await JobSeeker.findOne({ email: lowercaseEmail });
 
@@ -74,18 +74,23 @@ export const jobSeekerLogin = async (req, res) => {
     const matchedPassword = await bcrypt.compare(password, jobSeeker.password);
 
     if (matchedPassword) {
+      // Extract first name and last name from fullName
+      const [firstName, ...lastNameParts] = jobSeeker.fullName.split(" ");
+      const lastName = lastNameParts.join(" ");
+
       // Generate a token for the user
       const token = generateJwt(jobSeeker._id);
       res.cookie("userToken", token, { httpOnly: true, secure: false });
 
+      // Exclude sensitive data like password from the response
+      const { password, ...jobSeekerData } = jobSeeker.toObject();
+
       return res.status(StatusCodes.OK).json({
-        message: `Login successful. Welcome, ${jobSeeker.firstName} ${jobSeeker.lastName}`,
+        message: `Login successful. Welcome, ${firstName} ${lastName}`,
         jobSeeker: {
-          jobSeekerId: jobSeeker._id,
-          firstName: jobSeeker.firstName,
-          lastName: jobSeeker.lastName,
-          username: jobSeeker.username,
-          email: jobSeeker.email,
+          ...jobSeekerData,
+          firstName,
+          lastName,
         },
       });
     } else {
@@ -100,7 +105,6 @@ export const jobSeekerLogin = async (req, res) => {
       .json({ message: "Internal Server Error" });
   }
 };
-
 /**
  * Handler function for logging Job Seeker out.
  * @param {*} req
