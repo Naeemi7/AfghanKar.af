@@ -14,7 +14,7 @@ export default function Profile() {
   const timeoutRef = useRef(null); // Use ref for timeout
   const location = useLocation();
   const { isJobSeekerLoggedIn, jobSeeker } = useUserContext();
-  const jobSeekerDashboard = location.pathname === "/job-seeker-dashboard";
+  const jobSeekerDashboard = location.pathname === "/job-seeker-dashboard"; // Check if on dashboard
 
   const handleMouseEnter = () => {
     clearTimeout(timeoutRef.current);
@@ -47,6 +47,13 @@ export default function Profile() {
   const dropdownClassName = isJobSeekerLoggedIn
     ? "user-initial-dropdown"
     : "profile-dropdown"; // Default class
+
+  // Select dropdown data based on the page (Dashboard or normal page)
+  const dropdownItems = jobSeekerDashboard
+    ? dropdownDataDashboard
+    : isJobSeekerLoggedIn
+    ? jobSeekerAuthDropdownData
+    : dropdownData;
 
   return (
     <div
@@ -87,10 +94,7 @@ export default function Profile() {
           role="menu"
         >
           <ul>
-            {(isJobSeekerLoggedIn
-              ? jobSeekerAuthDropdownData
-              : dropdownData
-            ).map((item) => (
+            {dropdownItems.map((item) => (
               <DropdownItems item={item} key={item.to || item.label} />
             ))}
           </ul>
