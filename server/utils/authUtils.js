@@ -32,11 +32,22 @@ export const userLogin = async (userModel, email, password, res, userType) => {
       let userData;
 
       // Exclude password from response
-      const { password: _, ...userWithoutPassword } = user.toObject(); // Exclude password
+      const { password: _, fullName, ...userWithoutPassword } = user.toObject(); // Exclude password
+
+      // Split fullName into firstName and lastName
+      const [firstName, lastName] = fullName
+        ? fullName
+            .split(" ")
+            .map(
+              (name) =>
+                name.charAt(0).toUpperCase() + name.slice(1).toLowerCase()
+            )
+        : [null, null];
 
       if (userType === "recruiter") {
         userData = {
-          fullName: userWithoutPassword.fullName,
+          firstName,
+          lastName,
           email: userWithoutPassword.email,
           phoneNumber: userWithoutPassword.phoneNumber,
           position: userWithoutPassword.position,
@@ -55,14 +66,15 @@ export const userLogin = async (userModel, email, password, res, userType) => {
       } else {
         userData = {
           userId: userWithoutPassword._id,
-          fullName: userWithoutPassword.fullName,
+          firstName,
+          lastName,
           email: userWithoutPassword.email,
           position: userWithoutPassword.position || null,
         };
       }
 
       return res.status(StatusCodes.OK).json({
-        message: `${userType} login successful. Welcome, ${userData.fullName}`,
+        message: `${userType} login successful. Welcome, ${firstName} ${lastName}`,
         [userType]: userData,
       });
     } else {
