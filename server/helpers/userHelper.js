@@ -2,43 +2,15 @@ import JobSeeker from "../models/JobSeeker.js";
 import Recruiter from "../models/Recruiter.js";
 
 /**
- * Helper function to split the full name and capitalize the first letter of both first and last name
- * @param {*} fullName
+ * Helper to capitalize first letter of each word in a string
+ * @param {*} str
  * @returns
  */
-export const splitAndCapitalizeName = (fullName) => {
-  // Check if fullName is provided and not empty
-  if (!fullName || fullName.trim() === "") {
-    throw new Error("Full name is missing.");
-  }
-
-  // Trim and split the full name into parts (split by spaces)
-  const nameParts = fullName.trim().split(/\s+/); // Split on multiple spaces if any
-
-  // If there is only one part (first name), throw an error for missing last name
-  if (nameParts.length === 1) {
-    throw new Error("The full name must contain both first and last names.");
-  }
-
-  // If both names are present, capitalize first and last names
-  const firstName = nameParts[0]; // First name
-  const lastName = nameParts.slice(1).join(" "); // Last name (joins multiple parts if needed)
-
-  // Return capitalized names
-  return {
-    firstName: capitalizeName(firstName),
-    lastName: capitalizeName(lastName),
-  };
-};
-
-/**
- * Capitalize the first letter of a name.
- * @param {string} name - The name to capitalize.
- * @returns {string} - The capitalized name.
- */
-const capitalizeName = (name) => {
-  return name.charAt(0).toUpperCase() + name.slice(1).toLowerCase();
-};
+export const capitalizeWords = (str) =>
+  str
+    .split(" ")
+    .map((word) => word.charAt(0).toUpperCase() + word.slice(1).toLowerCase())
+    .join(" ");
 
 /**
  * Helper to check if a user with the provided email exists
