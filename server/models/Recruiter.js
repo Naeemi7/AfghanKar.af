@@ -1,7 +1,4 @@
-// models/Recruiter.js
 import { Schema, model } from "mongoose";
-import addressSchema from "./Address.js";
-import companySchema from "./Company.js";
 
 const recruiterSchema = new Schema(
   {
@@ -11,10 +8,58 @@ const recruiterSchema = new Schema(
     phoneNumber: { type: String, match: /^\+?[1-9]\d{1,14}$/, required: true },
     position: { type: String, required: true },
 
-    // Subschemas for company details and address
-    companyDetails: companySchema,
-    address: addressSchema,
+    // Company details as a nested object
+
+    companyName: { type: String, required: true },
+    companyType: {
+      type: String,
+      enum: [
+        "Private",
+        "Public",
+        "Non-Profit",
+        "Government",
+        "Cooperative",
+        "Startup",
+        "Multinational",
+        "Other",
+      ],
+      required: true,
+    },
+    foundedIn: { type: Number, min: 1800, max: new Date().getFullYear() },
+    companyWebsite: { type: String, match: /^(http|https):\/\/[^ "]+$/ },
+    description: { type: String, maxlength: 500 },
+    industryType: {
+      type: String,
+      enum: [
+        "IT",
+        "Finance",
+        "Healthcare",
+        "Education",
+        "Retail",
+        "Manufacturing",
+        "Construction",
+        "Real Estate",
+        "Agriculture",
+        "Hospitality",
+        "Telecommunication",
+        "Other",
+      ],
+      required: true,
+    },
+    companyLogo: {
+      type: String,
+      match: /^(http|https):\/\/[^ "]+$/,
+      required: false,
+    },
+
+    // Address details as a nested object
+
+    country: { type: String, required: true },
+    state: { type: String, required: true },
+    city: { type: String, required: true },
+    street: { type: String, required: true },
   },
+
   {
     timestamps: true,
   }

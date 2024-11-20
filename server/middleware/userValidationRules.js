@@ -16,17 +16,6 @@ const commonValidations = (userType) => [
     .withMessage("Full name must contain only alphabets and spaces.")
     .customSanitizer((value) => capitalizeWords(value)),
 
-  // Validate username
-  body("username")
-    .trim()
-    .isAlphanumeric()
-    .withMessage("Username must contain only letters and numbers.")
-    .isLength({ max: 20 })
-    .withMessage("Username can't be longer than 20 characters.")
-    .custom(async (value) => {
-      await checkUserExistenceByUsername(value, userType);
-    }),
-
   // Validate and normalize email
   body("email")
     .trim()
@@ -48,43 +37,91 @@ const commonValidations = (userType) => [
 // Job Seeker Validation Rules
 export const validateJobSeekerRules = [
   ...commonValidations("jobSeeker"),
+  // Validate username
+  body("username")
+    .trim()
+    .isAlphanumeric()
+    .withMessage("Username must contain only letters and numbers.")
+    .isLength({ max: 20 })
+    .withMessage("Username can't be longer than 20 characters.")
+    .custom(async (value) => {
+      await checkUserExistenceByUsername(value, userType);
+    }),
   body("resume").optional().isURL().withMessage("Resume must be a valid URL."),
 ];
 
 // Recruiter Validation Rules
 export const validateRecruiterRules = [
   ...commonValidations("recruiter"),
-  body("companyDetails.companyName")
+
+  // Company details validations
+  body("companyName")
     .trim()
     .notEmpty()
     .withMessage("Company name is required."),
-  body("companyDetails.companyType")
+
+  body("companyType")
     .trim()
-    .isIn(["Small", "Medium", "Large"])
-    .withMessage("Company type must be 'Small', 'Medium', or 'Large'."),
-  body("companyDetails.foundedIn")
+    .isIn([
+      "Private",
+      "Public",
+      "Non-Profit",
+      "Government",
+      "Cooperative",
+      "Startup",
+      "Multinational",
+      "Other",
+    ])
+    .withMessage(
+      "Company type must be one of the following: 'Private', 'Public', 'Non-Profit', 'Government', 'Cooperative', 'Startup', 'Multinational', 'Other'."
+    ),
+
+  body("foundedIn")
     .isNumeric()
     .isLength({ min: 4, max: 4 })
     .withMessage("Founded year must be a 4-digit number."),
-  body("companyDetails.website")
+
+  body("companyWebsite")
     .optional()
     .isURL()
     .withMessage("Company website must be a valid URL."),
-  body("companyDetails.description")
+
+  body("description")
     .optional()
     .isLength({ max: 500 })
     .withMessage("Description can't exceed 500 characters."),
-  body("addressDetails")
+
+  // Industry type validation
+  body("industryType")
+    .trim()
+    .isIn([
+      "IT",
+      "Finance",
+      "Healthcare",
+      "Education",
+      "Retail",
+      "Manufacturing",
+      "Construction",
+      "Real Estate",
+      "Agriculture",
+      "Hospitality",
+      "Telecommunication",
+      "Other",
+    ])
+    .withMessage("Industry type must be one of the predefined categories."),
+
+  // Company logo URL validation
+  body("companyLogo")
     .optional()
-    .isObject()
-    .withMessage("Address must be a valid object.")
-    .custom((value) => {
-      const requiredFields = ["street", "city", "state", "zip"];
-      requiredFields.forEach((field) => {
-        if (!value[field]) {
-          throw new Error(`Address must include ${field}.`);
-        }
-      });
-      return true;
-    }),
+    .isURL()
+    .withMessage("Company logo must be a valid URL."),
+
+  // Address details validations
+  body("country").trim().notEmpty().withMessage("Country is required."),
+
+  body("state").trim().notEmpty().withMessage("State is required."),
+
+  body("city").trim().notEmpty().withMessage("City is required."),
+
+  body("street").trim().notEmpty().withMessage("Street is required."),
 ];
