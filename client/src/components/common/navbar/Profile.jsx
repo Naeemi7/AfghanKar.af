@@ -5,6 +5,7 @@ import DropdownItems from "./DropdownItems";
 import useUserContext from "@hooks/useUserContext";
 import UserInitials from "@reusable/UserInitials";
 import { useDropdown } from "@hooks/useDropdown";
+import { useLogoutButton } from "@hooks/useLogoutButton";
 import jobSeekerAuthDropdownData from "@data/navbar/job-seeker-auth-dropdown";
 import recruiterAuthDropdownData from "@data/navbar/recruiter-auth-dropdown";
 import dashboardDropdownData from "@data/navbar/dashboard-dropdown-data";
@@ -23,26 +24,32 @@ export default function Profile() {
     handleKeyDown,
   } = useDropdown();
 
+  const handleLogout = useLogoutButton(); // Custom hook for logout logic
+
   const dropdownClassName =
     isJobSeekerLoggedIn || isRecruiterLoggedIn
       ? "user-initial-dropdown"
       : "profile-dropdown";
 
   // Determine which dropdown data to show based on login status and current page
-  let dropdownItems;
+  let dropdownMenuItems;
   if (jobSeekerDashboard || recruiterDashboard) {
-    // Show dashboard data for specific dashboard pages
-    dropdownItems = dashboardDropdownData;
+    dropdownMenuItems = dashboardDropdownData;
   } else if (isJobSeekerLoggedIn) {
-    // Show job seeker specific data when logged in
-    dropdownItems = jobSeekerAuthDropdownData;
+    dropdownMenuItems = jobSeekerAuthDropdownData;
   } else if (isRecruiterLoggedIn) {
-    // Show recruiter specific data when logged in
-    dropdownItems = recruiterAuthDropdownData;
+    dropdownMenuItems = recruiterAuthDropdownData;
   } else {
-    // Show generic dropdown when not logged in
-    dropdownItems = dropdownData;
+    dropdownMenuItems = dropdownData;
   }
+
+  // Separate the logout item and other dropdown items
+  const logoutItem = dropdownMenuItems.find(
+    (item) => item.label.toLowerCase() === "logout"
+  );
+  const otherMenuItems = dropdownMenuItems.filter(
+    (item) => item.label.toLowerCase() !== "logout"
+  );
 
   return (
     <div
@@ -78,9 +85,18 @@ export default function Profile() {
           role="menu"
         >
           <ul>
-            {dropdownItems.map((item) => (
+            {otherMenuItems.map((item) => (
               <DropdownItems item={item} key={item.to || item.label} />
             ))}
+            {logoutItem && (
+              <DropdownItems
+                item={{
+                  ...logoutItem,
+                  to: "#", // Use "#" or JavaScript:void(0) to prevent navigation
+                  onClick: handleLogout, // Attach logout logic here
+                }}
+              />
+            )}
           </ul>
         </div>
       )}
