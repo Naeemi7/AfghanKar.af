@@ -9,13 +9,14 @@ export default function UserInitials({
 }) {
   const { isJobSeekerLoggedIn, jobSeeker, recruiter } = useUserContext();
 
-  let firstInitial;
-  let lastInitial;
+  let firstInitial = "";
+  let lastInitial = "";
 
-  if (isJobSeekerLoggedIn) {
+  // Ensure firstName and lastName exist before accessing their charAt method
+  if (isJobSeekerLoggedIn && jobSeeker?.firstName && jobSeeker?.lastName) {
     firstInitial = jobSeeker.firstName.charAt(0).toUpperCase();
     lastInitial = jobSeeker.lastName.charAt(0).toUpperCase();
-  } else {
+  } else if (recruiter?.firstName && recruiter?.lastName) {
     firstInitial = recruiter.firstName.charAt(0).toUpperCase();
     lastInitial = recruiter.lastName.charAt(0).toUpperCase();
   }
@@ -46,8 +47,6 @@ export default function UserInitials({
 
 // Validate props
 UserInitials.propTypes = {
-  firstname: PropTypes.string,
-  lastname: PropTypes.string,
   radius: PropTypes.number,
   fontSize: PropTypes.number,
   borderWidth: PropTypes.number,
