@@ -10,7 +10,7 @@ export default function UserProvider({ children }) {
   const [isJobSeekerLoggedIn, setIsJobSeekerLoggedIn] = useState(false);
   const [isRecruiterLoggedIn, setIsRecruiterLoggedIn] = useState(false);
   const [error, setError] = useState("");
-  const [loading, setLoading] = useState(true); // Loading state to track initialization
+  const [loading, setLoading] = useState(true);
 
   useEffect(() => {
     const storedJobSeeker = localStorage.getItem("jobSeeker");
@@ -45,7 +45,7 @@ export default function UserProvider({ children }) {
   };
 
   const loginRecruiter = async (data) => {
-    return login("/users/login-recruiter", data, "recruiter");
+    return login("/recruiter/login", data, "recruiter");
   };
 
   const login = async (url, data, userType) => {
@@ -58,9 +58,10 @@ export default function UserProvider({ children }) {
         logBuddy("Provider: ", response.jobSeeker);
         localStorage.setItem("jobSeeker", JSON.stringify(response.jobSeeker));
       } else if (userType === "recruiter") {
-        setRecruiter(response.user);
+        logBuddy("Provider: ", response.recruiter);
+        setRecruiter(response.recruiter);
         setIsRecruiterLoggedIn(true);
-        localStorage.setItem("recruiter", JSON.stringify(response.user));
+        localStorage.setItem("recruiter", JSON.stringify(response.recruiter));
       }
     } catch (error) {
       logError("Login Error", error);
