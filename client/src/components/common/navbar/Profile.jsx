@@ -92,8 +92,8 @@ export default function Profile() {
               <DropdownItems
                 item={{
                   ...logoutItem,
-                  to: "#", // Use "#" or JavaScript:void(0) to prevent navigation
-                  onClick: handleLogout, // Attach logout logic here
+                  to: "#", // Used "#"  to prevent navigation
+                  onClick: handleLogout,
                 }}
               />
             )}
