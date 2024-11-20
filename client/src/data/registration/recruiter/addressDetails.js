@@ -208,7 +208,7 @@ const addressDetails = () => [
   ),
   formFields.textField("State *", "state", "Enter your state"),
   formFields.textField("City *", "city", "Enter your city"),
-  formFields.textField("Address *", "address", "Enter your address"),
+  formFields.textField("Street *", "street", "Enter your street name"),
 ];
 
 export default addressDetails;
