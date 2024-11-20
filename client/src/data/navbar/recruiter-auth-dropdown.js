@@ -1,13 +1,12 @@
-const jobSeekerAuthDropdownData = [
+const recruiterAuthDropdownData = [
   {
     library: "fa",
     name: "FaTachometerAlt",
     size: 22,
     label: "Dashboard",
-    to: "/job-seeker-dashboard",
+    to: "/recruiter-dashboard",
     className: "",
   },
-
   {
     library: "fa",
     name: "FaBriefcase",
@@ -34,4 +33,4 @@ const jobSeekerAuthDropdownData = [
   },
 ];
 
-export default jobSeekerAuthDropdownData;
+export default recruiterAuthDropdownData;

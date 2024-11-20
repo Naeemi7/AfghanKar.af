@@ -1,16 +1,24 @@
 import PropTypes from "prop-types";
 import "@styles/components/reusableComponents.scss";
+import useUserContext from "@hooks/useUserContext";
 
 export default function UserInitials({
-  firstname = "",
-  lastname = "",
   radius = 3.6,
   fontSize = 1.8,
   borderWidth = 0.5,
 }) {
-  // Extract the first letter of each name, defaulting to empty string if names are not provided
-  const firstInitial = firstname.charAt(0).toUpperCase();
-  const lastInitial = lastname.charAt(0).toUpperCase();
+  const { isJobSeekerLoggedIn, jobSeeker, recruiter } = useUserContext();
+
+  let firstInitial;
+  let lastInitial;
+
+  if (isJobSeekerLoggedIn) {
+    firstInitial = jobSeeker.firstName.charAt(0).toUpperCase();
+    lastInitial = jobSeeker.lastName.charAt(0).toUpperCase();
+  } else {
+    firstInitial = recruiter.firstName.charAt(0).toUpperCase();
+    lastInitial = recruiter.lastName.charAt(0).toUpperCase();
+  }
 
   // Compute styles once and use them for inline styling
   const circleStyles = {

@@ -1,59 +1,44 @@
-import { useState, useEffect, useRef } from "react";
 import { useLocation } from "react-router-dom";
 import Icon from "@reusable/Icon";
 import dropdownData from "@data/navbar/dropdownData";
 import DropdownItems from "./DropdownItems";
 import useUserContext from "@hooks/useUserContext";
 import UserInitials from "@reusable/UserInitials";
+import { useDropdown } from "@hooks/useDropdown";
 import jobSeekerAuthDropdownData from "@data/navbar/job-seeker-auth-dropdown";
+import recruiterAuthDropdownData from "@data/navbar/recruiter-auth-dropdown"; // New import for recruiter data
 import dropdownDataDashboard from "@data/navbar/dropdown-data-dashboard";
 
 export default function Profile() {
-  const [showDropdown, setShowDropdown] = useState(false);
-  const profileRef = useRef(null);
-  const timeoutRef = useRef(null); // Use ref for timeout
   const location = useLocation();
-  const { isJobSeekerLoggedIn, jobSeeker } = useUserContext();
-  const jobSeekerDashboard = location.pathname === "/job-seeker-dashboard"; // Check if on dashboard
+  const { isJobSeekerLoggedIn, isRecruiterLoggedIn } = useUserContext();
+  const jobSeekerDashboard = location.pathname === "/job-seeker-dashboard";
+  const recruiterDashboard = location.pathname === "/recruiter-dashboard";
 
-  const handleMouseEnter = () => {
-    clearTimeout(timeoutRef.current);
-    timeoutRef.current = setTimeout(() => setShowDropdown(true), 100);
-  };
+  const {
+    showDropdown,
+    profileRef,
+    handleMouseEnter,
+    handleMouseLeave,
+    handleKeyDown,
+  } = useDropdown();
 
-  const handleMouseLeave = () => {
-    clearTimeout(timeoutRef.current);
-    timeoutRef.current = setTimeout(() => setShowDropdown(false), 100);
-  };
+  const dropdownClassName =
+    isJobSeekerLoggedIn || isRecruiterLoggedIn
+      ? "user-initial-dropdown"
+      : "profile-dropdown";
 
-  const handleKeyDown = (e) => {
-    if (e.key === "Enter") {
-      setShowDropdown((prev) => !prev);
-    }
-  };
-
-  // Close dropdown if clicked outside
-  useEffect(() => {
-    const handleClickOutside = (event) => {
-      if (profileRef.current && !profileRef.current.contains(event.target)) {
-        setShowDropdown(false);
-      }
-    };
-    document.addEventListener("mousedown", handleClickOutside);
-    return () => document.removeEventListener("mousedown", handleClickOutside);
-  }, []);
-
-  // Determine the dropdown class based on login status
-  const dropdownClassName = isJobSeekerLoggedIn
-    ? "user-initial-dropdown"
-    : "profile-dropdown"; // Default class
-
-  // Select dropdown data based on the page (Dashboard or normal page)
-  const dropdownItems = jobSeekerDashboard
-    ? dropdownDataDashboard
-    : isJobSeekerLoggedIn
-    ? jobSeekerAuthDropdownData
-    : dropdownData;
+  // Determine which dropdown data to show based on login status and current page
+  let dropdownItems;
+  if (jobSeekerDashboard || recruiterDashboard) {
+    dropdownItems = dropdownDataDashboard; // Show dashboard data for specific dashboard pages
+  } else if (isJobSeekerLoggedIn) {
+    dropdownItems = jobSeekerAuthDropdownData; // Show job seeker specific data when logged in
+  } else if (isRecruiterLoggedIn) {
+    dropdownItems = recruiterAuthDropdownData; // Show recruiter specific data when logged in
+  } else {
+    dropdownItems = dropdownData; // Show generic dropdown when not logged in
+  }
 
   return (
     <div
@@ -62,18 +47,14 @@ export default function Profile() {
       onMouseEnter={handleMouseEnter}
       onMouseLeave={handleMouseLeave}
       onKeyDown={handleKeyDown}
-      tabIndex={0} // Make focusable
+      tabIndex={0}
       role="button"
       aria-haspopup="true"
       aria-expanded={showDropdown}
     >
       <div className="profile-icon-wrapper">
-        {isJobSeekerLoggedIn ? (
-          <UserInitials
-            firstname={jobSeeker.firstName}
-            lastname={jobSeeker.lastName}
-            radius={5}
-          />
+        {isJobSeekerLoggedIn || isRecruiterLoggedIn ? (
+          <UserInitials radius={5} />
         ) : (
           <>
             <Icon
@@ -85,7 +66,6 @@ export default function Profile() {
             <span>Login</span>
           </>
         )}
-        {/* Reusable Icon Component */}
       </div>
 
       {showDropdown && (

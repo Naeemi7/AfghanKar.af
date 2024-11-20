@@ -1,12 +1,8 @@
-import { useEffect, useRef } from "react";
+import { useLogoutButton } from "@hooks/useLogoutButton";
 import PropTypes from "prop-types";
 import { Link } from "react-router-dom";
-import useNavigation from "@hooks/useNavigation";
 import SidebarAvatar from "./SidebarAvatar";
 import Icon from "@reusable/Icon";
-import ShowToast from "@reusable/ShowToast";
-import useUserContext from "@hooks/useUserContext";
-import { logError, handleError } from "@utils/errorUtils";
 
 export default function Sidebar({
   links,
@@ -16,41 +12,9 @@ export default function Sidebar({
 }) {
   const logoutLink = links.find((link) => link.className === "logout-button");
   const otherLinks = links.filter((link) => link.className !== "logout-button");
-  const hasToastShown = useRef(false);
-  const { goTo } = useNavigation();
-  const { isJobSeekerLoggedIn, userLogoutHandler, setError } = useUserContext();
 
-  // Unified logout handler
-  const handleLogout = async () => {
-    const userType = isJobSeekerLoggedIn ? "jobSeeker" : "recruiter";
-
-    try {
-      await userLogoutHandler(userType);
-
-      if (!hasToastShown.current) {
-        ShowToast("Logged out successfully", "success");
-        hasToastShown.current = true;
-      }
-
-      // Navigate to appropriate login page after delay
-      const redirectUrl = isJobSeekerLoggedIn
-        ? "/job-seeker-login"
-        : "/recruiter-login";
-
-      setTimeout(() => {
-        goTo(redirectUrl);
-      }, 1500);
-    } catch (error) {
-      if (!error.handled) {
-        error.handled = true;
-        logError("Logout failed", error);
-        handleError(error, setError);
-      }
-    }
-  };
-
-  // Run the effect once when the component is mounted
-  useEffect(() => {}, []);
+  // Use the custom hook for logout logic
+  const handleLogout = useLogoutButton();
 
   return (
     <nav className="sidebar-container" aria-label="Main Navigation">
