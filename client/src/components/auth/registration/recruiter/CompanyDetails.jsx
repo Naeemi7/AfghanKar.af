@@ -1,4 +1,3 @@
-import { useState } from "react";
 import PropTypes from "prop-types";
 import companyDetails from "@data/registration/recruiter/companyDetails";
 import Input from "@reusable/Input";
@@ -6,8 +5,14 @@ import Select from "@reusable/Select";
 import Textarea from "@reusable/Textarea";
 import AlertBox from "@reusable/AlertBox";
 import Button from "@reusable/Button";
+import useUserContext from "@hooks/useUserContext";
+import { logBuddy } from "@utils/errorUtils";
+import { useState } from "react";
 
 export default function CompanyDetails({ onNext }) {
+  const { error } = useUserContext();
+
+  // Initialize form state
   const [formData, setFormData] = useState({
     companyName: "",
     companyType: "",
@@ -16,29 +21,29 @@ export default function CompanyDetails({ onNext }) {
     companyWebsite: "",
     companyDescription: "",
   });
-  const [error, setError] = useState("");
 
   const handleChange = (e) => {
     const { name, value } = e.target;
-    setFormData((prevData) => ({ ...prevData, [name]: value }));
-    if (error) setError("");
+    setFormData((prevData) => ({
+      ...prevData,
+      [name]: value,
+    }));
   };
 
-  const handleNext = () => {
-    const requiredFields = ["companyName", "companyType", "industryType"];
-    const emptyField = requiredFields.find((field) => !formData[field]);
+  const handleSubmit = (e) => {
+    e.preventDefault();
 
-    if (emptyField) {
-      setError(`Please fill in the required field: ${emptyField}`);
-      // return;
-    }
-    onNext();
+    // Pass the collected data to the parent
+    onNext(formData);
+
+    // Log the collected data for debugging
+    logBuddy("Company Details: ", formData);
   };
 
   return (
     <div className="company-details-container">
       <h1>Company Details</h1>
-      <form className="registration-form">
+      <form className="registration-form" onSubmit={handleSubmit}>
         {companyDetails().map((field, index) => {
           const { labelName, type, name, options, placeholder, required } =
             field;
@@ -49,44 +54,45 @@ export default function CompanyDetails({ onNext }) {
                 <Textarea
                   labelName={labelName}
                   name={name}
+                  value={formData[name]} // Set value for controlled component
                   placeholder={placeholder}
-                  value={formData[name] || ""}
-                  onChange={handleChange}
                   required={required}
+                  onChange={handleChange}
                 />
               ) : type === "select" ? (
                 <Select
                   labelName={labelName}
                   name={name}
+                  value={formData[name]} // Set value for controlled component
                   options={options}
                   placeholder={placeholder}
-                  value={formData[name] || ""}
-                  onChange={handleChange}
                   required={required}
+                  onChange={handleChange}
                 />
               ) : (
                 <Input
                   labelName={labelName}
                   type={type}
                   name={name}
+                  value={formData[name]} // Set value for controlled component
                   placeholder={placeholder}
-                  value={formData[name] || ""}
-                  onChange={handleChange}
                   required={required}
+                  onChange={handleChange}
                 />
               )}
             </div>
           );
         })}
 
+        {/* Display any errors using AlertBox */}
         {error && <AlertBox message={error} type="error" />}
 
+        {/* Button to trigger form submission */}
         <Button
           name="Next"
-          type="button"
+          type="submit" // Changed from "button" to "submit"
           iconLibrary="gr"
           iconName="GrFormNextLink"
-          onClick={handleNext}
         />
       </form>
     </div>

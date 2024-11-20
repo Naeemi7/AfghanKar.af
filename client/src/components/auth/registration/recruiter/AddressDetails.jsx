@@ -6,31 +6,23 @@ import Select from "@reusable/Select";
 import AlertBox from "@reusable/AlertBox";
 import Button from "@reusable/Button";
 
-export default function AddressDetails({ onNext }) {
-  const [formData, setFormData] = useState({
-    country: "",
-    state: "",
-    city: "",
-    postalCode: "",
-    addressLine: "",
-  });
-  const [error, setError] = useState("");
+export default function AddressDetails({ onNext, data }) {
+  const [formData, setFormData] = useState(data);
+  const [error, setError] = useState(""); // Error state for validation
 
   const handleChange = (e) => {
     const { name, value } = e.target;
     setFormData((prevData) => ({ ...prevData, [name]: value }));
-    if (error) setError("");
+    if (error) setError(""); // Clear error on input change
   };
 
-  const handleNext = () => {
-    const requiredFields = ["country", "state", "city", "postalCode"];
-    const emptyField = requiredFields.find((field) => !formData[field]);
-
-    if (emptyField) {
-      setError(`Please fill in the required field: ${emptyField}`);
+  const handleSubmit = () => {
+    // Check for missing required fields
+    if (Object.values(formData).some((val) => !val)) {
+      setError("Please fill all fields before proceeding.");
       return;
     }
-    onNext();
+    onNext(formData); // Pass data to parent component for final submission
   };
 
   return (
@@ -71,11 +63,11 @@ export default function AddressDetails({ onNext }) {
         {error && <AlertBox message={error} type="error" />}
 
         <Button
-          name="Next"
+          name="Register"
           type="button"
           iconLibrary="gr"
           iconName="GrFormNextLink"
-          onClick={handleNext}
+          onClick={handleSubmit}
         />
       </form>
     </div>
@@ -84,4 +76,5 @@ export default function AddressDetails({ onNext }) {
 
 AddressDetails.propTypes = {
   onNext: PropTypes.func.isRequired,
+  data: PropTypes.object, // Initial data passed from parent component
 };

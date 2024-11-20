@@ -44,8 +44,8 @@ const JobSeekerRegistration = () => {
     } else {
       setPasswordMatched(true);
     }
-
-    setError(""); // Clear previous errors before registration attempt
+    // Clear previous errors before registration attempt
+    setError("");
 
     try {
       const response = await post("/job-seeker/register", data, setError);

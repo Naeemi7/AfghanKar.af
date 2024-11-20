@@ -4,7 +4,7 @@ const personalDetails = (showPassword) => [
   formFields.textField("Full Name *", "fullName", "Enter your full name"),
   formFields.emailField("Email *", "email", "Enter your email"),
   formFields.textField("Position *", "position", "e.g. IT Manager"),
-  formFields.telField("Mobile *", "mobile", "+93 000000000"),
+  formFields.telField("Mobile *", "phoneNumber", "+93 000000000"),
   formFields.passwordField(
     "Password *",
     "password",

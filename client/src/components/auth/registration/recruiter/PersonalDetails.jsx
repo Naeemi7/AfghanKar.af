@@ -6,54 +6,43 @@ import Icon from "@reusable/Icon";
 import AlertBox from "@reusable/AlertBox";
 import Button from "@reusable/Button";
 import usePasswordVisibility from "@hooks/usePasswordVisibility";
+import useUserContext from "@hooks/useUserContext";
+import { logBuddy } from "@utils/errorUtils";
 
 export default function PersonalDetails({ onNext }) {
+  const [passwordMatched, setPasswordMatched] = useState(true);
   const { showPassword, togglePasswordVisibility } = usePasswordVisibility();
+  const { error, setError } = useUserContext();
 
-  // Track all form data
-  const [formData, setFormData] = useState({
-    password: "",
-    confirmPassword: "",
-  });
+  const handleSubmit = (e) => {
+    e.preventDefault();
 
-  // Track error state
-  const [error, setError] = useState("");
+    const formData = new FormData(e.target);
+    const personalData = {
+      fullName: formData.get("fullName"),
+      position: formData.get("position"),
+      phoneNumber: formData.get("phoneNumber"),
+      email: formData.get("email"),
+      password: formData.get("password"),
+    };
+    const confirmedPassword = formData.get("confirm-password");
 
-  // Check if passwords match
-  const passwordsMatch = formData.password === formData.confirmPassword;
-
-  // Handle input changes
-  const handleChange = (e) => {
-    const { name, value } = e.target;
-    setFormData((prevData) => ({
-      ...prevData,
-      [name]: value,
-    }));
-    if (error) setError(""); // Clear error when user starts typing
-  };
-
-  // Handle form submission or next step
-  const handleNext = () => {
-    // Ensure both passwords are filled
-    if (!formData.password || !formData.confirmPassword) {
-      setError("Please fill in all required fields.");
-      // return;
+    if (personalData.password !== confirmedPassword) {
+      setPasswordMatched(false);
+      return;
     }
 
-    // Ensure the passwords match
-    if (!passwordsMatch) {
-      setError("Passwords do not match.");
-      // return;
-    }
+    setPasswordMatched(true);
+    setError("");
 
-    // If no errors, proceed to the next step
-    onNext();
+    onNext(personalData); // Pass collected data to parent
+    logBuddy("Personal Detials: ", personalData);
   };
 
   return (
     <div className="personal-details-container">
       <h1>Personal Details</h1>
-      <form className="registration-form">
+      <form className="registration-form" onSubmit={handleSubmit}>
         {personalDetails(showPassword).map((field, index) => (
           <div
             key={index}
@@ -64,8 +53,7 @@ export default function PersonalDetails({ onNext }) {
               type={field.type}
               name={field.name}
               placeholder={field.placeholder}
-              value={formData[field.name] || ""}
-              onChange={handleChange}
+              required={field.required}
             />
             {field.name.includes("password") && (
               <Icon
@@ -78,14 +66,16 @@ export default function PersonalDetails({ onNext }) {
           </div>
         ))}
 
+        {!passwordMatched && (
+          <AlertBox message="Passwords do not match." type="error" />
+        )}
         {error && <AlertBox message={error} type="error" />}
 
         <Button
           name="Next"
-          type="button"
+          type="submit" // changed from "button" to "submit"
           iconLibrary="gr"
           iconName="GrFormNextLink"
-          onClick={handleNext}
         />
       </form>
     </div>
@@ -94,4 +84,5 @@ export default function PersonalDetails({ onNext }) {
 
 PersonalDetails.propTypes = {
   onNext: PropTypes.func.isRequired,
+  data: PropTypes.object, // Accept data as a prop if needed
 };
