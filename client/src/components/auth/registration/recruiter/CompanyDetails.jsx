@@ -54,7 +54,7 @@ export default function CompanyDetails({ onNext }) {
                 <Textarea
                   labelName={labelName}
                   name={name}
-                  value={formData[name]} // Set value for controlled component
+                  value={formData[name] || ""} // Controlled component
                   placeholder={placeholder}
                   required={required}
                   onChange={handleChange}
@@ -63,7 +63,7 @@ export default function CompanyDetails({ onNext }) {
                 <Select
                   labelName={labelName}
                   name={name}
-                  value={formData[name]} // Set value for controlled component
+                  value={formData[name] || ""} // Controlled component
                   options={options}
                   placeholder={placeholder}
                   required={required}
@@ -74,7 +74,7 @@ export default function CompanyDetails({ onNext }) {
                   labelName={labelName}
                   type={type}
                   name={name}
-                  value={formData[name]} // Set value for controlled component
+                  value={formData[name] || ""} // Controlled component
                   placeholder={placeholder}
                   required={required}
                   onChange={handleChange}
@@ -90,7 +90,7 @@ export default function CompanyDetails({ onNext }) {
         {/* Button to trigger form submission */}
         <Button
           name="Next"
-          type="submit" // Changed from "button" to "submit"
+          type="submit"
           iconLibrary="gr"
           iconName="GrFormNextLink"
         />
