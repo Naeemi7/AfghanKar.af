@@ -1,4 +1,5 @@
 import { useState } from "react";
+import { useLocation } from "react-router-dom";
 import "@styles/components/navbar.scss";
 import Profile from "./Profile";
 import Logo from "@reusable/Logo";
@@ -8,6 +9,13 @@ import NavLink from "./NavLink";
 
 const Navbar = () => {
   const [isMobileNavOpen, setMobileNavOpen] = useState(false);
+  const location = useLocation();
+  const home = location.pathname === "/";
+
+  // Filter out the "Home" nav item if we are already on the home page
+  const filteredNavItems = home
+    ? navItems.filter((item) => item.label !== "Home")
+    : navItems;
 
   return (
     <nav className="navbar-container">
@@ -16,7 +24,7 @@ const Navbar = () => {
         <Logo height={8} />
 
         {/* Navigation Component */}
-        <NavLink items={navItems} />
+        <NavLink items={filteredNavItems} />
 
         {/* Hamburger icon for mobile */}
         <div
@@ -36,7 +44,10 @@ const Navbar = () => {
       {/* Mobile Navigation Links */}
       {isMobileNavOpen && (
         <div className="mobile-nav">
-          <NavLink items={navItems} onClick={() => setMobileNavOpen(false)} />
+          <NavLink
+            items={filteredNavItems}
+            onClick={() => setMobileNavOpen(false)}
+          />
         </div>
       )}
     </nav>

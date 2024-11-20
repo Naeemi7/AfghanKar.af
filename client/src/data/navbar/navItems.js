@@ -1,5 +1,10 @@
 const navItems = [
   {
+    label: "Home",
+    path: "/",
+    icon: { library: "md", name: "MdHome", size: 20 }, // Icon for Home
+  },
+  {
     label: "Jobs",
     path: "/jobs",
     icon: { library: "md", name: "MdWorkOutline", size: 20 }, // Example icon for Jobs
