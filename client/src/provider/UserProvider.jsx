@@ -77,9 +77,7 @@ export default function UserProvider({ children }) {
   const userLogoutHandler = async (userType) => {
     try {
       const logoutUrl =
-        userType === "jobSeeker"
-          ? "/job-seeker/logout"
-          : "/users/logout-recruiter";
+        userType === "jobSeeker" ? "/job-seeker/logout" : "/recruiter/logout";
 
       await get(logoutUrl);
 
