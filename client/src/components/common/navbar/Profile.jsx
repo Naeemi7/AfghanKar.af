@@ -6,8 +6,8 @@ import useUserContext from "@hooks/useUserContext";
 import UserInitials from "@reusable/UserInitials";
 import { useDropdown } from "@hooks/useDropdown";
 import jobSeekerAuthDropdownData from "@data/navbar/job-seeker-auth-dropdown";
-import recruiterAuthDropdownData from "@data/navbar/recruiter-auth-dropdown"; // New import for recruiter data
-import dropdownDataDashboard from "@data/navbar/dropdown-data-dashboard";
+import recruiterAuthDropdownData from "@data/navbar/recruiter-auth-dropdown";
+import dashboardDropdownData from "@data/navbar/dashboard-dropdown-data";
 
 export default function Profile() {
   const location = useLocation();
@@ -31,13 +31,17 @@ export default function Profile() {
   // Determine which dropdown data to show based on login status and current page
   let dropdownItems;
   if (jobSeekerDashboard || recruiterDashboard) {
-    dropdownItems = dropdownDataDashboard; // Show dashboard data for specific dashboard pages
+    // Show dashboard data for specific dashboard pages
+    dropdownItems = dashboardDropdownData;
   } else if (isJobSeekerLoggedIn) {
-    dropdownItems = jobSeekerAuthDropdownData; // Show job seeker specific data when logged in
+    // Show job seeker specific data when logged in
+    dropdownItems = jobSeekerAuthDropdownData;
   } else if (isRecruiterLoggedIn) {
-    dropdownItems = recruiterAuthDropdownData; // Show recruiter specific data when logged in
+    // Show recruiter specific data when logged in
+    dropdownItems = recruiterAuthDropdownData;
   } else {
-    dropdownItems = dropdownData; // Show generic dropdown when not logged in
+    // Show generic dropdown when not logged in
+    dropdownItems = dropdownData;
   }
 
   return (

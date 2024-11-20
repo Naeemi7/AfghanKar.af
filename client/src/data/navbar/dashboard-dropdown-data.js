@@ -1,4 +1,4 @@
-const dropdownDataDashboard = [
+const dashboardDropdownData = [
   {
     library: "fa",
     name: "FaCog",
@@ -25,4 +25,4 @@ const dropdownDataDashboard = [
   },
 ];
 
-export default dropdownDataDashboard;
+export default dashboardDropdownData;
