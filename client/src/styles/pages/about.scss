@@ -1,0 +1,54 @@
+@use "@/styles/abstracts/variables" as *;
+@use "@/styles/abstracts/mixin" as *;
+
+.about-container {
+  padding: 20px;
+  max-width: 1200px;
+  margin: 0 auto;
+
+  h1,
+  h2 {
+    font-size: 2.5rem;
+    color: $primary-color;
+  }
+
+  h2 {
+    margin-top: 40px;
+  }
+
+  p,
+  ul,
+  ol {
+    font-size: 1.1rem;
+    line-height: 1.6;
+    color: $text-color;
+  }
+
+  ul,
+  ol {
+    margin-left: 20px;
+  }
+
+  .about-image {
+    max-width: 100%;
+    height: auto;
+    margin-top: 20px;
+    border-radius: 8px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+  }
+
+  .cta,
+  .contact {
+    margin-top: 40px;
+    text-align: center;
+  }
+
+  .cta p,
+  .contact p {
+    font-size: 1.2rem;
+  }
+
+  button {
+    margin-top: 20px;
+  }
+}
