@@ -1,0 +1,131 @@
+@use "@/styles/abstracts/variables" as *;
+@use "@/styles/abstracts/mixin" as *;
+
+// Home page style
+.home-page-container,
+.contact-page-container {
+  height: 100%;
+  display: flex;
+  flex-direction: column;
+  gap: 2rem;
+  align-items: center;
+  justify-content: center;
+
+  p {
+    font-size: 2rem;
+    color: $text-color;
+  }
+}
+
+// Registeration page style
+.registeration-page-container {
+  @include common-layout-template;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  height: 100%;
+
+  .registeration-heading {
+    display: flex;
+    justify-content: center;
+    margin-bottom: 2rem;
+  }
+
+  .registeration-page-wrapper {
+    padding: 3rem;
+    display: flex;
+    gap: 2.5rem;
+    justify-content: center;
+    align-items: center;
+  }
+}
+
+// Not Found page style
+.not-found-page-container {
+  height: 100vh;
+  width: 100vw;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+
+  .not-found-wrapper {
+    max-width: 120rem;
+    display: flex;
+    justify-content: center;
+
+    .not-found-content {
+      display: flex;
+      flex-direction: column;
+      align-items: flex-start;
+      justify-content: center;
+      gap: 2rem;
+
+      h1 {
+        font-size: 10rem;
+
+        span {
+          color: $primary-btn-background;
+        }
+      }
+
+      p {
+        font-size: 2.5rem;
+        color: $text-color;
+        text-align: left;
+      }
+    }
+  }
+}
+
+// About page style
+.about-container {
+  padding: 20px;
+  max-width: 1200px;
+  margin: 0 auto;
+
+  h1,
+  h2 {
+    font-size: 2.5rem;
+    color: $primary-color;
+  }
+
+  h2 {
+    margin-top: 40px;
+  }
+
+  p,
+  ul,
+  ol {
+    font-size: 1.1rem;
+    line-height: 1.6;
+    color: $text-color;
+  }
+
+  ul,
+  ol {
+    margin-left: 20px;
+  }
+
+  .about-image {
+    max-width: 100%;
+    height: auto;
+    margin-top: 20px;
+    border-radius: 8px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+  }
+
+  .cta,
+  .contact {
+    margin-top: 40px;
+    text-align: center;
+  }
+
+  .cta p,
+  .contact p {
+    font-size: 1.2rem;
+  }
+
+  button {
+    margin-top: 20px;
+  }
+}

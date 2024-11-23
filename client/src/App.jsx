@@ -10,6 +10,7 @@ import JobSeekerLogin from "@auth/login/JobSeekerLogin";
 import RecruiterLogin from "@auth/login/RecruiterLogin";
 import RegistrationPage from "@pages/registeration-page/RegistrationPage";
 import AboutPage from "@pages/about/AboutPage";
+import ContactPage from "@pages/contact/ContactPage";
 import JobSeekerRegistration from "@auth/registration/job-seeker/JobSeekerRegistration";
 import AppLayout from "@layouts/AppLayout";
 import JobSeekerLayout from "@layouts/JobSeekerLayout";
@@ -30,6 +31,7 @@ export default function App() {
           <Route path="/job-seeker-login" element={<JobSeekerLogin />} />
           <Route path="/recruiter-login" element={<RecruiterLogin />} />
           <Route path="/about" element={<AboutPage />} />
+          <Route path="/contact" element={<ContactPage />} />
 
           {/* Registration Routes */}
           <Route path="/registration" element={<RegistrationPage />} />

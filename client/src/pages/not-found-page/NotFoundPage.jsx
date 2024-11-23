@@ -1,9 +1,9 @@
-import "@styles/pages/not-found.scss";
+import "@styles/pages/pages-style.scss";
 import Button from "@reusable/Button";
 import useNavigation from "@hooks/useNavigation";
 import notFoundImage from "@images/not-found-page/not-found.png";
 
-const NotFoundPage = () => {
+export default function NotFoundPage() {
   const { goTo } = useNavigation();
 
   return (
@@ -31,6 +31,4 @@ const NotFoundPage = () => {
       </div>
     </div>
   );
-};
-
-export default NotFoundPage;
+}

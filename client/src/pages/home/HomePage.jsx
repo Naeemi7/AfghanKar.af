@@ -1,4 +1,4 @@
-import "@styles/pages/home.scss";
+import "@styles/pages/pages-style.scss";
 
 export default function HomePage() {
   return (

@@ -1,9 +1,9 @@
 import { useState } from "react";
 import { useNavigate } from "react-router-dom";
-import "@styles/pages/registration-page.scss";
+import "@styles/pages/pages-style.scss";
 import SelectionCard from "@reusable/SelectionCard";
 
-const RegistrationPage = () => {
+export default function RegistrationPage() {
   const [selectedCard, setSelectedCard] = useState(null);
   const navigate = useNavigate();
 
@@ -50,6 +50,4 @@ const RegistrationPage = () => {
       </div>
     </div>
   );
-};
-
-export default RegistrationPage;
+}

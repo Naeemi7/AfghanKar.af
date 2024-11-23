@@ -1,4 +1,4 @@
-import "@styles/pages/about.scss";
+import "@styles/pages/pages-style.scss";
 import Button from "@reusable/Button";
 
 export default function About() {
