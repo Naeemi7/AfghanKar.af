@@ -8,7 +8,7 @@ const StyledButton = styled.button`
   align-items: center;
   justify-content: center;
   gap: ${(props) =>
-    props.icon ? "8px" : "0"}; /* Space between text and icon */
+    props.$icon ? "8px" : "0"}; /* Space between text and icon */
 `;
 
 export default function Button({
@@ -27,7 +27,7 @@ export default function Button({
       width={width}
       onClick={onClick}
       type={type}
-      icon={iconLibrary && iconName} // Only apply gap if icon exists
+      $icon={iconLibrary && iconName} // Use $icon instead of icon
     >
       {name}
       {iconLibrary && iconName && (
