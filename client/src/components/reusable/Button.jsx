@@ -1,7 +1,6 @@
 import PropTypes from "prop-types";
 import styled from "styled-components";
-import Icon from "@reusable/Icon"; // Import the reusable Icon component
-
+import Icon from "@reusable/Icon";
 const StyledButton = styled.button`
   width: ${(props) => (props.width ? `${props.width}px` : "auto")};
   display: flex;
