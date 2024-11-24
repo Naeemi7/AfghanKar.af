@@ -49,7 +49,7 @@ MainContent.propTypes = {
   currentStep: PropTypes.number.isRequired,
   onNext: PropTypes.func.isRequired,
   onPrevious: PropTypes.func.isRequired,
-  personalData: PropTypes.object.isRequired,
-  companyData: PropTypes.object.isRequired,
-  addressData: PropTypes.object.isRequired,
+  personalData: PropTypes.object,
+  companyData: PropTypes.object,
+  addressData: PropTypes.object,
 };

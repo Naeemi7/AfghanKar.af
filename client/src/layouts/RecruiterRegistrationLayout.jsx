@@ -5,14 +5,15 @@ import RecruiterRegistrationSidebar from "@auth/registration/recruiter/Recruiter
 import MainContent from "@auth/registration/recruiter/MainContent";
 import useNavigation from "@hooks/useNavigation";
 import ShowToast from "@reusable/ShowToast";
+import { post } from "@api/apiService";
+import useUserContext from "@hooks/useUserContext";
+import { logBuddy, logError, handleError } from "@utils/errorUtils";
 
 export default function RecruiterRegistrationLayout() {
   const [currentStep, setCurrentStep] = useState(1);
   const { goTo } = useNavigation();
-
-  const [personalData, setPersonalData] = useState({});
-  const [companyData, setCompanyData] = useState({});
-  const [addressData, setAddressData] = useState({});
+  const { setError } = useUserContext();
+  const [formData, setFormData] = useState({});
 
   const handleNext = (newData) => {
     if (Object.values(newData).some((val) => !val)) {
@@ -20,9 +21,10 @@ export default function RecruiterRegistrationLayout() {
       return;
     }
 
-    if (currentStep === 1) setPersonalData(newData);
-    if (currentStep === 2) setCompanyData(newData);
-    if (currentStep === 3) setAddressData(newData);
+    setFormData((prevData) => ({
+      ...prevData,
+      ...newData, // Merge new data into the flat structure
+    }));
 
     if (currentStep < 3) setCurrentStep(currentStep + 1);
     else handleSubmit();
@@ -36,9 +38,25 @@ export default function RecruiterRegistrationLayout() {
     }
   };
 
-  const handleSubmit = () => {
-    const fullData = { personalData, companyData, addressData };
-    console.log("Final form submission data:", fullData);
+  const handleSubmit = async () => {
+    console.log("Final form data beofore submission:", formData);
+
+    try {
+      const response = await post("/recruiter/register", formData, setError);
+      logBuddy("Returned form", response);
+      ShowToast("Registered successfully!", "success");
+
+      // Redurect to login page after a short delay
+      setTimeout(() => {
+        goTo("/recruiter-login");
+      }, 1500);
+    } catch (err) {
+      if (!err.handled) {
+        err.handled = true;
+        handleError(err, setError);
+        logError("Registration error:", err);
+      }
+    }
     // API call for submission
   };
 
@@ -49,9 +67,7 @@ export default function RecruiterRegistrationLayout() {
         currentStep={currentStep}
         onNext={handleNext}
         onPrevious={handlePrevious}
-        personalData={personalData}
-        companyData={companyData}
-        addressData={addressData}
+        formData={formData}
       />
     </div>
   );

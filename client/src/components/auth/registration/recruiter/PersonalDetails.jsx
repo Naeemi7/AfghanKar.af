@@ -83,6 +83,6 @@ export default function PersonalDetails({ onNext }) {
 }
 
 PersonalDetails.propTypes = {
-  onNext: PropTypes.func.isRequired,
+  onNext: PropTypes.func,
   data: PropTypes.object, // Accept data as a prop if needed
 };
