@@ -1,34 +1,47 @@
-import { useState } from "react";
 import PropTypes from "prop-types";
 import addressDetails from "@data/registration/recruiter/addressDetails";
 import Input from "@reusable/Input";
 import Select from "@reusable/Select";
 import AlertBox from "@reusable/AlertBox";
 import Button from "@reusable/Button";
+import { useState } from "react";
 
-export default function AddressDetails({ onNext, data }) {
-  const [formData, setFormData] = useState(data);
-  const [error, setError] = useState(""); // Error state for validation
+export default function AddressDetails({ onNext }) {
+  const [formError, setFormError] = useState(""); // Error state for validation
 
-  const handleChange = (e) => {
-    const { name, value } = e.target;
-    setFormData((prevData) => ({ ...prevData, [name]: value }));
-    if (error) setError(""); // Clear error on input change
-  };
+  const handleSubmit = (e) => {
+    e.preventDefault();
+    const formData = new FormData(e.target);
 
-  const handleSubmit = () => {
-    // Check for missing required fields
-    if (Object.values(formData).some((val) => !val)) {
-      setError("Please fill all fields before proceeding.");
+    // Dynamically collect all form fields
+    const addressData = {};
+    addressDetails().forEach((field) => {
+      const { name } = field;
+      addressData[name] = formData.get(name) || ""; // Assign default value if field is empty
+    });
+
+    // Validation for required fields
+    const isFormValid = addressDetails().every((field) => {
+      if (field.required) {
+        return addressData[field.name]?.trim();
+      }
+      return true;
+    });
+
+    if (!isFormValid) {
+      setFormError("Please fill out all required fields.");
       return;
     }
-    onNext(formData); // Pass data to parent component for final submission
+
+    setFormError("");
+    onNext(addressData); // Pass collected data to parent
+    console.log("Address Details: ", addressData); // Debugging log
   };
 
   return (
     <div className="address-details-container">
       <h1>Address Details</h1>
-      <form className="registration-form">
+      <form className="registration-form" onSubmit={handleSubmit}>
         {addressDetails().map((field, index) => {
           const { labelName, type, name, options, placeholder, required } =
             field;
@@ -41,8 +54,6 @@ export default function AddressDetails({ onNext, data }) {
                   name={name}
                   options={options}
                   placeholder={placeholder}
-                  value={formData[name] || ""}
-                  onChange={handleChange}
                   required={required}
                 />
               ) : (
@@ -51,8 +62,6 @@ export default function AddressDetails({ onNext, data }) {
                   type={type}
                   name={name}
                   placeholder={placeholder}
-                  value={formData[name] || ""}
-                  onChange={handleChange}
                   required={required}
                 />
               )}
@@ -60,14 +69,14 @@ export default function AddressDetails({ onNext, data }) {
           );
         })}
 
-        {error && <AlertBox message={error} type="error" />}
+        {formError && <AlertBox message={formError} type="error" />}
 
+        {/* Button for submission */}
         <Button
-          name="Register"
-          type="button"
+          name="Next"
+          type="submit"
           iconLibrary="gr"
           iconName="GrFormNextLink"
-          onClick={handleSubmit}
         />
       </form>
     </div>
@@ -76,5 +85,4 @@ export default function AddressDetails({ onNext, data }) {
 
 AddressDetails.propTypes = {
   onNext: PropTypes.func.isRequired,
-  data: PropTypes.object, // Initial data passed from parent component
 };
