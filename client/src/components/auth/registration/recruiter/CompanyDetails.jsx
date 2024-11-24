@@ -11,33 +11,28 @@ import { useState } from "react";
 
 export default function CompanyDetails({ onNext }) {
   const { error } = useUserContext();
-
-  // Initialize form state
-  const [formData, setFormData] = useState({
-    companyName: "",
-    companyType: "",
-    industryType: "",
-    foundedIn: "",
-    companyWebsite: "",
-    companyDescription: "",
-  });
-
-  const handleChange = (e) => {
-    const { name, value } = e.target;
-    setFormData((prevData) => ({
-      ...prevData,
-      [name]: value,
-    }));
-  };
+  const [formError, setFormError] = useState("");
 
   const handleSubmit = (e) => {
     e.preventDefault();
+    const formData = new FormData(e.target);
 
-    // Pass the collected data to the parent
-    onNext(formData);
+    // Dynamically collect all form fields
+    const companyData = {};
+    companyDetails().forEach((field) => {
+      const { name } = field;
+      companyData[name] = formData.get(name) || ""; // Assign default value if field is empty
+    });
 
-    // Log the collected data for debugging
-    logBuddy("Company Details: ", formData);
+    // Validation (if needed)
+    if (!companyData.companyName || !companyData.companyType) {
+      setFormError("Please fill out all required fields.");
+      return;
+    }
+
+    setFormError("");
+    onNext(companyData); // Pass collected data to parent
+    logBuddy("Company Details: ", companyData);
   };
 
   return (
@@ -54,37 +49,32 @@ export default function CompanyDetails({ onNext }) {
                 <Textarea
                   labelName={labelName}
                   name={name}
-                  value={formData[name] || ""} // Controlled component
                   placeholder={placeholder}
                   required={required}
-                  onChange={handleChange}
                 />
               ) : type === "select" ? (
                 <Select
                   labelName={labelName}
                   name={name}
-                  value={formData[name] || ""} // Controlled component
                   options={options}
                   placeholder={placeholder}
                   required={required}
-                  onChange={handleChange}
                 />
               ) : (
                 <Input
                   labelName={labelName}
                   type={type}
                   name={name}
-                  value={formData[name] || ""} // Controlled component
                   placeholder={placeholder}
                   required={required}
-                  onChange={handleChange}
                 />
               )}
             </div>
           );
         })}
 
-        {/* Display any errors using AlertBox */}
+        {/* Display errors using AlertBox */}
+        {formError && <AlertBox message={formError} type="error" />}
         {error && <AlertBox message={error} type="error" />}
 
         {/* Button to trigger form submission */}
