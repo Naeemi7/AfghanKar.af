@@ -4,10 +4,11 @@ import Input from "@reusable/Input";
 import Select from "@reusable/Select";
 import AlertBox from "@reusable/AlertBox";
 import Button from "@reusable/Button";
-import { useState } from "react";
+import useUserContext from "@hooks/useUserContext";
+import { logBuddy } from "@utils/errorUtils";
 
 export default function AddressDetails({ onNext }) {
-  const [formError, setFormError] = useState(""); // Error state for validation
+  const { error, setError } = useUserContext();
 
   const handleSubmit = (e) => {
     e.preventDefault();
@@ -29,13 +30,13 @@ export default function AddressDetails({ onNext }) {
     });
 
     if (!isFormValid) {
-      setFormError("Please fill out all required fields.");
+      setError("Please fill out all required fields.");
       return;
     }
 
-    setFormError("");
+    setError("");
     onNext(addressData); // Pass collected data to parent
-    console.log("Address Details: ", addressData); // Debugging log
+    logBuddy("Address Details: ", addressData); // Debugging log
   };
 
   return (
@@ -69,7 +70,7 @@ export default function AddressDetails({ onNext }) {
           );
         })}
 
-        {formError && <AlertBox message={formError} type="error" />}
+        {error && <AlertBox message={error} type="error" />}
 
         {/* Button for submission */}
         <Button
