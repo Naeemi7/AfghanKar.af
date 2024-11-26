@@ -16,9 +16,6 @@ export const userValidatorMiddleware = (req, res, next) => {
   if (!errors.isEmpty()) {
     const formattedErrors = formatValidationErrors(errors.array(), req);
 
-    // Log the errors after formatting
-    logBuddy("Validation Errors: ", { errors: formattedErrors });
-
     return res
       .status(StatusCodes.BAD_REQUEST)
       .json({ errors: formattedErrors });
