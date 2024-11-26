@@ -6,6 +6,7 @@ import {
 } from "../controllers/recruiterController.js";
 import { validateRecruiterRules } from "../middleware/recruiterValidationRules.js";
 import { userValidatorMiddleware } from "../middleware/userValidatorMiddleware.js";
+import { handleDuplicateKeyError } from "../middleware/mongoDbMiddleware.js";
 
 const router = express.Router();
 
@@ -18,5 +19,8 @@ router.post(
 );
 router.post("/login", recruiterLogin);
 router.get("/logout", recruiterLogout);
+
+// Use the duplicate key error handler middleware for all routes
+router.use(handleDuplicateKeyError);
 
 export default router;
