@@ -2,17 +2,19 @@ import { Schema, model } from "mongoose";
 
 const recruiterSchema = new Schema(
   {
-    // Recruiter Personal Details
-    fullName: { type: String, required: true, trim: true },
-    email: { type: String, required: true, unique: true, trim: true },
-    password: { type: String, required: true, minlength: 8 },
-    phoneNumber: { type: String, required: true, trim: true },
-    position: { type: String, required: true, trim: true },
+    // Personal Details
+    personalDetails: {
+      fullName: { type: String, required: true, trim: true },
+      email: { type: String, required: true, unique: true },
+      password: { type: String, required: true, minlength: 8 },
+      phoneNumber: { type: String, required: true, trim: true },
+      position: { type: String, required: true, trim: true },
+    },
 
     // Company Details
     companyDetails: {
-      name: { type: String, required: true, trim: true },
-      type: {
+      companyName: { type: String, required: true, trim: true },
+      companyType: {
         type: String,
         enum: [
           "Private",
@@ -59,27 +61,25 @@ const recruiterSchema = new Schema(
         ],
         required: true,
       },
-      logo: {
+      companyLogo: {
         type: String,
         match: /^(https?:\/\/[^\s/$.?#].[^\s]*)$/,
-        required: false,
         trim: true,
       },
     },
 
     // Address Details
-    address: {
+    addressDetails: {
       country: { type: String, required: true, trim: true },
       state: { type: String, required: true, trim: true },
       city: { type: String, required: true, trim: true },
       street: { type: String, required: true, trim: true },
     },
   },
-  {
-    timestamps: true,
-  }
+  { timestamps: true }
 );
 
+// Create the Recruiter model based on the schema
 const Recruiter = model("Recruiter", recruiterSchema);
 
 export default Recruiter;

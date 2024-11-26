@@ -1,4 +1,3 @@
-// controllers/recruiterController.js
 import { StatusCodes } from "http-status-codes";
 import bcrypt from "bcrypt";
 import Recruiter from "../models/Recruiter.js";
@@ -12,43 +11,19 @@ import { userLogin, userLogout } from "../utils/authUtils.js";
  * @returns
  */
 export const createRecruiter = async (req, res) => {
-  const {
-    fullName,
-    email,
-    password,
-    phoneNumber,
-    position,
-    companyName,
-    companyType,
-    foundedIn,
-    companyWebsite,
-    description,
-    industryType,
-    companyLogo,
-    country,
-    state,
-    city,
-    street,
-  } = req.body;
+  const { personalDetails, companyDetails, addressDetails } = req.body;
 
-  // Check if all the required fields are provided
-  if (
-    !fullName ||
-    !email ||
-    !password ||
-    !phoneNumber ||
-    !position ||
-    !companyName ||
-    !companyType ||
-    !foundedIn ||
-    !industryType ||
-    !country ||
-    !state ||
-    !city ||
-    !street
-  ) {
+  if (!personalDetails || !companyDetails || !addressDetails) {
     return res.status(StatusCodes.BAD_REQUEST).json({
       message: "You need to provide the required information to sign up!",
+    });
+  }
+
+  const { fullName, email, password, phoneNumber, position } = personalDetails;
+
+  if (!email) {
+    return res.status(StatusCodes.BAD_REQUEST).json({
+      message: "Email is required!",
     });
   }
 
@@ -56,36 +31,34 @@ export const createRecruiter = async (req, res) => {
     // Hash the user's password
     const hashedPassword = await bcrypt.hash(password, 12);
 
-    // Create the recruiter with company details and address
+    // Create the recruiter
     const newRecruiter = await Recruiter.create({
-      fullName,
-      email,
-      password: hashedPassword,
-      phoneNumber,
-      position,
-      companyName,
-      companyType,
-      foundedIn,
-      companyWebsite,
-      description,
-      industryType,
-      companyLogo,
-      country,
-      state,
-      city,
-      street,
+      personalDetails: {
+        fullName,
+        email,
+        password: hashedPassword,
+        phoneNumber,
+        position,
+      },
+      companyDetails,
+      addressDetails,
     });
 
-    // Query the created recruiter and exclude the password
     const recruiterWithoutPassword = await Recruiter.findById(newRecruiter._id)
-      .select("-password")
-      .lean(); // 'lean()' returns a plain JavaScript object
+      .select("-personalDetails.password")
+      .lean();
 
     return res.status(StatusCodes.CREATED).json({
       message: "Recruiter successfully created",
       data: recruiterWithoutPassword,
     });
   } catch (error) {
+    if (error.code === 11000 && error.keyPattern.email) {
+      return res.status(StatusCodes.CONFLICT).json({
+        message:
+          "The provided email is already in use. Please use a different email.",
+      });
+    }
     logError("An error occurred while creating recruiter", error);
     return res.status(StatusCodes.INTERNAL_SERVER_ERROR).json({
       message: "Internal Server error!",

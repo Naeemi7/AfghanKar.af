@@ -4,7 +4,7 @@ import {
   recruiterLogin,
   recruiterLogout,
 } from "../controllers/recruiterController.js";
-import { validateRecruiterRules } from "../middleware/userValidationRules.js";
+import { validateRecruiterRules } from "../middleware/recruiterValidationRules.js";
 import { userValidator } from "../middleware/userValidator.js";
 
 const router = express.Router();

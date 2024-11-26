@@ -4,7 +4,7 @@ import {
   jobSeekerLogin,
   jobSeekerLogout,
 } from "../controllers/jobSeekerController.js";
-import { validateJobSeekerRules } from "../middleware/userValidationRules.js";
+import { validateJobSeekerRules } from "../middleware/jobSeekerValidationRules.js";
 import { userValidator } from "../middleware/userValidator.js";
 
 const router = express.Router();
