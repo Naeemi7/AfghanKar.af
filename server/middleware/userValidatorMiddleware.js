@@ -9,7 +9,7 @@ import { logBuddy } from "../utils/logUtils.js";
  * @param {*} next
  * @returns
  */
-export const userValidator = (req, res, next) => {
+export const userValidatorMiddleware = (req, res, next) => {
   const errors = validationResult(req);
 
   // If there are validation errors

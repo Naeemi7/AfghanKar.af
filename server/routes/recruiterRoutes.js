@@ -5,7 +5,7 @@ import {
   recruiterLogout,
 } from "../controllers/recruiterController.js";
 import { validateRecruiterRules } from "../middleware/recruiterValidationRules.js";
-import { userValidator } from "../middleware/userValidator.js";
+import { userValidatorMiddleware } from "../middleware/userValidatorMiddleware.js";
 
 const router = express.Router();
 
@@ -13,7 +13,7 @@ const router = express.Router();
 router.post(
   "/register",
   validateRecruiterRules,
-  userValidator,
+  userValidatorMiddleware,
   createRecruiter
 );
 router.post("/login", recruiterLogin);

@@ -5,7 +5,7 @@ import {
   jobSeekerLogout,
 } from "../controllers/jobSeekerController.js";
 import { validateJobSeekerRules } from "../middleware/jobSeekerValidationRules.js";
-import { userValidator } from "../middleware/userValidator.js";
+import { userValidatorMiddleware } from "../middleware/userValidatorMiddleware.js";
 
 const router = express.Router();
 
@@ -13,7 +13,7 @@ const router = express.Router();
 router.post(
   "/register",
   validateJobSeekerRules,
-  userValidator,
+  userValidatorMiddleware,
   createJobSeeker
 );
 
