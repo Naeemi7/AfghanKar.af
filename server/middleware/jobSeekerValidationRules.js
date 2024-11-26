@@ -2,6 +2,7 @@ import { body } from "express-validator";
 import {
   checkUserExistenceByUsername,
   checkUserExistenceByEmail,
+  capitalizeWords,
 } from "../helpers/userHelper.js";
 
 // Job Seeker Validation Rules
@@ -21,7 +22,7 @@ export const validateJobSeekerRules = [
     .normalizeEmail({ gmail_remove_dots: false })
     .withMessage("Please provide a valid email address.")
     .custom(async (value) => {
-      await checkUserExistenceByEmail(value, userType);
+      await checkUserExistenceByEmail(value, "jobSeeker");
     }),
 
   // Validate password
