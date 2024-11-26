@@ -55,6 +55,7 @@ export const handleError = (error, setError) => {
     "02": "Username is already taken",
     "03": "Email is already registered",
     "04": "Password doesn't meet the requirements",
+    409: "The provided email is already in use. Please provide a different email.", // New error message for 409
   };
 
   let errorMessage = "An error occurred";
@@ -81,6 +82,10 @@ export const handleError = (error, setError) => {
       break;
     case 404:
       errorMessage = "Email not found";
+      showError(errorMessage, setError);
+      break;
+    case 409: // Handle the conflict error for duplicate email
+      errorMessage = errorMapping["409"]; // Using the 409 mapping
       showError(errorMessage, setError);
       break;
     case 500:

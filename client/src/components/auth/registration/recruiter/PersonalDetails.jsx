@@ -27,6 +27,7 @@ export default function PersonalDetails({ onNext }) {
     };
     const confirmedPassword = formData.get("confirm-password");
 
+    // Password mismatch check
     if (personalData.password !== confirmedPassword) {
       setPasswordMatched(false);
       return;
@@ -36,7 +37,7 @@ export default function PersonalDetails({ onNext }) {
     setError("");
 
     onNext(personalData); // Pass collected data to parent
-    logBuddy("Personal Detials: ", personalData);
+    logBuddy("Personal Details:", personalData);
   };
 
   return (
@@ -83,6 +84,5 @@ export default function PersonalDetails({ onNext }) {
 }
 
 PersonalDetails.propTypes = {
-  onNext: PropTypes.func,
-  data: PropTypes.object, // Accept data as a prop if needed
+  onNext: PropTypes.func.isRequired,
 };

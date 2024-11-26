@@ -13,21 +13,24 @@ export default function RecruiterRegistrationLayout() {
   const [currentStep, setCurrentStep] = useState(1);
   const { goTo } = useNavigation();
   const { setError } = useUserContext();
-  const [formData, setFormData] = useState({});
+  const [formData, setFormData] = useState({
+    personalDetails: {},
+    companyDetails: {},
+    addressDetails: {},
+  });
 
   const handleNext = (newData) => {
-    if (Object.values(newData).some((val) => !val)) {
-      ShowToast("Please fill all the fields before proceeding.", "error");
-      return;
-    }
-
+    const sectionKey = getSectionKeyForStep(currentStep);
     setFormData((prevData) => ({
       ...prevData,
-      ...newData, // Merge new data into the flat structure
+      [sectionKey]: { ...prevData[sectionKey], ...newData },
     }));
 
-    if (currentStep < 3) setCurrentStep(currentStep + 1);
-    else handleSubmit();
+    if (currentStep < 3) {
+      setCurrentStep(currentStep + 1);
+    } else {
+      handleSubmit();
+    }
   };
 
   const handlePrevious = () => {
@@ -39,14 +42,13 @@ export default function RecruiterRegistrationLayout() {
   };
 
   const handleSubmit = async () => {
-    console.log("Final form data beofore submission:", formData);
+    console.log("Final form data before submission:", formData);
 
     try {
       const response = await post("/recruiter/register", formData, setError);
       logBuddy("Returned form", response);
       ShowToast("Registered successfully!", "success");
 
-      // Redurect to login page after a short delay
       setTimeout(() => {
         goTo("/recruiter-login");
       }, 1500);
@@ -57,7 +59,19 @@ export default function RecruiterRegistrationLayout() {
         logError("Registration error:", err);
       }
     }
-    // API call for submission
+  };
+
+  const getSectionKeyForStep = (step) => {
+    switch (step) {
+      case 1:
+        return "personalDetails";
+      case 2:
+        return "companyDetails";
+      case 3:
+        return "addressDetails";
+      default:
+        return "";
+    }
   };
 
   return (

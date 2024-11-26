@@ -1,7 +1,9 @@
+import { useState } from "react";
 import PropTypes from "prop-types";
 import addressDetails from "@data/registration/recruiter/addressDetails";
 import Input from "@reusable/Input";
 import Select from "@reusable/Select";
+import Icon from "@reusable/Icon";
 import AlertBox from "@reusable/AlertBox";
 import Button from "@reusable/Button";
 import useUserContext from "@hooks/useUserContext";
@@ -14,11 +16,11 @@ export default function AddressDetails({ onNext }) {
     e.preventDefault();
     const formData = new FormData(e.target);
 
-    // Dynamically collect all form fields
+    // Collect address details from the form
     const addressData = {};
     addressDetails().forEach((field) => {
       const { name } = field;
-      addressData[name] = formData.get(name) || ""; // Assign default value if field is empty
+      addressData[name] = formData.get(name) || ""; // Default to empty if field is not filled
     });
 
     // Validation for required fields
@@ -35,8 +37,8 @@ export default function AddressDetails({ onNext }) {
     }
 
     setError("");
-    onNext(addressData); // Pass collected data to parent
-    logBuddy("Address Details: ", addressData); // Debugging log
+    onNext(addressData); // Pass the address data to the parent
+    logBuddy("Address Details:", addressData); // Log the data for debugging
   };
 
   return (
@@ -72,7 +74,7 @@ export default function AddressDetails({ onNext }) {
 
         {error && <AlertBox message={error} type="error" />}
 
-        {/* Button for submission */}
+        {/* Submit button */}
         <Button name="Register" type="submit" />
       </form>
     </div>

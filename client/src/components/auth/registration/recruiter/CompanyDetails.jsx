@@ -17,14 +17,12 @@ export default function CompanyDetails({ onNext }) {
     e.preventDefault();
     const formData = new FormData(e.target);
 
-    // Dynamically collect all form fields
     const companyData = {};
     companyDetails().forEach((field) => {
       const { name } = field;
-      companyData[name] = formData.get(name) || ""; // Assign default value if field is empty
+      companyData[name] = formData.get(name) || ""; // Default empty value if not filled
     });
 
-    // Validation (if needed)
     if (!companyData.companyName || !companyData.companyType) {
       setFormError("Please fill out all required fields.");
       return;
@@ -32,7 +30,7 @@ export default function CompanyDetails({ onNext }) {
 
     setFormError("");
     onNext(companyData); // Pass collected data to parent
-    logBuddy("Company Details: ", companyData);
+    logBuddy("Company Details:", companyData);
   };
 
   return (
@@ -73,11 +71,9 @@ export default function CompanyDetails({ onNext }) {
           );
         })}
 
-        {/* Display errors using AlertBox */}
         {formError && <AlertBox message={formError} type="error" />}
         {error && <AlertBox message={error} type="error" />}
 
-        {/* Button to trigger form submission */}
         <Button
           name="Next"
           type="submit"
