@@ -10,6 +10,9 @@ import { handleDuplicateKeyError } from "../middleware/mongoDbMiddleware.js";
 
 const router = express.Router();
 
+// The duplicate key error handler middleware for all routes
+router.use(handleDuplicateKeyError);
+
 // Unprotected Routes
 router.post(
   "/register",
@@ -19,8 +22,5 @@ router.post(
 );
 router.post("/login", recruiterLogin);
 router.get("/logout", recruiterLogout);
-
-// Use the duplicate key error handler middleware for all routes
-router.use(handleDuplicateKeyError);
 
 export default router;
