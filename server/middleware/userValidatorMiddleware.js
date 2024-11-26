@@ -63,7 +63,7 @@ const getCustomMessage = (error, fieldValue) => {
     // Custom message for missing fields
     customMsg = `The ${error.path} is missing.`;
   } else if (customMsg.toLowerCase() === "invalid value") {
-    customMsg = `The ${error.path} has an invalid value.`; // Custom message for invalid values
+    customMsg = `The ${error.path} has an invalid value.`;
   }
 
   // Handle full name specific error
@@ -87,7 +87,7 @@ const getCustomMessage = (error, fieldValue) => {
  */
 const getCodeForError = (field, role) => {
   if (!role || !errorCodes[role]) {
-    return "00"; // Default error code if role is not provided or invalid
+    return "00"; // Default error code
   }
   return errorCodes[role][field] || "00"; // Return error code or default "00"
 };
