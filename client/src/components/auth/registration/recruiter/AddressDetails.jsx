@@ -1,9 +1,8 @@
-import { useState } from "react";
 import PropTypes from "prop-types";
 import addressDetails from "@data/registration/recruiter/addressDetails";
 import Input from "@reusable/Input";
 import Select from "@reusable/Select";
-import Icon from "@reusable/Icon";
+
 import AlertBox from "@reusable/AlertBox";
 import Button from "@reusable/Button";
 import useUserContext from "@hooks/useUserContext";
