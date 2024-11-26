@@ -73,12 +73,7 @@ export default function AddressDetails({ onNext }) {
         {error && <AlertBox message={error} type="error" />}
 
         {/* Button for submission */}
-        <Button
-          name="Next"
-          type="submit"
-          iconLibrary="gr"
-          iconName="GrFormNextLink"
-        />
+        <Button name="Register" type="submit" />
       </form>
     </div>
   );
