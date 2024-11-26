@@ -2,64 +2,79 @@ import { Schema, model } from "mongoose";
 
 const recruiterSchema = new Schema(
   {
-    fullName: { type: String, required: true },
-    email: { type: String, required: true, unique: true },
+    // Recruiter Personal Details
+    fullName: { type: String, required: true, trim: true },
+    email: { type: String, required: true, unique: true, trim: true },
     password: { type: String, required: true, minlength: 8 },
-    phoneNumber: { type: String, match: /^\+?[1-9]\d{1,14}$/, required: true },
-    position: { type: String, required: true },
+    phoneNumber: { type: String, required: true, trim: true },
+    position: { type: String, required: true, trim: true },
 
-    // Company details as a nested object
-
-    companyName: { type: String, required: true },
-    companyType: {
-      type: String,
-      enum: [
-        "Private",
-        "Public",
-        "Non-Profit",
-        "Government",
-        "Cooperative",
-        "Startup",
-        "Multinational",
-        "Other",
-      ],
-      required: true,
+    // Company Details
+    companyDetails: {
+      name: { type: String, required: true, trim: true },
+      type: {
+        type: String,
+        enum: [
+          "Private",
+          "Public",
+          "Non-Profit",
+          "Government",
+          "Cooperative",
+          "Startup",
+          "Multinational",
+          "Other",
+        ],
+        required: true,
+      },
+      foundedIn: {
+        type: Date,
+        validate: {
+          validator: (value) =>
+            value.getFullYear() >= 1800 &&
+            value.getFullYear() <= new Date().getFullYear(),
+          message: "Founded year must be between 1800 and the current year.",
+        },
+      },
+      website: {
+        type: String,
+        match: /^(https?:\/\/[^\s/$.?#].[^\s]*)$/,
+        trim: true,
+      },
+      description: { type: String, maxlength: 500, trim: true },
+      industryType: {
+        type: String,
+        enum: [
+          "IT",
+          "Finance",
+          "Healthcare",
+          "Education",
+          "Retail",
+          "Manufacturing",
+          "Construction",
+          "Real Estate",
+          "Agriculture",
+          "Hospitality",
+          "Telecommunication",
+          "Other",
+        ],
+        required: true,
+      },
+      logo: {
+        type: String,
+        match: /^(https?:\/\/[^\s/$.?#].[^\s]*)$/,
+        required: false,
+        trim: true,
+      },
     },
-    foundedIn: { type: Number, min: 1800, max: new Date().getFullYear() },
-    companyWebsite: { type: String, match: /^(http|https):\/\/[^ "]+$/ },
-    description: { type: String, maxlength: 500 },
-    industryType: {
-      type: String,
-      enum: [
-        "IT",
-        "Finance",
-        "Healthcare",
-        "Education",
-        "Retail",
-        "Manufacturing",
-        "Construction",
-        "Real Estate",
-        "Agriculture",
-        "Hospitality",
-        "Telecommunication",
-        "Other",
-      ],
-      required: true,
-    },
-    companyLogo: {
-      type: String,
-      match: /^(http|https):\/\/[^ "]+$/,
-      required: false,
-    },
 
-    // Address details as a nested object
-
-    country: { type: String, required: true },
-    state: { type: String, required: true },
-    city: { type: String, required: true },
-    street: { type: String, required: true },
+    // Address Details
+    address: {
+      country: { type: String, required: true, trim: true },
+      state: { type: String, required: true, trim: true },
+      city: { type: String, required: true, trim: true },
+      street: { type: String, required: true, trim: true },
+    },
   },
-
   {
     timestamps: true,
   }

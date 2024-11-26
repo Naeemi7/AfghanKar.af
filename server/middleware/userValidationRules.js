@@ -55,12 +55,12 @@ export const validateRecruiterRules = [
   ...commonValidations("recruiter"),
 
   // Company details validations
-  body("companyName")
+  body("companyDetails.name")
     .trim()
     .notEmpty()
     .withMessage("Company name is required."),
 
-  body("companyType")
+  body("companyDetails.type")
     .trim()
     .isIn([
       "Private",
@@ -76,23 +76,31 @@ export const validateRecruiterRules = [
       "Company type must be one of the following: 'Private', 'Public', 'Non-Profit', 'Government', 'Cooperative', 'Startup', 'Multinational', 'Other'."
     ),
 
-  body("foundedIn")
-    .isNumeric()
-    .isLength({ min: 4, max: 4 })
-    .withMessage("Founded year must be a 4-digit number."),
+  body("companyDetails.foundedIn")
+    .isISO8601()
+    .toDate()
+    .withMessage("Founded date must be a valid date.")
+    .custom((value) => {
+      const year = value.getFullYear();
+      if (year < 1800 || year > new Date().getFullYear()) {
+        throw new Error(
+          "Founded year must be between 1800 and the current year."
+        );
+      }
+      return true;
+    }),
 
-  body("companyWebsite")
+  body("companyDetails.website")
     .optional()
     .isURL()
     .withMessage("Company website must be a valid URL."),
 
-  body("description")
+  body("companyDetails.description")
     .optional()
     .isLength({ max: 500 })
     .withMessage("Description can't exceed 500 characters."),
 
-  // Industry type validation
-  body("industryType")
+  body("companyDetails.industryType")
     .trim()
     .isIn([
       "IT",
@@ -110,18 +118,17 @@ export const validateRecruiterRules = [
     ])
     .withMessage("Industry type must be one of the predefined categories."),
 
-  // Company logo URL validation
-  body("companyLogo")
+  body("companyDetails.logo")
     .optional()
     .isURL()
     .withMessage("Company logo must be a valid URL."),
 
   // Address details validations
-  body("country").trim().notEmpty().withMessage("Country is required."),
+  body("address.country").trim().notEmpty().withMessage("Country is required."),
 
-  body("state").trim().notEmpty().withMessage("State is required."),
+  body("address.state").trim().notEmpty().withMessage("State is required."),
 
-  body("city").trim().notEmpty().withMessage("City is required."),
+  body("address.city").trim().notEmpty().withMessage("City is required."),
 
-  body("street").trim().notEmpty().withMessage("Street is required."),
+  body("address.street").trim().notEmpty().withMessage("Street is required."),
 ];
