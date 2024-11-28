@@ -21,7 +21,7 @@ export default function AddressDetails({ onNext }) {
     e.preventDefault();
 
     const formData = new FormData(e.target);
-    const addressDetails = {
+    const addressData = {
       country: formData.get("country"),
       state: formData.get("state"),
       city: formData.get("city"),
@@ -35,8 +35,8 @@ export default function AddressDetails({ onNext }) {
     setError("");
 
     // Pass collected data to parent
-    onNext(addressDetails);
-    logBuddy("Address Details:", addressDetails);
+    onNext(addressData);
+    logBuddy("Address Details:", addressData);
   };
 
   return (
