@@ -12,15 +12,15 @@ import { useState } from "react";
 export default function CompanyDetails({ onNext }) {
   const { error } = useUserContext();
   const [formError, setFormError] = useState("");
+  const [formData, setFormData] = useState({}); // Track form data here
 
   const handleSubmit = (e) => {
     e.preventDefault();
-    const formData = new FormData(e.target);
 
     const companyData = {};
     companyDetails().forEach((field) => {
       const { name } = field;
-      companyData[name] = formData.get(name) || ""; // Default empty value if not filled
+      companyData[name] = formData[name] || ""; // Default empty value if not filled
     });
 
     if (!companyData.companyName || !companyData.companyType) {
@@ -31,6 +31,14 @@ export default function CompanyDetails({ onNext }) {
     setFormError("");
     onNext(companyData); // Pass collected data to parent
     logBuddy("Company Details:", companyData);
+  };
+
+  const handleChange = (e) => {
+    const { name, value } = e.target;
+    setFormData((prevData) => ({
+      ...prevData,
+      [name]: value,
+    }));
   };
 
   return (
@@ -49,6 +57,8 @@ export default function CompanyDetails({ onNext }) {
                   name={name}
                   placeholder={placeholder}
                   required={required}
+                  value={formData[name] || ""}
+                  onChange={handleChange}
                 />
               ) : type === "select" ? (
                 <Select
@@ -57,6 +67,8 @@ export default function CompanyDetails({ onNext }) {
                   options={options}
                   placeholder={placeholder}
                   required={required}
+                  value={formData[name] || ""}
+                  onChange={handleChange} // Ensure to update the formData state
                 />
               ) : (
                 <Input
@@ -65,6 +77,8 @@ export default function CompanyDetails({ onNext }) {
                   name={name}
                   placeholder={placeholder}
                   required={required}
+                  value={formData[name] || ""}
+                  onChange={handleChange}
                 />
               )}
             </div>
