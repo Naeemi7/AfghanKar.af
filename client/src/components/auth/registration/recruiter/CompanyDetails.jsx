@@ -72,12 +72,6 @@ export default function CompanyDetails({ onNext }) {
                   options={options}
                   placeholder={placeholder}
                   required={required}
-                  Ensure
-                  to
-                  update
-                  the
-                  formData
-                  state
                 />
               ) : (
                 <Input
