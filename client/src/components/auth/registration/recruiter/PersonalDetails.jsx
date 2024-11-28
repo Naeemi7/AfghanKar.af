@@ -1,6 +1,6 @@
 import { useState } from "react";
 import PropTypes from "prop-types";
-import personalDetailsConfig from "@data/registration/recruiter/personalDetails";
+import personalDetails from "@data/registration/recruiter/personalDetails";
 import Input from "@reusable/Input";
 import Icon from "@reusable/Icon";
 import AlertBox from "@reusable/AlertBox";
@@ -32,7 +32,7 @@ export default function PersonalDetails({ onNext }) {
     e.preventDefault();
 
     const formData = new FormData(e.target);
-    const personalDetails = {
+    const personalData = {
       fullName: formData.get("fullName"),
       email: formData.get("email"),
       position: formData.get("position"),
@@ -47,7 +47,7 @@ export default function PersonalDetails({ onNext }) {
     // Password matching validation
     if (
       includePasswordValidation &&
-      personalDetails.password !== confirmedPassword
+      personalData.password !== confirmedPassword
     ) {
       setPasswordMatched(false);
       return;
@@ -59,15 +59,15 @@ export default function PersonalDetails({ onNext }) {
     setError("");
 
     // Pass collected data to parent
-    onNext(personalDetails);
-    logBuddy("Personal Details:", personalDetails);
+    onNext(personalData);
+    logBuddy("Personal Details:", personalData);
   };
 
   return (
     <div className="personal-details-container">
       <h1>Personal Details</h1>
       <form className="registration-form" onSubmit={handleSubmit}>
-        {personalDetailsConfig(showPassword).map((field, index) => (
+        {personalDetails(showPassword).map((field, index) => (
           <div
             key={index}
             className={field.name.includes("password") ? "password-input" : ""}
