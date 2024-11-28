@@ -78,6 +78,13 @@ export const validateRecruiterRules = [
 
   body("companyDetails.website")
     .optional()
+    .customSanitizer((value) => {
+      if (value && !/^https?:\/\//i.test(value)) {
+        // Prepend 'http://' if protocol is missing
+        return `http://${value}`;
+      }
+      return value;
+    })
     .isURL()
     .withMessage("Company website must be a valid URL."),
 
