@@ -57,10 +57,6 @@ form {
   // date input
   /* Styling for date input */
   .date-input input {
-    padding: 10px;
-    font-size: 16px;
-    color: #333;
-    background-color: #f5f5f5; /* Light gray background */
     cursor: pointer; /* Pointer cursor for better UX */
 
     /* Remove the default appearance in Webkit and other browsers */
@@ -76,22 +72,12 @@ form {
     &::-moz-calendar-picker-indicator {
       display: none; /* Hides the calendar icon in Firefox */
     }
-
-    /* Trigger the date picker on click or focus */
-    &:focus {
-      outline: none;
-      border: 2px solid red; /* Optional focus effect */
-    }
   }
 
   .date-input input:hover {
-    border-color: red; /* Set hover border color */
+    border-color: $accent-color;
   }
 
-  /* Optional: For custom styling on date input's focus state */
-  .date-input input:focus {
-    border-color: #ff6b3b; /* Optional custom color for focus */
-  }
   // Reusable Navigator
   .navigator-container {
     margin-top: -10px;
