@@ -16,15 +16,22 @@ export default function RecruiterRegistrationLayout() {
   const [formData, setFormData] = useState({
     personalDetails: {},
     companyDetails: {},
-    addressDetails: {},
+    addressDetails: {}, // Ensure this is initialized with an empty object
   });
 
   const handleNext = (newData) => {
     const sectionKey = getSectionKeyForStep(currentStep);
-    setFormData((prevData) => ({
-      ...prevData,
-      [sectionKey]: { ...prevData[sectionKey], ...newData },
-    }));
+    console.log("New Data in handleNext:", newData);
+
+    // Ensure that the new data is being added correctly to formData
+    setFormData((prevData) => {
+      const updatedData = {
+        ...prevData,
+        [sectionKey]: { ...prevData[sectionKey], ...newData },
+      };
+      console.log("Updated Form Data:", updatedData); // Check if the data is updating
+      return updatedData;
+    });
 
     if (currentStep < 3) {
       setCurrentStep(currentStep + 1);
@@ -68,7 +75,7 @@ export default function RecruiterRegistrationLayout() {
       case 2:
         return "companyDetails";
       case 3:
-        return "addressDetails";
+        return "addressDetails"; // Ensure this matches the step logic
       default:
         return "";
     }

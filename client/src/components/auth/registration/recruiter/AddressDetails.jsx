@@ -21,6 +21,8 @@ export default function AddressDetails({ onNext }) {
     e.preventDefault();
 
     const formData = new FormData(e.target);
+
+    // Collect form data into an object
     const addressData = {
       country: formData.get("country"),
       state: formData.get("state"),
@@ -28,13 +30,16 @@ export default function AddressDetails({ onNext }) {
       street: formData.get("street"),
     };
 
+    // Check the collected address data
+    console.log("Address Data collected:", addressData);
+
     // Validate required fields
     if (!validateForm(formData)) return;
 
     // Reset error state
     setError("");
 
-    // Pass collected data to parent
+    // Pass collected data to parent (onNext)
     onNext(addressData);
     logBuddy("Address Details:", addressData);
   };
