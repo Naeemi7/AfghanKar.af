@@ -29,7 +29,7 @@ export default function CompanyDetails({ onNext }) {
     e.preventDefault();
 
     const formData = new FormData(e.target);
-    const companyDetails = {
+    const companyData = {
       companyName: formData.get("companyName"),
       companyType: formData.get("companyType"),
       industryType: formData.get("industryType"),
@@ -45,8 +45,8 @@ export default function CompanyDetails({ onNext }) {
     setError("");
 
     // Pass collected data to parent
-    onNext(companyDetails);
-    logBuddy("Company Details:", companyDetails);
+    onNext(companyData);
+    logBuddy("Company Details:", companyData);
   };
 
   return (
