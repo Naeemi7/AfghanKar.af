@@ -7,38 +7,46 @@ import AlertBox from "@reusable/AlertBox";
 import Button from "@reusable/Button";
 import useUserContext from "@hooks/useUserContext";
 import { logBuddy } from "@utils/errorUtils";
-import { useState } from "react";
+import useFormValidation from "@hooks/useFormValidation";
 
 export default function CompanyDetails({ onNext }) {
-  const { error } = useUserContext();
-  const [formError, setFormError] = useState("");
-  const [formData, setFormData] = useState({}); // Track form data here
+  const { error, setError } = useUserContext();
+
+  // Form fields
+  const formFields = [
+    "companyName",
+    "companyType",
+    "industryType",
+    "foundedIn",
+    "website",
+    "description",
+  ];
+
+  // formFileds & setError are passed as props
+  const { validateForm } = useFormValidation(formFields, setError);
 
   const handleSubmit = (e) => {
     e.preventDefault();
 
-    const companyData = {};
-    companyDetails().forEach((field) => {
-      const { name } = field;
-      companyData[name] = formData[name] || ""; // Default empty value if not filled
-    });
+    const formData = new FormData(e.target);
+    const companyDetails = {
+      companyName: formData.get("companyName"),
+      companyType: formData.get("companyType"),
+      industryType: formData.get("industryType"),
+      foundedIn: formData.get("foundedIn"),
+      website: formData.get("website"),
+      description: formData.get("description"),
+    };
 
-    if (!companyData.companyName || !companyData.companyType) {
-      setFormError("Please fill out all required fields.");
-      return;
-    }
+    // Validate required fields
+    if (!validateForm(formData)) return;
 
-    setFormError("");
-    onNext(companyData); // Pass collected data to parent
-    logBuddy("Company Details:", companyData);
-  };
+    // Reset error state
+    setError("");
 
-  const handleChange = (e) => {
-    const { name, value } = e.target;
-    setFormData((prevData) => ({
-      ...prevData,
-      [name]: value,
-    }));
+    // Pass collected data to parent
+    onNext(companyDetails);
+    logBuddy("Company Details:", companyDetails);
   };
 
   return (
@@ -56,9 +64,6 @@ export default function CompanyDetails({ onNext }) {
                   labelName={labelName}
                   name={name}
                   placeholder={placeholder}
-                  required={required}
-                  value={formData[name] || ""}
-                  onChange={handleChange}
                 />
               ) : type === "select" ? (
                 <Select
@@ -67,8 +72,12 @@ export default function CompanyDetails({ onNext }) {
                   options={options}
                   placeholder={placeholder}
                   required={required}
-                  value={formData[name] || ""}
-                  onChange={handleChange} // Ensure to update the formData state
+                  Ensure
+                  to
+                  update
+                  the
+                  formData
+                  state
                 />
               ) : (
                 <Input
@@ -77,15 +86,12 @@ export default function CompanyDetails({ onNext }) {
                   name={name}
                   placeholder={placeholder}
                   required={required}
-                  value={formData[name] || ""}
-                  onChange={handleChange}
                 />
               )}
             </div>
           );
         })}
 
-        {formError && <AlertBox message={formError} type="error" />}
         {error && <AlertBox message={error} type="error" />}
 
         <Button

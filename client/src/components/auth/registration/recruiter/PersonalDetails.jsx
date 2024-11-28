@@ -9,11 +9,13 @@ import usePasswordVisibility from "@hooks/usePasswordVisibility";
 import useUserContext from "@hooks/useUserContext";
 import { logBuddy } from "@utils/errorUtils";
 import useFormValidation from "@hooks/useFormValidation";
+
 export default function PersonalDetails({ onNext }) {
   const [passwordMatched, setPasswordMatched] = useState(true);
   const { showPassword, togglePasswordVisibility } = usePasswordVisibility();
   const { error, setError } = useUserContext();
 
+  // Form fields
   const formFields = [
     "fullName",
     "email",
@@ -21,9 +23,10 @@ export default function PersonalDetails({ onNext }) {
     "phoneNumber",
     "password",
   ];
-  const includePasswordValidation = formFields.includes("password");
-  // Custom hook only for required field validation
+
+  // formFileds & setError are passed as props
   const { validateForm } = useFormValidation(formFields, setError);
+  const includePasswordValidation = formFields.includes("password");
 
   const handleSubmit = (e) => {
     e.preventDefault();
@@ -49,10 +52,14 @@ export default function PersonalDetails({ onNext }) {
       setPasswordMatched(false);
       return;
     }
-    setPasswordMatched(true); // Reset password match state
-    setError(""); // Reset error state
 
-    onNext(personalDetails); // Pass collected data to parent
+    // Reset password match state
+    setPasswordMatched(true);
+    // Reset error state
+    setError("");
+
+    // Pass collected data to parent
+    onNext(personalDetails);
     logBuddy("Personal Details:", personalDetails);
   };
 

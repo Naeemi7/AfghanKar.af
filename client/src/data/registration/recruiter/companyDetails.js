@@ -41,14 +41,10 @@ const companyDetails = () => [
     "Select industry type"
   ),
   formFields.dateField("Founded In *", "foundedIn", "Select founding date"),
-  formFields.textField(
-    "Company Website *",
-    "companyWebsite",
-    "Enter company website"
-  ),
+  formFields.textField("Company Website *", "website", "Enter company website"),
   formFields.textareaField(
     "Company Description *",
-    "companyDescription",
+    "description",
     "Describe your company"
   ),
 ];
