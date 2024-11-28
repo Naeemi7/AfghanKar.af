@@ -1,5 +1,6 @@
 import PropTypes from "prop-types";
 import "@styles/components/reusableComponents.scss";
+import { useRef } from "react";
 
 export default function Input({
   labelName,
@@ -9,6 +10,9 @@ export default function Input({
   className = "",
   autocomplete = "",
 }) {
+  // Reference to the input element
+  const inputRef = useRef(null);
+
   // Check if label is required (contains a star)
   const isRequired = labelName.includes("*");
 
@@ -18,8 +22,15 @@ export default function Input({
   // Generate a sanitized ID for the input
   const inputId = labelName.replace(/\s+/g, "-").toLowerCase();
 
+  // Function to handle input click and trigger the date picker
+  const handleClick = () => {
+    if (inputRef.current && inputRef.current.type === "date") {
+      inputRef.current.showPicker(); // Trigger the date picker
+    }
+  };
+
   return (
-    <div className="input-box">
+    <div className={`input-box ${type === "date" ? "date-input" : ""}`}>
       <label htmlFor={inputId}>
         {labelText}
         {isRequired && <span style={{ color: "red" }}> *</span>}
@@ -31,6 +42,8 @@ export default function Input({
         placeholder={placeholder}
         name={name}
         autoComplete={autocomplete} // Pass autocomplete to input
+        ref={inputRef} // Attach the ref to the input element
+        onClick={handleClick} // Trigger the date picker on click
       />
     </div>
   );
