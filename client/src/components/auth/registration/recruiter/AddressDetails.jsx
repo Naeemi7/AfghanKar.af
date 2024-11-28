@@ -2,7 +2,6 @@ import PropTypes from "prop-types";
 import addressDetails from "@data/registration/recruiter/addressDetails";
 import Input from "@reusable/Input";
 import Select from "@reusable/Select";
-
 import AlertBox from "@reusable/AlertBox";
 import Button from "@reusable/Button";
 import useUserContext from "@hooks/useUserContext";
@@ -19,7 +18,7 @@ export default function AddressDetails({ onNext }) {
     const addressData = {};
     addressDetails().forEach((field) => {
       const { name } = field;
-      addressData[name] = formData.get(name) || ""; // Default to empty if field is not filled
+      addressData[name] = formData.get(name) || "";
     });
 
     // Validation for required fields

@@ -1,6 +1,6 @@
 import { useState } from "react";
 import PropTypes from "prop-types";
-import personalDetails from "@data/registration/recruiter/personalDetails";
+import personalDetailsConfig from "@data/registration/recruiter/personalDetails";
 import Input from "@reusable/Input";
 import Icon from "@reusable/Icon";
 import AlertBox from "@reusable/AlertBox";
@@ -8,43 +8,59 @@ import Button from "@reusable/Button";
 import usePasswordVisibility from "@hooks/usePasswordVisibility";
 import useUserContext from "@hooks/useUserContext";
 import { logBuddy } from "@utils/errorUtils";
-
+import useFormValidation from "@hooks/useFormValidation";
 export default function PersonalDetails({ onNext }) {
   const [passwordMatched, setPasswordMatched] = useState(true);
   const { showPassword, togglePasswordVisibility } = usePasswordVisibility();
   const { error, setError } = useUserContext();
 
+  const formFields = [
+    "fullName",
+    "email",
+    "position",
+    "phoneNumber",
+    "password",
+  ];
+  const includePasswordValidation = formFields.includes("password");
+  // Custom hook only for required field validation
+  const { validateForm } = useFormValidation(formFields, setError);
+
   const handleSubmit = (e) => {
     e.preventDefault();
 
     const formData = new FormData(e.target);
-    const personalData = {
+    const personalDetails = {
       fullName: formData.get("fullName"),
+      email: formData.get("email"),
       position: formData.get("position"),
       phoneNumber: formData.get("phoneNumber"),
-      email: formData.get("email"),
       password: formData.get("password"),
     };
     const confirmedPassword = formData.get("confirm-password");
 
-    // Password mismatch check
-    if (personalData.password !== confirmedPassword) {
+    // Validate required fields
+    if (!validateForm(formData)) return;
+
+    // Password matching validation
+    if (
+      includePasswordValidation &&
+      personalDetails.password !== confirmedPassword
+    ) {
       setPasswordMatched(false);
       return;
     }
+    setPasswordMatched(true); // Reset password match state
+    setError(""); // Reset error state
 
-    setPasswordMatched(true);
-    setError("");
-
-    onNext(personalData); // Pass collected data to parent
-    logBuddy("Personal Details:", personalData);
+    onNext(personalDetails); // Pass collected data to parent
+    logBuddy("Personal Details:", personalDetails);
   };
 
   return (
     <div className="personal-details-container">
       <h1>Personal Details</h1>
       <form className="registration-form" onSubmit={handleSubmit}>
-        {personalDetails(showPassword).map((field, index) => (
+        {personalDetailsConfig(showPassword).map((field, index) => (
           <div
             key={index}
             className={field.name.includes("password") ? "password-input" : ""}
@@ -74,7 +90,7 @@ export default function PersonalDetails({ onNext }) {
 
         <Button
           name="Next"
-          type="submit" // changed from "button" to "submit"
+          type="submit"
           iconLibrary="gr"
           iconName="GrFormNextLink"
         />
