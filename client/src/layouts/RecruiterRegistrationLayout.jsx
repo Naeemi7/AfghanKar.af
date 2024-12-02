@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useState, useEffect, useCallback } from "react";
 import "@styles/layouts/layouts.scss";
 import "@styles/components/recruiter-registration.scss";
 import RecruiterRegistrationSidebar from "@auth/registration/recruiter/RecruiterRegistrationSidebar";
@@ -16,36 +16,13 @@ export default function RecruiterRegistrationLayout() {
   const [formData, setFormData] = useState({
     personalDetails: {},
     companyDetails: {},
-    addressDetails: {}, // Initialize as empty object
+    addressDetails: {},
   });
 
-  const handleNext = (newData) => {
-    const sectionKey = getSectionKeyForStep(currentStep);
+  const [isFinalStep, setIsFinalStep] = useState(false); // Track when the last step is completed
 
-    setFormData((prevData) => ({
-      ...prevData,
-      [sectionKey]: {
-        ...prevData[sectionKey], // Keep the previous data for this section
-        ...newData, // Add the new data from the current step
-      },
-    }));
-
-    if (currentStep < 3) {
-      setCurrentStep(currentStep + 1);
-    } else {
-      handleSubmit(); // Submit form once the last step is reached
-    }
-  };
-
-  const handlePrevious = () => {
-    if (currentStep === 1) {
-      goTo("/registration");
-    } else {
-      setCurrentStep(currentStep - 1);
-    }
-  };
-
-  const handleSubmit = async () => {
+  // Wrap handleSubmit with useCallback to stabilize its reference
+  const handleSubmit = useCallback(async () => {
     console.log("Final form data before submission:", formData);
 
     try {
@@ -62,6 +39,39 @@ export default function RecruiterRegistrationLayout() {
         handleError(err, setError);
         logError("Registration error:", err);
       }
+    }
+  }, [formData, goTo, setError]);
+
+  useEffect(() => {
+    // Trigger submission when all steps are complete
+    if (isFinalStep) {
+      handleSubmit();
+    }
+  }, [isFinalStep, handleSubmit]); // Add handleSubmit as a dependency
+
+  const handleNext = (newData) => {
+    const sectionKey = getSectionKeyForStep(currentStep);
+
+    setFormData((prevData) => ({
+      ...prevData,
+      [sectionKey]: {
+        ...prevData[sectionKey],
+        ...newData,
+      },
+    }));
+
+    if (currentStep < 3) {
+      setCurrentStep(currentStep + 1);
+    } else {
+      setIsFinalStep(true); // Mark the final step as completed
+    }
+  };
+
+  const handlePrevious = () => {
+    if (currentStep === 1) {
+      goTo("/registration");
+    } else {
+      setCurrentStep(currentStep - 1);
     }
   };
 
