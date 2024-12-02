@@ -7,7 +7,6 @@ import AlertBox from "@reusable/AlertBox";
 import Button from "@reusable/Button";
 import usePasswordVisibility from "@hooks/usePasswordVisibility";
 import useUserContext from "@hooks/useUserContext";
-import { logBuddy } from "@utils/errorUtils";
 import useFormValidation from "@hooks/useFormValidation";
 
 export default function PersonalDetails({ onNext }) {
@@ -60,7 +59,6 @@ export default function PersonalDetails({ onNext }) {
 
     // Pass collected data to parent
     onNext(personalData);
-    logBuddy("Personal Details:", personalData);
   };
 
   return (

@@ -6,7 +6,6 @@ import AlertBox from "@reusable/AlertBox";
 import Button from "@reusable/Button";
 import useUserContext from "@hooks/useUserContext";
 import useFormValidation from "@hooks/useFormValidation";
-import { logBuddy } from "@utils/errorUtils";
 
 export default function AddressDetails({ onNext }) {
   const { error, setError } = useUserContext();
@@ -30,9 +29,6 @@ export default function AddressDetails({ onNext }) {
       street: formData.get("street"),
     };
 
-    // Check the collected address data
-    console.log("Address Data collected:", addressData);
-
     // Validate required fields
     if (!validateForm(formData)) return;
 
@@ -41,7 +37,6 @@ export default function AddressDetails({ onNext }) {
 
     // Pass collected data to parent (onNext)
     onNext(addressData);
-    logBuddy("Address Details:", addressData);
   };
 
   return (

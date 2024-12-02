@@ -6,7 +6,6 @@ import Textarea from "@reusable/Textarea";
 import AlertBox from "@reusable/AlertBox";
 import Button from "@reusable/Button";
 import useUserContext from "@hooks/useUserContext";
-import { logBuddy } from "@utils/errorUtils";
 import useFormValidation from "@hooks/useFormValidation";
 
 export default function CompanyDetails({ onNext }) {
@@ -46,7 +45,6 @@ export default function CompanyDetails({ onNext }) {
 
     // Pass collected data to parent
     onNext(companyData);
-    logBuddy("Company Details:", companyData);
   };
 
   return (
