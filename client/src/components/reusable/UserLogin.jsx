@@ -1,14 +1,16 @@
 import PropTypes from "prop-types";
-import { useState, useCallback } from "react";
+import { useCallback } from "react";
 import "@styles/components/user-login.scss";
 import useNavigation from "@hooks/useNavigation";
 import usePasswordVisibility from "@hooks/usePasswordVisibility";
+import useUserContext from "@hooks/useUserContext";
 import Input from "@reusable/Input";
 import Button from "@reusable/Button";
 import Icon from "@reusable/Icon";
 import AlertBox from "@reusable/AlertBox";
 import AuthLink from "@reusable/AuthLink";
 import ShowToast from "@reusable/ShowToast";
+import LoadingIndicator from "@reusable/LoadingIndicator";
 import { logBuddy, handleError } from "@utils/errorUtils";
 
 export default function UserLogin({
@@ -20,7 +22,7 @@ export default function UserLogin({
 }) {
   const { goTo } = useNavigation();
   const { showPassword, togglePasswordVisibility } = usePasswordVisibility();
-  const [error, setError] = useState("");
+  const { error, setError, loading, setLoading } = useUserContext();
 
   const handleLogin = useCallback(
     async (e) => {
@@ -36,57 +38,67 @@ export default function UserLogin({
           : { email, password };
 
       setError("");
+      setLoading(true); // Start loading spinner
       try {
         await loginUser(data);
         logBuddy(`${heading} login successful`, data);
         ShowToast("Logged in successfully!", "success");
-        setTimeout(() => goTo(goToUrl), 1500);
+
+        // Ensure spinner is visible during navigation
+        setLoading(true);
+        await goTo(goToUrl);
       } catch (error) {
         if (!error.handled) {
           error.handled = true;
           handleError(error, setError);
         }
+      } finally {
+        setLoading(false); // Stop loading spinner
       }
     },
-    [goTo, loginUser, heading, goToUrl, userType]
+    [goTo, loginUser, heading, goToUrl, userType, setError, setLoading]
   );
 
   return (
     <div className="user-login-container">
-      <div className="user-login-wrapper">
-        <h2>{heading}</h2>
-        <form onSubmit={handleLogin}>
-          <Input
-            labelName="Email *"
-            type="email"
-            name="email"
-            placeholder="Enter your email"
-            required
-          />
-          <div className="password-input">
+      {loading ? (
+        <LoadingIndicator size={60} />
+      ) : (
+        <div className="user-login-wrapper">
+          <h2>{heading}</h2>
+          <form onSubmit={handleLogin}>
             <Input
-              labelName="Password *"
-              type={showPassword ? "text" : "password"}
-              name="password"
-              placeholder="Enter your password"
+              labelName="Email *"
+              type="email"
+              name="email"
+              placeholder="Enter your email"
               required
             />
-            <Icon
-              library="fa"
-              name={showPassword ? "FaEyeSlash" : "FaEye"}
-              className="hide-and-show-pass"
-              onClick={togglePasswordVisibility}
+            <div className="password-input">
+              <Input
+                labelName="Password *"
+                type={showPassword ? "text" : "password"}
+                name="password"
+                placeholder="Enter your password"
+                required
+              />
+              <Icon
+                library="fa"
+                name={showPassword ? "FaEyeSlash" : "FaEye"}
+                className="hide-and-show-pass"
+                onClick={togglePasswordVisibility}
+              />
+            </div>
+            {error && <AlertBox message={error} />}
+            <Button name="Login" type="submit" />
+            <AuthLink
+              message="No account yet?"
+              pathName="Register"
+              pathUrl={registerPathUrl}
             />
-          </div>
-          {error && <AlertBox message={error} />}
-          <Button name="Login" type="submit" />
-          <AuthLink
-            message="No account yet?"
-            pathName="Register"
-            pathUrl={registerPathUrl}
-          />
-        </form>
-      </div>
+          </form>
+        </div>
+      )}
     </div>
   );
 }

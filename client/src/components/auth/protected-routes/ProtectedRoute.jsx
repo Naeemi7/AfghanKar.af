@@ -10,11 +10,14 @@ import ShowToast from "@reusable/ShowToast";
  * @returns
  */
 export default function ProtectedRoute({ role }) {
-  const { isJobSeekerLoggedIn, isRecruiterLoggedIn } = useUserContext();
+  const { isJobSeekerLoggedIn, isRecruiterLoggedIn, loading, setLoading } =
+    useUserContext();
   const [redirect, setRedirect] = useState(null);
   const [toastMessage, setToastMessage] = useState(null);
-  // Loading state to prevent redirecting too early
-  const [loading, setLoading] = useState(true);
+  const [previousLoginState, setPreviousLoginState] = useState({
+    isJobSeekerLoggedIn,
+    isRecruiterLoggedIn,
+  });
 
   useEffect(() => {
     // Wait for the login state to be initialized
@@ -25,7 +28,7 @@ export default function ProtectedRoute({ role }) {
       // Once state is set, stop loading
       setLoading(false);
     }
-  }, [isJobSeekerLoggedIn, isRecruiterLoggedIn]);
+  }, [isJobSeekerLoggedIn, isRecruiterLoggedIn, setLoading]);
 
   useEffect(() => {
     if (!loading) {
@@ -49,10 +52,34 @@ export default function ProtectedRoute({ role }) {
     setRedirect(route); // Set redirection route
   };
 
+  // Compare the current login state with the previous state to detect logout
+  useEffect(() => {
+    if (
+      isJobSeekerLoggedIn !== previousLoginState.isJobSeekerLoggedIn ||
+      isRecruiterLoggedIn !== previousLoginState.isRecruiterLoggedIn
+    ) {
+      // If login state has changed (i.e., the user logged out), suppress the toast
+      if (
+        !isJobSeekerLoggedIn &&
+        !isRecruiterLoggedIn &&
+        previousLoginState.isJobSeekerLoggedIn !== undefined
+      ) {
+        setToastMessage(null); // Prevent showing the toast message if logged out
+      }
+
+      // Update previous login state
+      setPreviousLoginState({
+        isJobSeekerLoggedIn,
+        isRecruiterLoggedIn,
+      });
+    }
+  }, [isJobSeekerLoggedIn, isRecruiterLoggedIn, previousLoginState]);
+
   useEffect(() => {
     if (toastMessage) {
       ShowToast(toastMessage, "error");
     }
+    setToastMessage(null); // Reset toast message after displaying it
   }, [toastMessage]);
 
   // If redirect is set, perform navigation

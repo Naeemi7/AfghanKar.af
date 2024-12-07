@@ -101,10 +101,6 @@ export default function UserProvider({ children }) {
     }
   };
 
-  if (loading) {
-    return null; // Optionally, return a loading spinner or null until the state is set
-  }
-
   return (
     <UserContext.Provider
       value={{
@@ -117,6 +113,8 @@ export default function UserProvider({ children }) {
         loginJobSeeker,
         loginRecruiter,
         userLogoutHandler,
+        loading,
+        setLoading,
       }}
     >
       {children}

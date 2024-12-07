@@ -369,3 +369,15 @@ form {
     position: absolute;
   }
 }
+
+// LoadingIndicator Reusable component style
+.loading-container {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 60vh;
+
+  .spinner {
+    color: $accent-color;
+  }
+}
