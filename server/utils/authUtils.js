@@ -48,9 +48,9 @@ export const userLogin = async (userModel, email, password, res, userType) => {
     if (userType === "recruiter") delete user.personalDetails.password;
     else delete user.password;
 
-    // Format response data for recruiter or job seeker
-    // Format response data for recruiters or job seekers
+    // Flatten response data for recruiter or job seeker
     let responseData;
+
     if (userType === "recruiter") {
       // Flatten nested recruiter details
       responseData = {
@@ -58,13 +58,15 @@ export const userLogin = async (userModel, email, password, res, userType) => {
         email: user.personalDetails.email,
         position: user.personalDetails.position,
         phoneNumber: user.personalDetails.phoneNumber,
-        ...(user.companyDetails || {}),
-        ...(user.addressDetails || {}),
+        ...user.companyDetails, // Flatten companyDetails into root
+        ...user.addressDetails, // Flatten addressDetails into root
       };
     } else {
+      // Flatten job seeker details (if any)
       responseData = {
         fullName: user.fullName,
         email: user.email,
+        ...user.otherDetails, // Optional other details
       };
     }
 

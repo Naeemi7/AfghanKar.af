@@ -58,10 +58,11 @@ export default function UserProvider({ children }) {
         logBuddy("Provider: ", response.jobSeeker);
         localStorage.setItem("jobSeeker", JSON.stringify(response.jobSeeker));
       } else if (userType === "recruiter") {
-        logBuddy("Provider: ", response.recruiter);
-        setRecruiter(response.recruiter);
+        logBuddy("Provider: ", response.data);
+
+        setRecruiter(response.data);
         setIsRecruiterLoggedIn(true);
-        localStorage.setItem("recruiter", JSON.stringify(response.recruiter));
+        localStorage.setItem("recruiter", JSON.stringify(response.data));
       }
     } catch (error) {
       logError("Login Error", error);
