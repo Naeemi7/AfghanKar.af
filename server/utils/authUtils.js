@@ -66,7 +66,7 @@ export const userLogin = async (userModel, email, password, res, userType) => {
       responseData = {
         fullName: user.fullName,
         email: user.email,
-        ...user.otherDetails, // Optional other details
+        username: user.username,
       };
     }
 

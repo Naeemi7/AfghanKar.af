@@ -53,10 +53,10 @@ export default function UserProvider({ children }) {
       const response = await post(url, data, setError);
 
       if (userType === "jobSeeker") {
-        setJobSeeker(response.jobSeeker);
+        setJobSeeker(response.data);
         setIsJobSeekerLoggedIn(true);
-        logBuddy("Provider: ", response.jobSeeker);
-        localStorage.setItem("jobSeeker", JSON.stringify(response.jobSeeker));
+        logBuddy("Provider: ", response.data);
+        localStorage.setItem("jobSeeker", JSON.stringify(response.data));
       } else if (userType === "recruiter") {
         logBuddy("Provider: ", response.data);
 
