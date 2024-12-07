@@ -48,21 +48,25 @@ export const userLogin = async (userModel, email, password, res, userType) => {
     if (userType === "recruiter") delete user.personalDetails.password;
     else delete user.password;
 
-    // Format response data
-    const responseData =
-      userType === "recruiter"
-        ? {
-            fullName: user.personalDetails.fullName,
-            email: user.personalDetails.email,
-            position: user.personalDetails.position,
-            phoneNumber: user.personalDetails.phoneNumber,
-            companyDetails: user.companyDetails,
-            addressDetails: user.addressDetails,
-          }
-        : {
-            fullName: user.fullName,
-            email: user.email,
-          };
+    // Format response data for recruiter or job seeker
+    // Format response data for recruiters or job seekers
+    let responseData;
+    if (userType === "recruiter") {
+      // Flatten nested recruiter details
+      responseData = {
+        fullName: user.personalDetails.fullName,
+        email: user.personalDetails.email,
+        position: user.personalDetails.position,
+        phoneNumber: user.personalDetails.phoneNumber,
+        ...(user.companyDetails || {}),
+        ...(user.addressDetails || {}),
+      };
+    } else {
+      responseData = {
+        fullName: user.fullName,
+        email: user.email,
+      };
+    }
 
     return res.status(StatusCodes.OK).json({
       message: `${userType} login successful.`,
