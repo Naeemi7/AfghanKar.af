@@ -21,7 +21,7 @@ export default function RecruiterSidebar() {
     <Sidebar
       links={recruiterSidebarData}
       avatarImage={profileImage}
-      avatarHeading={`${recruiter.firstName} ${recruiter.lastName}`}
+      avatarHeading={recruiter.fullName}
       avatarParagraph={recruiter.email}
     />
   );

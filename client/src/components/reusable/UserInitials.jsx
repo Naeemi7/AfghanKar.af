@@ -9,17 +9,19 @@ export default function UserInitials({
 }) {
   const { isJobSeekerLoggedIn, jobSeeker, recruiter } = useUserContext();
 
-  let firstInitial = "";
-  let lastInitial = "";
+  // Helper function to get initials from a full name
+  const getInitials = (fullName) => {
+    if (!fullName) return "";
+    const [firstName, lastName] = fullName.split(" "); // Split by space to get first and last names
+    const firstInitial = firstName?.charAt(0).toUpperCase() || "";
+    const lastInitial = lastName?.charAt(0).toUpperCase() || "";
+    return `${firstInitial}${lastInitial}`;
+  };
 
-  // Ensure firstName and lastName exist before accessing their charAt method
-  if (isJobSeekerLoggedIn && jobSeeker?.firstName && jobSeeker?.lastName) {
-    firstInitial = jobSeeker.firstName.charAt(0).toUpperCase();
-    lastInitial = jobSeeker.lastName.charAt(0).toUpperCase();
-  } else if (recruiter?.firstName && recruiter?.lastName) {
-    firstInitial = recruiter.firstName.charAt(0).toUpperCase();
-    lastInitial = recruiter.lastName.charAt(0).toUpperCase();
-  }
+  // Determine which user's initials to display
+  const initials = isJobSeekerLoggedIn
+    ? getInitials(jobSeeker?.fullName)
+    : getInitials(recruiter?.fullName);
 
   // Compute styles once and use them for inline styling
   const circleStyles = {
@@ -37,8 +39,7 @@ export default function UserInitials({
     <div className="initials-container">
       <div className="initials-circle" style={circleStyles}>
         <p className="initials" style={textStyles}>
-          {firstInitial}
-          {lastInitial}
+          {initials}
         </p>
       </div>
     </div>

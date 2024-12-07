@@ -22,7 +22,7 @@ export default function JobSeekerSidebar() {
     <Sidebar
       links={jobSeekerSidebarData}
       avatarImage={profileImage}
-      avatarHeading={`${jobSeeker.firstName} ${jobSeeker.lastName}`}
+      avatarHeading={jobSeeker.fullName}
       avatarParagraph={jobSeeker.email}
     />
   );
