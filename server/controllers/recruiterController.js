@@ -73,7 +73,9 @@ export const createRecruiter = async (req, res) => {
  * @returns
  */
 export const recruiterLogin = async (req, res) => {
-  const { email, password } = req.body;
+  const { personalDetails } = req.body;
+  const { email, password } = personalDetails;
+
   return userLogin(Recruiter, email, password, res, "recruiter");
 };
 

@@ -14,74 +14,60 @@ import { generateJwt } from "../helpers/jwt.js";
 export const userLogin = async (userModel, email, password, res, userType) => {
   try {
     const lowercaseEmail = email.toLowerCase();
-    const user = await userModel.findOne({ email: lowercaseEmail });
+
+    // Adjust the query for nested fields
+    const emailField =
+      userType === "recruiter" ? "personalDetails.email" : "email";
+    const user = await userModel
+      .findOne({ [emailField]: lowercaseEmail })
+      .lean();
 
     if (!user) {
       return res
         .status(StatusCodes.NOT_FOUND)
-        .json({ message: "Email not found" });
+        .json({ message: "User not found. Please check the email address." });
     }
 
-    const matchedPassword = await bcrypt.compare(password, user.password);
+    // Hash comparison
+    const hashedPassword =
+      userType === "recruiter" ? user.personalDetails.password : user.password;
 
-    if (matchedPassword) {
-      const token = generateJwt(user._id);
-      res.cookie("userToken", token, { httpOnly: true, secure: false });
+    const matchedPassword = await bcrypt.compare(password, hashedPassword);
 
-      // Define response structure based on userType
-      let userData;
-
-      // Exclude password from response
-      const { password: _, fullName, ...userWithoutPassword } = user.toObject(); // Exclude password
-
-      // Split fullName into firstName and lastName
-      const [firstName, lastName] = fullName
-        ? fullName
-            .split(" ")
-            .map(
-              (name) =>
-                name.charAt(0).toUpperCase() + name.slice(1).toLowerCase()
-            )
-        : [null, null];
-
-      if (userType === "recruiter") {
-        userData = {
-          firstName,
-          lastName,
-          email: userWithoutPassword.email,
-          phoneNumber: userWithoutPassword.phoneNumber,
-          position: userWithoutPassword.position,
-          companyName: userWithoutPassword.companyName,
-          companyType: userWithoutPassword.companyType,
-          foundedIn: userWithoutPassword.foundedIn,
-          companyWebsite: userWithoutPassword.companyWebsite,
-          description: userWithoutPassword.description,
-          industryType: userWithoutPassword.industryType,
-          companyLogo: userWithoutPassword.companyLogo,
-          country: userWithoutPassword.country,
-          state: userWithoutPassword.state,
-          city: userWithoutPassword.city,
-          street: userWithoutPassword.street,
-        };
-      } else {
-        userData = {
-          userId: userWithoutPassword._id,
-          firstName,
-          lastName,
-          email: userWithoutPassword.email,
-          position: userWithoutPassword.position || null,
-        };
-      }
-
-      return res.status(StatusCodes.OK).json({
-        message: `${userType} login successful. Welcome, ${firstName} ${lastName}`,
-        [userType]: userData,
-      });
-    } else {
+    if (!matchedPassword) {
       return res
         .status(StatusCodes.UNAUTHORIZED)
-        .json({ message: "Incorrect password" });
+        .json({ message: "Incorrect password." });
     }
+
+    // Generate JWT
+    const token = generateJwt(user._id);
+    res.cookie("userToken", token, { httpOnly: true, secure: false });
+
+    // Exclude password from response
+    if (userType === "recruiter") delete user.personalDetails.password;
+    else delete user.password;
+
+    // Format response data
+    const responseData =
+      userType === "recruiter"
+        ? {
+            fullName: user.personalDetails.fullName,
+            email: user.personalDetails.email,
+            position: user.personalDetails.position,
+            phoneNumber: user.personalDetails.phoneNumber,
+            companyDetails: user.companyDetails,
+            addressDetails: user.addressDetails,
+          }
+        : {
+            fullName: user.fullName,
+            email: user.email,
+          };
+
+    return res.status(StatusCodes.OK).json({
+      message: `${userType} login successful.`,
+      data: responseData,
+    });
   } catch (error) {
     console.error(`Error in ${userType} login:`, error);
     return res
@@ -89,7 +75,6 @@ export const userLogin = async (userModel, email, password, res, userType) => {
       .json({ message: "Internal Server Error" });
   }
 };
-
 /**
  * Utility function for logging out a user.
  * @param {Object} res - The response object.
