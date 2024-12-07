@@ -11,6 +11,7 @@ export default function RecruiterLogin() {
       loginUser={loginRecruiter}
       registerPathUrl="/recruiter-registration"
       goToUrl="/recruiter-dashboard"
+      userType="recruiter"
     />
   );
 }

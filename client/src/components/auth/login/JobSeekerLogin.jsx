@@ -11,6 +11,7 @@ export default function JobSeekerLogin() {
       loginUser={loginJobSeeker}
       registerPathUrl="/job-seeker-registration"
       goToUrl="/job-seeker-dashboard"
+      userType="jobSeeker"
     />
   );
 }

@@ -16,6 +16,7 @@ export default function UserLogin({
   loginUser,
   registerPathUrl,
   goToUrl,
+  userType,
 }) {
   const { goTo } = useNavigation();
   const { showPassword, togglePasswordVisibility } = usePasswordVisibility();
@@ -25,10 +26,15 @@ export default function UserLogin({
     async (e) => {
       e.preventDefault();
       const formData = new FormData(e.target);
-      const data = {
-        email: formData.get("email"),
-        password: formData.get("password"),
-      };
+      const email = formData.get("email");
+      const password = formData.get("password");
+
+      // Adjust the payload structure based on userType
+      const data =
+        userType === "recruiter"
+          ? { personalDetails: { email, password } }
+          : { email, password };
+
       setError("");
       try {
         await loginUser(data);
@@ -42,7 +48,7 @@ export default function UserLogin({
         }
       }
     },
-    [goTo, loginUser, heading, goToUrl]
+    [goTo, loginUser, heading, goToUrl, userType]
   );
 
   return (
@@ -87,7 +93,8 @@ export default function UserLogin({
 
 UserLogin.propTypes = {
   heading: PropTypes.string,
-  loginUser: PropTypes.func,
-  registerPathUrl: PropTypes.string,
-  goToUrl: PropTypes.string,
+  loginUser: PropTypes.func.isRequired,
+  registerPathUrl: PropTypes.string.isRequired,
+  goToUrl: PropTypes.string.isRequired,
+  userType: PropTypes.oneOf(["recruiter", "jobSeeker"]).isRequired, // Add userType prop validation
 };
