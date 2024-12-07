@@ -12,12 +12,13 @@ import { post } from "@api/apiService";
 import ShowToast from "@reusable/ShowToast";
 import formFields from "@data/registration/job-seeker/job-seeker-registration-data";
 import { logBuddy, logError, handleError } from "@utils/errorUtils";
+import LoadingIndicator from "@reusable/LoadingIndicator";
 
 const JobSeekerRegistration = () => {
   const [passwordMatched, setPasswordMatched] = useState(true);
   const { goTo } = useNavigation();
   const { showPassword, togglePasswordVisibility } = usePasswordVisibility();
-  const { error, setError } = useUserContext();
+  const { error, setError, loading, setLoading } = useUserContext();
 
   /**
    * Handles the registration
@@ -36,84 +37,81 @@ const JobSeekerRegistration = () => {
       password: formData.get("password"),
     };
 
-    const confirmedPassword = formData.get("confirm-password");
-
-    if (data.password !== confirmedPassword) {
+    if (data.password !== formData.get("confirm-password")) {
       setPasswordMatched(false);
       return;
-    } else {
-      setPasswordMatched(true);
     }
-    // Clear previous errors before registration attempt
+
+    setPasswordMatched(true);
     setError("");
+    setLoading(true);
 
     try {
       const response = await post("/job-seeker/register", data, setError);
       logBuddy("Registration response: ", response);
       ShowToast("Registered successfully!", "success");
 
-      // Redirect to login page after a short delay
-      setTimeout(() => {
-        goTo("/job-seeker-login");
-      }, 1500);
+      setLoading(true); // Ensure spinner is visible during navigation
+      goTo("/job-seeker-login");
     } catch (err) {
       if (!err.handled) {
-        err.handled = true;
         handleError(err, setError);
         logError("Registration error:", err);
       }
+    } finally {
+      setLoading(false);
     }
   };
 
   return (
     <div className="job-seeker-registration-container">
-      <h2>Job Seeker Registration</h2>
+      {loading ? (
+        <LoadingIndicator size={60} />
+      ) : (
+        <>
+          <h2>Job Seeker Registration</h2>
+          <form onSubmit={handleRegistration}>
+            {formFields(showPassword).map((field, index) => (
+              <div
+                key={index}
+                className={
+                  field.name.includes("password") ? "password-input" : ""
+                }
+              >
+                <Input
+                  labelName={field.labelName}
+                  type={field.type}
+                  name={field.name}
+                  placeholder={field.placeholder}
+                  required
+                  autoComplete="new-password"
+                />
+                {field.name.includes("password") && (
+                  <Icon
+                    library="fa"
+                    name={showPassword ? "FaEyeSlash" : "FaEye"}
+                    className="hide-and-show-pass"
+                    onClick={togglePasswordVisibility}
+                  />
+                )}
+              </div>
+            ))}
 
-      <form onSubmit={handleRegistration}>
-        {formFields(showPassword).map((field, index) => (
-          <div
-            key={index}
-            className={field.name.includes("password") ? "password-input" : ""}
-          >
-            {/* Reusable Input Component */}
-            <Input
-              labelName={field.labelName}
-              type={field.type}
-              name={field.name}
-              placeholder={field.placeholder}
-              required
-              // **Changes made here**: Added autocomplete="new-password" for both password fields
-              autocomplete="new-password"
-            />
-            {field.name.includes("password") && (
-              // Reusable Icon Component
-              <Icon
-                library="fa"
-                name={showPassword ? "FaEyeSlash" : "FaEye"}
-                className="hide-and-show-pass"
-                onClick={togglePasswordVisibility}
-              />
+            {!passwordMatched && (
+              <AlertBox message="Passwords do not match." type="error" />
             )}
-          </div>
-        ))}
+            {error && <AlertBox message={error} type="error" />}
 
-        {/* Reusable AlertBox component to display the error message on UI */}
-        {!passwordMatched && (
-          <AlertBox message="Passwords do not match." type="error" />
-        )}
-        {error && <AlertBox message={error} type="error" />}
-
-        <Button name="Register" type="submit" />
-
-        {/* Reusable AuthLink component to redirect the user to login page */}
-        <AuthLink
-          message="Already signed up? "
-          pathName="Login"
-          pathUrl="/job-seeker-login"
-        />
-      </form>
+            <Button name="Register" type="submit" />
+            <AuthLink
+              message="Already signed up? "
+              pathName="Login"
+              pathUrl="/job-seeker-login"
+            />
+          </form>
+        </>
+      )}
     </div>
   );
 };
-
 export default JobSeekerRegistration;
