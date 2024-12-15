@@ -19,7 +19,8 @@ export default function RecruiterRegistrationLayout() {
     addressDetails: {},
   });
 
-  const [isFinalStep, setIsFinalStep] = useState(false); // Track when the last step is completed
+  // Track when the last step is completed
+  const [isFinalStep, setIsFinalStep] = useState(false);
 
   // Wrap handleSubmit with useCallback to stabilize its reference
   const handleSubmit = useCallback(async () => {
@@ -63,7 +64,8 @@ export default function RecruiterRegistrationLayout() {
     if (currentStep < 3) {
       setCurrentStep(currentStep + 1);
     } else {
-      setIsFinalStep(true); // Mark the final step as completed
+      // Mark the final step as completed
+      setIsFinalStep(true);
     }
   };
 
