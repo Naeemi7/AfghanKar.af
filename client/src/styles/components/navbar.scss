@@ -42,10 +42,10 @@
 
         &:hover {
           font-weight: bold;
-          color: $accent-color;
+          color: $primary-btn-hover;
 
           .nav-icon {
-            color: $accent-color;
+            color: $primary-btn-hover;
           }
         }
       }
@@ -78,7 +78,7 @@
         &:hover {
           span,
           .profile-icon {
-            color: $accent-color;
+            color: $primary-btn-hover;
           }
         }
 
@@ -183,7 +183,7 @@
         transition: color 0.3s;
 
         &:hover {
-          color: $accent-color;
+          color: $primary-btn-hover;
         }
       }
     }
