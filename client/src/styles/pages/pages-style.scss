@@ -173,9 +173,9 @@
         right: 0;
         width: 0; // Start with no width
         height: 100%; // Full height to match the contact form
-        box-shadow: inset -2px 0 0 0 $border-color; // Apply shadow only on the right side
-        animation: borderRightAnimation 10s ease-in-out infinite; // Smooth transition with longer duration
-        border-radius: 1rem; // Matching the contact form border-radius
+        box-shadow: inset -2px 0 0 0 $border-color;
+        animation: borderRightAnimation 10s ease-in-out infinite;
+        border-radius: 1rem;
       }
 
       @keyframes borderRightAnimation {
