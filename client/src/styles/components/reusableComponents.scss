@@ -381,3 +381,23 @@ form {
     color: $accent-color;
   }
 }
+
+// Reusable Social Media Component Style
+.social-media-container {
+  display: flex;
+  gap: 1rem;
+  justify-content: flex-start;
+
+  a {
+    // color: $secondary-color;
+    transition: color 0.3s ease, transform 0.3s;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+
+    &:hover {
+      transform: scale(1.2);
+      color: red;
+    }
+  }
+}

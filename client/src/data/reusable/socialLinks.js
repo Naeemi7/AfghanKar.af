@@ -5,7 +5,6 @@ const socialLinks = [
       {
         library: "md",
         name: "MdFacebook",
-        size: 24,
       },
     ],
   },
@@ -15,7 +14,6 @@ const socialLinks = [
       {
         library: "fa6",
         name: "FaXTwitter",
-        size: 24,
       },
     ],
   },
@@ -25,7 +23,6 @@ const socialLinks = [
       {
         library: "fa6",
         name: "FaSquareInstagram",
-        size: 24,
       },
     ],
   },
@@ -35,7 +32,6 @@ const socialLinks = [
       {
         library: "io5",
         name: "IoLogoLinkedin",
-        size: 24,
       },
     ],
   },

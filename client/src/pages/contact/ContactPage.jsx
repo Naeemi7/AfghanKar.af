@@ -4,6 +4,7 @@ import Input from "@reusable/Input";
 import Textarea from "@reusable/TextArea";
 import Button from "@reusable/Button";
 import Icon from "@reusable/Icon";
+import SocialMedia from "@reusable/SocialMeida";
 
 export default function ContactPage() {
   // Filter textarea inputs
@@ -14,15 +15,16 @@ export default function ContactPage() {
 
   return (
     <div className="contact-page-container">
-      <h1>Contact Us</h1>
+      <div className="contact-heading">
+        <h2>Contact Us</h2>
+      </div>
 
       <div className="contact-wrapper">
         <form className="contact-form">
-          {/* <p className="contact-page-description">
-            Whether you’re a job seeker with questions or a recruiter looking
-            for support, we’re here to help. Fill out the form below, and our
-            team will get back to you promptly.
-          </p> */}
+          <p>
+            Got questions? Fill out the form, and we’ll be in touch shortly to
+            assist you!
+          </p>
           {/* Render other input fields dynamically */}
           {otherInputs.map(
             ({ labelName, type, name, placeholder, required }) => (
@@ -60,7 +62,7 @@ export default function ContactPage() {
         {/* Render contact info dynamically */}
         <div className="contact-info">
           {contactInfo.map(({ id, library, iconName, labelName }) => (
-            <div key={id} className="contact-icon-wrapper">
+            <div key={id} className="contact-icon-container">
               <Icon
                 library={library}
                 name={iconName}
@@ -69,6 +71,10 @@ export default function ContactPage() {
               <span>{labelName}</span>
             </div>
           ))}
+          <div className="contact-social-media-icons">
+            {/* Reusable SocialMedia Component */}
+            <SocialMedia size={32} color="#e67e22" />
+          </div>
         </div>
       </div>
     </div>

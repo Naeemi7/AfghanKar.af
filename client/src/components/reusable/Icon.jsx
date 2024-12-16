@@ -10,7 +10,7 @@ import * as PiIcons from "react-icons/pi";
 import * as CiIcons from "react-icons/ci";
 import * as GrIcons from "react-icons/gr";
 import * as TiIcons from "react-icons/ti";
-import * as BiIcons from "react-icons/bi"; // Import the BiIcons library
+import * as BiIcons from "react-icons/bi";
 
 const ICON_LIBRARIES = {
   fa: FaIcons,
@@ -24,7 +24,7 @@ const ICON_LIBRARIES = {
   ci: CiIcons,
   gr: GrIcons,
   ti: TiIcons,
-  bi: BiIcons, // Add the BiIcons library
+  bi: BiIcons,
 };
 
 export default function Icon({

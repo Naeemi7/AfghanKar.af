@@ -1,9 +1,9 @@
 import "@styles/components/footer.scss";
 import Logo from "@reusable/Logo";
 import QuickLinks from "./QuickLinks";
-import SocialMedia from "./SocialMedia";
 import Newsletter from "./Newsletter";
 import FooterBottom from "./FooterBottom";
+import SocialMediaLinks from "./SocialMeidaLinks";
 
 const Footer = () => {
   return (
@@ -15,8 +15,8 @@ const Footer = () => {
         {/* QuickLink Component */}
         <QuickLinks />
 
-        {/* SocialMedia Component */}
-        <SocialMedia />
+        {/* SocialMediaLinks Component */}
+        <SocialMediaLinks />
 
         {/* Newsletter Component */}
         <Newsletter />
