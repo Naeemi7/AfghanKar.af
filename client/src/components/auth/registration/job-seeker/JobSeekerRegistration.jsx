@@ -8,7 +8,7 @@ import usePasswordVisibility from "@hooks/usePasswordVisibility";
 import useNavigation from "@hooks/useNavigation";
 import useUserContext from "@hooks/useUserContext";
 import AlertBox from "@reusable/AlertBox";
-import { post } from "@api/apiService";
+import { post } from "@api/express/apiService";
 import ShowToast from "@reusable/ShowToast";
 import formFields from "@data/registration/job-seeker/job-seeker-registration-data";
 import { logBuddy, logError, handleError } from "@utils/errorUtils";

@@ -5,7 +5,7 @@ import RecruiterRegistrationSidebar from "@auth/registration/recruiter/Recruiter
 import MainContent from "@auth/registration/recruiter/MainContent";
 import useNavigation from "@hooks/useNavigation";
 import ShowToast from "@reusable/ShowToast";
-import { post } from "@api/apiService";
+import { post } from "@api/express/apiService";
 import useUserContext from "@hooks/useUserContext";
 import { logBuddy, logError, handleError } from "@utils/errorUtils";
 

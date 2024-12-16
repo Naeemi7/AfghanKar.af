@@ -1,7 +1,7 @@
 import { useState, useEffect } from "react";
 import PropTypes from "prop-types";
 import UserContext from "@context/UserContext";
-import { post, get } from "@api/apiService";
+import { post, get } from "@api/express/apiService";
 import { logBuddy, logError } from "@utils/errorUtils";
 
 export default function UserProvider({ children }) {
