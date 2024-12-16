@@ -108,5 +108,5 @@ UserLogin.propTypes = {
   loginUser: PropTypes.func.isRequired,
   registerPathUrl: PropTypes.string.isRequired,
   goToUrl: PropTypes.string.isRequired,
-  userType: PropTypes.oneOf(["recruiter", "jobSeeker"]).isRequired, // Add userType prop validation
+  userType: PropTypes.oneOf(["recruiter", "jobSeeker"]).isRequired,
 };

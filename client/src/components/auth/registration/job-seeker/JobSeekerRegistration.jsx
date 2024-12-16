@@ -71,31 +71,31 @@ const JobSeekerRegistration = () => {
         <>
           <h2>Job Seeker Registration</h2>
           <form onSubmit={handleRegistration}>
-            {formFields(showPassword).map((field, index) => (
-              <div
-                key={index}
-                className={
-                  field.name.includes("password") ? "password-input" : ""
-                }
-              >
-                <Input
-                  labelName={field.labelName}
-                  type={field.type}
-                  name={field.name}
-                  placeholder={field.placeholder}
-                  required
-                  autoComplete="new-password"
-                />
-                {field.name.includes("password") && (
-                  <Icon
-                    library="fa"
-                    name={showPassword ? "FaEyeSlash" : "FaEye"}
-                    className="hide-and-show-pass"
-                    onClick={togglePasswordVisibility}
+            {formFields(showPassword).map(
+              ({ labelName, type, name, placeholder, required }) => (
+                <div
+                  key={name}
+                  className={name.includes("password") ? "password-input" : ""}
+                >
+                  <Input
+                    labelName={labelName}
+                    type={type}
+                    name={name}
+                    placeholder={placeholder}
+                    required={required}
+                    autoComplete="new-password"
                   />
-                )}
-              </div>
-            ))}
+                  {name.includes("password") && (
+                    <Icon
+                      library="fa"
+                      name={showPassword ? "FaEyeSlash" : "FaEye"}
+                      className="hide-and-show-pass"
+                      onClick={togglePasswordVisibility}
+                    />
+                  )}
+                </div>
+              )
+            )}
 
             {!passwordMatched && (
               <AlertBox message="Passwords do not match." type="error" />

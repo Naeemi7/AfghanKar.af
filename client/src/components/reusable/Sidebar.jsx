@@ -24,11 +24,11 @@ export default function Sidebar({
         avatarParagraph={avatarParagraph}
       />
       <ul className="sidebar-link-container">
-        {otherLinks.map((link, index) => (
-          <li key={index}>
-            <Link to={link.to} className="sidebar-link">
-              <Icon library={link.library} name={link.name} />
-              <span>{link.label}</span>
+        {otherLinks.map(({ to, library, name, label }) => (
+          <li key={name}>
+            <Link to={to} className="sidebar-link">
+              <Icon library={library} name={name} />
+              <span>{label}</span>
             </Link>
           </li>
         ))}
