@@ -130,3 +130,56 @@
 }
 
 // Contact page
+.contact-page-container {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  width: 100%;
+  justify-content: center;
+  gap: 2rem;
+
+  h1 {
+    text-align: center;
+  }
+
+  .contact-wrapper {
+    width: 100%;
+    display: flex;
+    gap: 2rem;
+    justify-items: center;
+    align-items: center;
+
+    .contact-form {
+      display: flex;
+      gap: 2rem;
+      // border: 1px solid $border-color;
+      // padding: 6rem;
+      border-radius: 1rem;
+      width: 50%;
+    }
+
+    .contact-info {
+      width: 40%;
+
+      .contact-icon-wrapper {
+        display: flex;
+        align-items: center;
+        gap: 1rem;
+        padding: 0.5rem;
+
+        .contact-icon {
+          width: 3rem;
+          height: 3rem;
+          border-radius: 100%;
+          background-color: $secondary-color;
+          color: $primary-color;
+          padding: 0.5rem;
+        }
+
+        span {
+          font-size: 1.5rem;
+        }
+      }
+    }
+  }
+}

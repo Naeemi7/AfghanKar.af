@@ -24,18 +24,21 @@ const contactData = [
 
 const contactInfo = [
   {
+    id: 1,
     library: "md",
-    name: "MdAlternateEmail",
+    iconName: "MdAlternateEmail",
     labelName: "info@afghanKar.af",
   },
   {
+    id: 2,
     library: "md",
-    name: "MdPhoneInTalk",
+    iconName: "MdPhoneInTalk",
     labelName: "+93-790173480",
   },
   {
+    id: 3,
     library: "io5",
-    name: "IoLocationOutline",
+    iconName: "IoLocationOutline",
     labelName: "New City, Kabul, Afghanistan",
   },
 ];
