@@ -1,9 +1,8 @@
 @use "@/styles/abstracts/variables" as *;
 @use "@/styles/abstracts/mixin" as *;
 
-// Home and Contact pages common style
-.home-page-container,
-.contact-page-container {
+// Home page common style
+.home-page-container {
   height: 100%;
   display: flex;
   flex-direction: column;
@@ -129,3 +128,5 @@
     margin-top: 20px;
   }
 }
+
+// Contact page

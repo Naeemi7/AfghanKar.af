@@ -65,28 +65,30 @@ export default function PersonalDetails({ onNext }) {
     <div className="personal-details-container">
       <h1>Personal Details</h1>
       <form className="registration-form" onSubmit={handleSubmit}>
-        {personalDetails(showPassword).map((field, index) => (
-          <div
-            key={index}
-            className={field.name.includes("password") ? "password-input" : ""}
-          >
-            <Input
-              labelName={field.labelName}
-              type={field.type}
-              name={field.name}
-              placeholder={field.placeholder}
-              required={field.required}
-            />
-            {field.name.includes("password") && (
-              <Icon
-                library="fa"
-                name={showPassword ? "FaEyeSlash" : "FaEye"}
-                className="hide-and-show-pass"
-                onClick={togglePasswordVisibility}
+        {personalDetails(showPassword).map(
+          ({ labelName, type, name, placeholder, required }) => (
+            <div
+              key={name}
+              className={name.includes("password") ? "password-input" : ""}
+            >
+              <Input
+                labelName={labelName}
+                type={type}
+                name={name}
+                placeholder={placeholder}
+                required={required}
               />
-            )}
-          </div>
-        ))}
+              {name.includes("password") && (
+                <Icon
+                  library="fa"
+                  name={showPassword ? "FaEyeSlash" : "FaEye"}
+                  className="hide-and-show-pass"
+                  onClick={togglePasswordVisibility}
+                />
+              )}
+            </div>
+          )
+        )}
 
         {!passwordMatched && (
           <AlertBox message="Passwords do not match." type="error" />

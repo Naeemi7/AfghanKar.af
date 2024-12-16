@@ -26,15 +26,11 @@ export default function Button({
       width={width}
       onClick={onClick}
       type={type}
-      $icon={iconLibrary && iconName} // Use $icon instead of icon
+      $icon={iconLibrary && iconName}
     >
       {name}
       {iconLibrary && iconName && (
-        <Icon
-          library={iconLibrary} // Pass the icon library
-          name={iconName} // Pass the icon name
-          size={iconSize} // Pass the icon size
-        />
+        <Icon library={iconLibrary} name={iconName} size={iconSize} />
       )}
     </StyledButton>
   );

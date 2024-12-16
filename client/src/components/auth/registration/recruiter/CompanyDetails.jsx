@@ -51,38 +51,38 @@ export default function CompanyDetails({ onNext }) {
     <div className="company-details-container">
       <h1>Company Details</h1>
       <form className="registration-form" onSubmit={handleSubmit}>
-        {companyDetails().map((field, index) => {
-          const { labelName, type, name, options, placeholder, required } =
-            field;
-
-          return (
-            <div key={index} className="form-field">
-              {type === "textarea" ? (
-                <Textarea
-                  labelName={labelName}
-                  name={name}
-                  placeholder={placeholder}
-                />
-              ) : type === "select" ? (
-                <Select
-                  labelName={labelName}
-                  name={name}
-                  options={options}
-                  placeholder={placeholder}
-                  required={required}
-                />
-              ) : (
-                <Input
-                  labelName={labelName}
-                  type={type}
-                  name={name}
-                  placeholder={placeholder}
-                  required={required}
-                />
-              )}
-            </div>
-          );
-        })}
+        {companyDetails().map(
+          ({ labelName, type, name, options, placeholder, required }) => {
+            return (
+              <div key={name} className="form-field">
+                {type === "textarea" ? (
+                  <Textarea
+                    labelName={labelName}
+                    name={name}
+                    placeholder={placeholder}
+                    required={required}
+                  />
+                ) : type === "select" ? (
+                  <Select
+                    labelName={labelName}
+                    name={name}
+                    options={options}
+                    placeholder={placeholder}
+                    required={required}
+                  />
+                ) : (
+                  <Input
+                    labelName={labelName}
+                    type={type}
+                    name={name}
+                    placeholder={placeholder}
+                    required={required}
+                  />
+                )}
+              </div>
+            );
+          }
+        )}
 
         {error && <AlertBox message={error} type="error" />}
 

@@ -8,8 +8,9 @@ import * as BsIcons from "react-icons/bs";
 import * as RiIcons from "react-icons/ri";
 import * as PiIcons from "react-icons/pi";
 import * as CiIcons from "react-icons/ci";
-import * as GriIcons from "react-icons/gr";
-import * as TiIcon from "react-icons/ti";
+import * as GrIcons from "react-icons/gr";
+import * as TiIcons from "react-icons/ti";
+import * as BiIcons from "react-icons/bi"; // Import the BiIcons library
 
 const ICON_LIBRARIES = {
   fa: FaIcons,
@@ -21,8 +22,9 @@ const ICON_LIBRARIES = {
   ri: RiIcons,
   pi: PiIcons,
   ci: CiIcons,
-  gr: GriIcons,
-  ti: TiIcon,
+  gr: GrIcons,
+  ti: TiIcons,
+  bi: BiIcons, // Add the BiIcons library
 };
 
 export default function Icon({
@@ -36,7 +38,7 @@ export default function Icon({
   const IconComponent = IconLibrary ? IconLibrary[name] : null;
 
   if (!IconComponent) {
-    console.warn(`Icon ${name} not found in ${library} library.`);
+    console.warn(`Icon "${name}" not found in "${library}" library.`);
     return null;
   }
 

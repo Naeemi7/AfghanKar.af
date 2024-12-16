@@ -43,32 +43,31 @@ export default function AddressDetails({ onNext }) {
     <div className="address-details-container">
       <h1>Address Details</h1>
       <form className="registration-form" onSubmit={handleSubmit}>
-        {addressDetails().map((field, index) => {
-          const { labelName, type, name, options, placeholder, required } =
-            field;
-
-          return (
-            <div key={index} className="form-field">
-              {type === "select" ? (
-                <Select
-                  labelName={labelName}
-                  name={name}
-                  options={options}
-                  placeholder={placeholder}
-                  required={required}
-                />
-              ) : (
-                <Input
-                  labelName={labelName}
-                  type={type}
-                  name={name}
-                  placeholder={placeholder}
-                  required={required}
-                />
-              )}
-            </div>
-          );
-        })}
+        {addressDetails().map(
+          ({ labelName, type, name, options, placeholder, required }) => {
+            return (
+              <div key={name} className="form-field">
+                {type === "select" ? (
+                  <Select
+                    labelName={labelName}
+                    name={name}
+                    options={options}
+                    placeholder={placeholder}
+                    required={required}
+                  />
+                ) : (
+                  <Input
+                    labelName={labelName}
+                    type={type}
+                    name={name}
+                    placeholder={placeholder}
+                    required={required}
+                  />
+                )}
+              </div>
+            );
+          }
+        )}
 
         {error && <AlertBox message={error} type="error" />}
 
