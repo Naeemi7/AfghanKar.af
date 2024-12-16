@@ -5,6 +5,7 @@ import Textarea from "@reusable/TextArea";
 import Button from "@reusable/Button";
 import Icon from "@reusable/Icon";
 import SocialMedia from "@reusable/SocialMeida";
+import contactImage from "@images/contact/contact4.png";
 
 export default function ContactPage() {
   // Filter textarea inputs
@@ -61,6 +62,10 @@ export default function ContactPage() {
 
         {/* Render contact info dynamically */}
         <div className="contact-info">
+          <div className="contact-image-wrapper">
+            <img src={contactImage} />
+          </div>
+
           {contactInfo.map(({ id, library, iconName, labelName }) => (
             <div key={id} className="contact-icon-container">
               <Icon

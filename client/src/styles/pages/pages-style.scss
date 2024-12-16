@@ -159,14 +159,63 @@
     .contact-form {
       display: flex;
       gap: 2rem;
-      width: 65%;
+      width: 63%;
+      padding: 4rem;
+      position: relative;
+      overflow: hidden; // Ensures the pseudo-element does not overflow the rounded corners
+      border-radius: 1rem;
+
+      // Pseudo-element to create the animated border effect
+      &::after {
+        content: "";
+        position: absolute;
+        top: 0;
+        right: 0;
+        width: 0; // Start with no width
+        height: 100%; // Full height to match the contact form
+        box-shadow: inset -2px 0 0 0 $border-color; // Apply shadow only on the right side
+        animation: borderRightAnimation 10s ease-in-out infinite; // Smooth transition with longer duration
+        border-radius: 1rem; // Matching the contact form border-radius
+      }
+
+      @keyframes borderRightAnimation {
+        0% {
+          width: 0;
+          box-shadow: inset -2px 0 0 0 $border-color;
+        }
+        25% {
+          width: 25%;
+          box-shadow: inset -2px 0 0 0 $secondary-color;
+        }
+        50% {
+          width: 50%;
+          box-shadow: inset -2px 0 0 0 $primary-color;
+        }
+        75% {
+          width: 75%;
+          box-shadow: inset -2px 0 0 0 $primary-btn-hover;
+        }
+        100% {
+          width: 0;
+          box-shadow: inset -2px 0 0 0 $border-color;
+        }
+      }
     }
 
     .contact-info {
-      margin-top: 5.5rem;
       width: 30%;
+      height: fit-content;
       display: flex;
       flex-direction: column;
+
+      .contact-image-wrapper {
+        display: flex;
+        justify-content: center;
+        img {
+          height: 20rem;
+          width: 100%;
+        }
+      }
 
       .contact-icon-container {
         display: flex;
@@ -198,7 +247,7 @@
 
       // Contact Social Media Icons
       .contact-social-media-icons {
-        margin-top: 3rem;
+        margin-top: 1rem;
       }
     }
   }
