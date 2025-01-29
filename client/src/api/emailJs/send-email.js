@@ -15,21 +15,16 @@ export default async function sendEmail(name, email, message) {
     },
   };
 
-  console.log("Public key", import.meta.env.VITE_PUBLIC_KEY);
-  console.log("Template ID ", import.meta.env.VITE_TEMPLATE_ID);
   try {
     const response = await axios.post(emailJsEndpoint, payload, {
       headers: {
         "Content-Type": "application/json",
       },
     });
-
     return response.data;
   } catch (error) {
-    console.error(
-      "Error sending email",
-      error.response ? error.response.data : error.message
-    );
+    const errorMessage = error.response ? error.response.data : error.message;
+    console.error("Error sending email:", errorMessage);
     throw new Error("Failed to send email");
   }
 }

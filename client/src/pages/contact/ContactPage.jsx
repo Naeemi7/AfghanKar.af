@@ -9,47 +9,29 @@ import Icon from "@reusable/Icon";
 import SocialMedia from "@reusable/SocialMeida";
 import contactImage from "@images/contact/contact4.png";
 import ShowToast from "@reusable/ShowToast";
+import useUserContext from "@hooks/useUserContext";
 
 export default function ContactPage() {
-  const [formState, setFormState] = useState({
-    fullName: "",
-    email: "",
-    message: "",
-    isLoading: false,
-    showThankYou: false,
-  });
-
-  const handleInputChange = ({ target: { name, value } }) => {
-    setFormState((prevState) => ({
-      ...prevState,
-      [name]: value,
-    }));
-  };
+  const { error, setError, loading, setLoading } = useUserContext();
 
   const handleSendMail = async (e) => {
     e.preventDefault();
-    setFormState((prevState) => ({ ...prevState, isLoading: true }));
-    ShowToast("Sending email...", "loading");
+    const formData = new FormData(e.target);
+    const fullName = formData.get("fullName");
+    const email = formData.get("email");
+    const message = formData.get("message");
+
+    setError("");
+    setLoading(true); // Start loading spinner
 
     try {
-      await sendEmail(formState.fullName, formState.email, formState.message);
-
+      await sendEmail(fullName, email, message);
       ShowToast("Email sent successfully!", "success");
-      setFormState({
-        fullName: "",
-        email: "",
-        message: "",
-        isLoading: false,
-        showThankYou: true,
-      });
-
-      setTimeout(() => {
-        setFormState((prevState) => ({ ...prevState, showThankYou: false }));
-      }, 4000);
     } catch (error) {
       console.error("Error sending email:", error.message);
       ShowToast("Failed to send email. Please try again!", "error");
-      setFormState((prevState) => ({ ...prevState, isLoading: false }));
+    } finally {
+      setLoading(false); // Stop loading spinner
     }
   };
 
@@ -66,47 +48,32 @@ export default function ContactPage() {
             assist you!
           </p>
 
-          {contactData.map(({ labelName, type, name, placeholder, required }) =>
-            type === "textarea" ? (
-              <Textarea
-                key={name}
-                labelName={labelName}
-                name={name}
-                value={formState[name]}
-                placeholder={placeholder}
-                required={required}
-                onChange={handleInputChange}
-              />
-            ) : (
-              <Input
-                key={name}
-                labelName={labelName}
-                type={type}
-                name={name}
-                value={formState[name]}
-                placeholder={placeholder}
-                required={required}
-                onChange={handleInputChange}
-              />
-            )
+          {contactData.map(
+            ({ labelName, type, name, placeholder, required }) => {
+              const Component = type === "textarea" ? Textarea : Input;
+              return (
+                <Component
+                  key={name}
+                  labelName={labelName}
+                  name={name}
+                  type={type}
+                  placeholder={placeholder}
+                  required={required}
+                />
+              );
+            }
           )}
 
           <Button
             type="submit"
-            name={formState.isLoading ? "Sending..." : "Send Message"}
+            name={loading ? "Sending..." : "Send Message"}
             iconLibrary="bi"
             iconName="BiSolidMessageRoundedDots"
             iconSize={20}
-            disabled={formState.isLoading}
-            aria-busy={formState.isLoading ? "true" : "false"}
+            disabled={loading}
+            aria-busy={loading ? "true" : "false"}
           />
         </form>
-
-        {formState.showThankYou && (
-          <p className="thank-you-message">
-            Thank you for getting in touch! We’ll respond soon.
-          </p>
-        )}
 
         <div className="contact-info">
           <div className="contact-image-wrapper">
