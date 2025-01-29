@@ -29,6 +29,9 @@ export default function ContactPage() {
     try {
       await sendEmail(fullName, email, message);
       ShowToast("Email sent successfully!", "success");
+
+      // Reset the form fields after success
+      e.target.reset();
     } catch (error) {
       console.error("Error sending email:", error.message);
       ShowToast("Failed to send email. Please try again!", "error");
