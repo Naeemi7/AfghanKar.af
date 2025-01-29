@@ -1,4 +1,4 @@
-import SocialMedia from "@reusable/SocialMeida";
+import SocialMedia from "@reusable/SocialMedia";
 
 export default function SocialMediaLinks() {
   return (

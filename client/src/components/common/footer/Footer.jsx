@@ -3,7 +3,7 @@ import Logo from "@reusable/Logo";
 import QuickLinks from "./QuickLinks";
 import Newsletter from "./Newsletter";
 import FooterBottom from "./FooterBottom";
-import SocialMediaLinks from "./SocialMeidaLinks";
+import SocialMediaLinks from "./SocialMediaLinks";
 
 const Footer = () => {
   return (

@@ -5,14 +5,14 @@ import Input from "@reusable/Input";
 import Textarea from "@reusable/TextArea";
 import Button from "@reusable/Button";
 import Icon from "@reusable/Icon";
-import SocialMedia from "@reusable/SocialMeida";
+import SocialMedia from "@reusable/SocialMedia";
 import contactImage from "@images/contact/contact4.png";
 import ShowToast from "@reusable/ShowToast";
 import useUserContext from "@hooks/useUserContext";
 import useFormattedName from "@hooks/useFormattedName";
 
 export default function ContactPage() {
-  const { setError, loading, setLoading } = useUserContext();
+  const { setError, loading, setLoading } = useUserContext() || {}; // Ensure safe destructuring
   const { formatName } = useFormattedName();
 
   const handleSendMail = async (e) => {
@@ -22,8 +22,8 @@ export default function ContactPage() {
     const email = formData.get("email");
     const message = formData.get("message");
 
-    setError("");
-    setLoading(true); // Start loading spinner
+    if (setError) setError(""); // Check before using setError
+    if (setLoading) setLoading(true); // Start loading spinner
 
     const { fullName } = formatName(rawFullName);
     try {
@@ -33,7 +33,7 @@ export default function ContactPage() {
       console.error("Error sending email:", error.message);
       ShowToast("Failed to send email. Please try again!", "error");
     } finally {
-      setLoading(false); // Stop loading spinner
+      if (setLoading) setLoading(false); // Stop loading spinner
     }
   };
 
