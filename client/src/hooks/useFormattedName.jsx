@@ -1,22 +1,30 @@
 import { useCallback } from "react";
 
-const useFormattedName = () => {
-  const formatName = useCallback((fullName) => {
-    if (!fullName) return { firstName: "", lastName: "" };
+export default function useFormattedName() {
+  const capitalize = useCallback(
+    (str) => str.charAt(0).toUpperCase() + str.slice(1).toLowerCase(),
+    []
+  );
 
-    const nameParts = fullName.trim().split(" ");
-    const firstName = nameParts[0] ? capitalize(nameParts[0]) : "";
-    const lastName = nameParts.slice(1).join(" ")
-      ? capitalize(nameParts.slice(1).join(" "))
-      : "";
+  const formatName = useCallback(
+    (fullName) => {
+      if (!fullName || typeof fullName !== "string")
+        return { fullName: "", firstName: "", lastName: "" };
 
-    return { firstName, lastName };
-  }, []);
+      const nameParts = fullName.trim().split(/\s+/); // Handles multiple spaces
+      const firstName = nameParts[0] ? capitalize(nameParts[0]) : "";
+      const lastName = nameParts.slice(1).join(" ")
+        ? capitalize(nameParts.slice(1).join(" "))
+        : "";
 
-  const capitalize = (str) =>
-    str.charAt(0).toUpperCase() + str.slice(1).toLowerCase();
+      return {
+        fullName: `${firstName} ${lastName}`.trim(),
+        firstName,
+        lastName,
+      };
+    },
+    [capitalize]
+  );
 
   return { formatName };
-};
-
-export default useFormattedName;
+}

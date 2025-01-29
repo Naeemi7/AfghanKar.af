@@ -1,4 +1,3 @@
-import { useState } from "react";
 import "@styles/pages/pages-style.scss";
 import { contactData, contactInfo } from "@data/contact/contactData";
 import sendEmail from "@api/emailJs/send-email";
@@ -10,20 +9,23 @@ import SocialMedia from "@reusable/SocialMeida";
 import contactImage from "@images/contact/contact4.png";
 import ShowToast from "@reusable/ShowToast";
 import useUserContext from "@hooks/useUserContext";
+import useFormattedName from "@hooks/useFormattedName";
 
 export default function ContactPage() {
-  const { error, setError, loading, setLoading } = useUserContext();
+  const { setError, loading, setLoading } = useUserContext();
+  const { formatName } = useFormattedName();
 
   const handleSendMail = async (e) => {
     e.preventDefault();
     const formData = new FormData(e.target);
-    const fullName = formData.get("fullName");
+    const rawFullName = formData.get("fullName");
     const email = formData.get("email");
     const message = formData.get("message");
 
     setError("");
     setLoading(true); // Start loading spinner
 
+    const { fullName } = formatName(rawFullName);
     try {
       await sendEmail(fullName, email, message);
       ShowToast("Email sent successfully!", "success");
