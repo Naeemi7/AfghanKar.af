@@ -85,7 +85,7 @@ export default function About() {
       <section className="cta">
         <h2>Join Us Today</h2>
         <p>
-          Whether you're looking for your next career opportunity or seeking
+          Whether you&#39;re looking for your next career opportunity or seeking
           talented individuals to join your team, AfghanKar.af is here to help
           you succeed. Start today and take the next step in your professional
           journey!
