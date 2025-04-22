@@ -20,12 +20,12 @@ export default function RegistrationPage() {
   };
 
   return (
-    <div className="registeration-page-container">
-      <div className="registeration-heading">
+    <div className="registration-page-container">
+      <div className="registration-heading">
         <h2>Choose Your Registration Type</h2>
       </div>
 
-      <div className="registeration-page-wrapper">
+      <div className="registration-page-wrapper">
         {/* Reusable SelectionCard Component */}
         <SelectionCard
           select={selectedCard === "jobSeeker"}

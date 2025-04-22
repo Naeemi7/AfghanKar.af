@@ -16,21 +16,21 @@
   }
 }
 
-// Registeration page style
-.registeration-page-container {
+// Registration page style
+.registration-page-container {
   @include common-layout-template;
   display: flex;
   flex-direction: column;
   justify-content: center;
   height: 100%;
 
-  .registeration-heading {
+  .registration-heading {
     display: flex;
     justify-content: center;
     margin-bottom: 2rem;
   }
 
-  .registeration-page-wrapper {
+  .registration-page-wrapper {
     padding: 3rem;
     display: flex;
     gap: 2.5rem;
