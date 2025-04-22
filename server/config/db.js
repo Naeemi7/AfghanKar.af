@@ -36,7 +36,7 @@ export default async function connectToMongoDB() {
 
   try {
     await mongoose.connect(mongoURI, options);
-    logBuddy("Database connected! 👍");
+    logBuddy("Database is connected! 👍");
   } catch (error) {
     logError("Database connection error:", error.message);
     logError("Stack Trace:", error.stack); // Log the stack trace for detailed error info
